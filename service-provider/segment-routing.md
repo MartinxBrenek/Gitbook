@@ -49,6 +49,8 @@ Service,Context,Locator,IGP-based forwarding construct,BGP-based forwarding cons
 
 **Segment list** is the full segment routing path from source to the destination (segment list = label stack)
 
+[https://www.ciscolive.com/c/dam/r/ciscolive/emea/docs/2024/pdf/BRKSPG-3624.pdf](https://www.ciscolive.com/c/dam/r/ciscolive/emea/docs/2024/pdf/BRKSPG-3624.pdf)
+
 ![](<../.gitbook/assets/Unknown image (1289)>)
 
 ### Network simplification
