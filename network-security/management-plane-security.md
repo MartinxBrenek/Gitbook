@@ -77,11 +77,7 @@ Fewer ACLs are needed to restrict access to the device.
 
 Prevention of packet floods on switching and routing interfaces from reaching the CPU.
 
-#### In-band interface configuration
-
-![](/broken/files/a1ef7557ce18cb6ac634563c280951b3e21e07a5)
-
-#### Out-of-band interface configuration
+#### In-band or Out-of-band interface configuration example
 
 ![](<../.gitbook/assets/Unknown image (776)>)
 
@@ -201,79 +197,3 @@ Supports EAP for .1x authentication and is used primarily for secure network acc
 **TACACS+** is a Cisco enhancement to the original TACACS protocol. Despite its name, TACACS+ is an entirely new protocol that is incompatible with any previous version of TACACS. TACACS+ is defined in RFC 8907.
 
 TACACS+ provides separate AAA services. Because TACACS+ separates authentication and authorization, it is possible to use TACACS+ for authorization and accounting while using another method of authentication. The extensions to the TACACS+ protocol provide more types of authentication requests and response codes than were in the original specification. TACACS+ offers multiprotocol support, such as IP. Normal TACACS+ operation encrypts the entire body of the packet for more secure communications and utilizes TCP port 49.
-
-**Client configuration**
-
-| Create a local user with full privilege for fallback or to avoid being locked out after enabling AAA username <> privilege 15 secret {password} |   |
-| ----------------------------------------------------------------------------------------------------------------------------------------------- | - |
-
-**Activate AAA**
-
-| aaa new-model | automatically applies local authentication to all lines and interfaces (except console line line con 0) |
-| ------------- | ------------------------------------------------------------------------------------------------------- |
-
-**Define a TACACS+ server**
-
-| tacacs server ISE-PRIMARY   | radius server                                                                          |
-| --------------------------- | -------------------------------------------------------------------------------------- |
-| address 10.10.10.1          | Specifies the IP address of the server                                                 |
-| key my.S3cR3t.k3y           | Sets the shared secret key used to authenticate and encrypt communications with server |
-| tacacs server ISE-SECONDARY | Secondary server                                                                       |
-| address 20.20.20.1          |                                                                                        |
-| key my.S3cR3t.k3y           |                                                                                        |
-
-**Create an AAA group**
-
-| aaa group server tacacs+ ISE-TACACS+ server name ise-primary server name ise-secondary | aaa group server radius |
-| -------------------------------------------------------------------------------------- | ----------------------- |
-
-**Define a named-list** with authentication methods (left to right in execution order). Apply it to a line (vty/con/aux/...).
-
-| aaa authentication {login \| ppp} {default \| list-name \| remote} method-list Exampple: aaa authentication login default group ISE-TACACS+ group AAA\_RADIUS local-case First for authentication will be used defined ISE-TACACS+ group, if it becomes unavailable it will proceed to authenticate with pre-defined AAA\_RADIUS group. If AAA\_RADIUS group fails aswell it will proceed to use local credentials for authentication | Use the login keyword to set authentication for login. Use the ppp keyword to set authentication for PPP. Use the default keyword to cause the listed authentication methods that follow this keyword to be the default list of methods for authentication. Enter a list-name character string to identify the authentication method list. Enter method-list types in the preferred sequence The group tacacs+ command—Use a server group or TACACS+ servers for authentication. The group radius command—Use a server group or RADIUS servers for authentication. The group named-group command—Use a named subset of TACACS+ or RADIUS servers for authentication. The local command—Use a local username or password database for authentication. The line command—Use line password or user group for authentication. default applies authentication methods from the named list to all lines so we don't have to apply it separately to each line with #login \<A/A/A> \<list\_name>this is overriden when specific named list for given line is configured line applies authentication directly to specific lines, ensuring a more targeted approach enable indicates that the authentication method should be applied when a user enters the "enable" command to access privileged enable mode local-case indicates that the device's local user database will be used for authentication in case sensitive format To specify that the authentication should succeed even if all methods return an error, specify none as the final method in the command line aaa session-id common enables common session ID for multiple authentication sessions |
-| ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Enable AAA authorization for EXEC Example: aaa authorization exec default group ISE-TACACS+ if-authenticated                                                                                                                                                                                                                                                                                                                          | if-authenticated To allow users to have access to the functions they request as long as they have been authenticated. If you select this method, all requested functions are automatically granted to authenticated users none excludes any authorization aaa authorization consoleauthorization for the console is usually disabled by default as it allows users to access the console without the need for authentication or authorization, ensuring they can always regain access even if they forgot their credentials or encounter authorization issues. aaa authorization commands 15 default group ISE-TACACS+ if-authenticatedauthorizes all commands with the AAA server before executing them Command authorization is applied on a per-privilege-level basis aaa authorization config-commandsEnable authorization in global configuration mode and all it's sub-modes                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         |
-| Enable accounting for executed commands at the execution level and sends accounting records to specified server group Example: aaa accounting exec default start-stop group ISE-TACACS+                                                                                                                                                                                                                                               | start-stop causes accounting to start as soon as a session starts and stop as soon as the session ends                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     |
-| Apply Authentication to the Line When a named list (in this example, CONSOLE) is created, it must be applied to a line or interface before it executes. This is done with the login authentication \<list\_name>Example line vty 0 15 login authentication default                                                                                                                                                                    | For IOS-XR Cisco allows the creation of user-defined line templates to define standard configurations for virtual terminal lines (VTY lines) [https://www.cisco.com/c/en/us/td/docs/iosxr/asr9000/general-administration/configuration/b-general-administration-configuration-ios-xr-asr9000/physical-and-virtual-terminals.html](https://www.cisco.com/c/en/us/td/docs/iosxr/asr9000/general-administration/configuration/b-general-administration-configuration-ios-xr-asr9000/physical-and-virtual-terminals.html)                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      |
-
-**AAA Verification**
-
-| .1x AAA show authentication sessions interface <>clear authentication session interface | to check authentication state of .1x or MAB on a port |
-| --------------------------------------------------------------------------------------- | ----------------------------------------------------- |
-| show radius server-group all                                                            |                                                       |
-| show dot1x int <>                                                                       |                                                       |
-| show aaa servers                                                                        |                                                       |
-
-**Example**
-
-Login via local credentials when aaa is enabled - u will not see login local if u have aaa enabled
-
-If you only need basic local authentication and don't require advanced features like centralized management or integration with other systems, then using login local is sufficient.
-
-| aaa new-model aaa authentication login default local-case aaa authentication enable default enable aaa authorization exec default local if-authenticated aaa session-id common line vty 0 15 login authentication default exec-timeout 30 0 privilege level 15 logging synchronous level all transport input telnet ssh |   |
-| ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | - |
-
-Configure a password expiry mechanism for all local passwords to expire after 60 days
-
-| aaa new-model                                                 |                                                                                              |
-| ------------------------------------------------------------- | -------------------------------------------------------------------------------------------- |
-| aaa authentication login default local                        |                                                                                              |
-| aaa authentication enable default none                        |                                                                                              |
-| aaa comon-criteria policy Administrators                      |                                                                                              |
-| min-length 1                                                  |                                                                                              |
-| max-length 127                                                |                                                                                              |
-| char-changes 4                                                |                                                                                              |
-| lifetime month 2                                              |                                                                                              |
-| username <> common-criteria-policy Administrators password <> | applied on the user                                                                          |
-| #test aaa group \<group\_name>                                | To test authentication                                                                       |
-| #debug radius brief                                           |                                                                                              |
-| #alias mode                                                   | u can create a alias (shortcut) which will run pre-defined command when executing it's alias |
-
-![](<../.gitbook/assets/Unknown image (779)>)
-
-Radius server linux environment that confirm it listens on UDP ports 1812/3 with privilige level specified for alice
-
-![](<../.gitbook/assets/Unknown image (780)>)
-
-Tacacs server listening on dedicated port
-
-![](<../.gitbook/assets/Unknown image (781)>)

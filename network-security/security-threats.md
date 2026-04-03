@@ -389,7 +389,7 @@ Using a subdomain of a hosting provider is an even bigger red flag
 
 **Multi-factor authentication (MFA)** requires at least one extra step beyond username and password. The second factor can be a push notification, a hardware/software token, or SMS. One-Time Passwords (OTP) are a common MFA mechanism.
 
-#### Device hardening
+### Device hardening
 
 **Device hardening** refers to securing and configuring a network device (router, switch, firewall) to minimize risk and improve resilience against attacks.
 

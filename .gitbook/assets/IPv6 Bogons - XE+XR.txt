@@ -1,0 +1,128 @@
+::/8 - Block reserved IPv6 addresses including unspecified, loopback, and deprecated IPv4-compatible addresses (RFC 4291)
+0100::/64 - Block specific unassigned or reserved prefix (No specific RFC, possibly context-specific)
+200::/7 - Block former NSAP allocation, now unassigned (RFC 1888)
+400::/6 - Block unassigned IPv6 address space
+800::/5 - Block unassigned IPv6 address space
+1000::/4 - Block unassigned IPv6 address space
+2d00::/8 - Block unassigned IPv6 address space
+2e00::/7 - Block unassigned IPv6 address space
+3000::/5 - Block unassigned IPv6 address space
+3800::/6 - Block unassigned IPv6 address space
+3c00::/7 - Block unassigned IPv6 address space
+3e00::/8 - Block unassigned IPv6 address space
+3f00::/9 - Block unassigned IPv6 address space
+3f80::/10 - Block unassigned IPv6 address space
+3fc0::/11 - Block unassigned IPv6 address space
+3fe0::/12 - Block unassigned IPv6 address space
+3ff0::/13 - Block unassigned IPv6 address space
+3ff8::/14 - Block unassigned IPv6 address space
+3ffc::/15 - Block unassigned IPv6 address space
+3ffe::/16 - Block former 6bone allocation, now unassigned (RFC 3701)
+3fff::/20 - Block unassigned IPv6 address space
+5f00::/16 - Block reserved for IANA special use
+64:ff9b::/96 - Block NAT64 well-known prefix (RFC 6052)
+100::/8 - Block unassigned IPv6 address space
+100::/64 - Block discard prefix (RFC 6666)
+2001::/23 - Block IETF protocol assignments (RFC 2928)
+2001::/32 - Block Teredo prefix (RFC 4380)
+2001:2::/48 - Block reserved prefix within IETF assignments (RFC 2928 subset)
+2001:10::/28 - Block ORCHID prefix (RFC 4843)
+2001:20::/28 - Block reserved prefix within IETF assignments (RFC 2928 subset)
+2001:30::/28 - Block reserved prefix within IETF assignments (RFC 2928 subset)
+2001:db8::/32 - Block documentation prefix (RFC 3849)
+2002::/16 - Block 6to4 prefix (RFC 3056)
+2620:4f:8000::/48 - Block specific reserved prefix, possibly root DNS servers (IANA reserved)
+fc00::/7 - Block Unique Local Addresses (RFC 4193)
+fe00::/9 - Block reserved for future use (RFC 4291)
+fe80::/10 - Block link-local addresses (RFC 4291)
+fec0::/10 - Block site-local addresses, deprecated (RFC 3879)
+ff00::/8 - Block multicast addresses (RFC 4291)
+
+IOS-XE Config
+
+ipv6 prefix-list BOGON-RESERVED-IPV6 seq 10 deny ::/8 le 128
+ipv6 prefix-list BOGON-RESERVED-IPV6 seq 20 deny 0100::/64
+ipv6 prefix-list BOGON-RESERVED-IPV6 seq 30 deny 200::/7 le 128
+ipv6 prefix-list BOGON-RESERVED-IPV6 seq 40 deny 400::/6 le 128
+ipv6 prefix-list BOGON-RESERVED-IPV6 seq 50 deny 800::/5 le 128
+ipv6 prefix-list BOGON-RESERVED-IPV6 seq 60 deny 1000::/4 le 128
+ipv6 prefix-list BOGON-RESERVED-IPV6 seq 70 deny 2d00::/8 le 128
+ipv6 prefix-list BOGON-RESERVED-IPV6 seq 80 deny 2e00::/7 le 128
+ipv6 prefix-list BOGON-RESERVED-IPV6 seq 90 deny 3000::/5 le 128
+ipv6 prefix-list BOGON-RESERVED-IPV6 seq 100 deny 3800::/6 le 128
+ipv6 prefix-list BOGON-RESERVED-IPV6 seq 110 deny 3c00::/7 le 128
+ipv6 prefix-list BOGON-RESERVED-IPV6 seq 120 deny 3e00::/8 le 128
+ipv6 prefix-list BOGON-RESERVED-IPV6 seq 130 deny 3f00::/9 le 128
+ipv6 prefix-list BOGON-RESERVED-IPV6 seq 140 deny 3f80::/10 le 128
+ipv6 prefix-list BOGON-RESERVED-IPV6 seq 150 deny 3fc0::/11 le 128
+ipv6 prefix-list BOGON-RESERVED-IPV6 seq 160 deny 3fe0::/12 le 128
+ipv6 prefix-list BOGON-RESERVED-IPV6 seq 170 deny 3ff0::/13 le 128
+ipv6 prefix-list BOGON-RESERVED-IPV6 seq 180 deny 3ff8::/14 le 128
+ipv6 prefix-list BOGON-RESERVED-IPV6 seq 190 deny 3ffc::/15 le 128
+ipv6 prefix-list BOGON-RESERVED-IPV6 seq 200 deny 3ffe::/16 le 128
+ipv6 prefix-list BOGON-RESERVED-IPV6 seq 210 deny 3fff::/20 le 128
+ipv6 prefix-list BOGON-RESERVED-IPV6 seq 220 deny 5f00::/16 le 128
+ipv6 prefix-list BOGON-RESERVED-IPV6 seq 230 deny 64:ff9b::/96 le 128
+ipv6 prefix-list BOGON-RESERVED-IPV6 seq 240 deny 100::/8 le 128
+ipv6 prefix-list BOGON-RESERVED-IPV6 seq 250 deny 100::/64
+ipv6 prefix-list BOGON-RESERVED-IPV6 seq 260 deny 2001::/23 le 128
+ipv6 prefix-list BOGON-RESERVED-IPV6 seq 270 deny 2001::/32 le 128
+ipv6 prefix-list BOGON-RESERVED-IPV6 seq 280 deny 2001:2::/48 le 128
+ipv6 prefix-list BOGON-RESERVED-IPV6 seq 290 deny 2001:10::/28 le 128
+ipv6 prefix-list BOGON-RESERVED-IPV6 seq 300 deny 2001:20::/28 le 128
+ipv6 prefix-list BOGON-RESERVED-IPV6 seq 310 deny 2001:30::/28 le 128
+ipv6 prefix-list BOGON-RESERVED-IPV6 seq 320 deny 2001:db8::/32 le 128
+ipv6 prefix-list BOGON-RESERVED-IPV6 seq 330 deny 2002::/16 le 128
+ipv6 prefix-list BOGON-RESERVED-IPV6 seq 340 deny 2620:4f:8000::/48 le 128
+ipv6 prefix-list BOGON-RESERVED-IPV6 seq 350 deny fc00::/7 le 128
+ipv6 prefix-list BOGON-RESERVED-IPV6 seq 360 deny fe00::/9 le 128
+ipv6 prefix-list BOGON-RESERVED-IPV6 seq 370 deny fe80::/10 le 128
+ipv6 prefix-list BOGON-RESERVED-IPV6 seq 380 deny fec0::/10 le 128
+ipv6 prefix-list BOGON-RESERVED-IPV6 seq 390 deny ff00::/8 le 128
+ipv6 prefix-list BOGON-RESERVED-IPV6 seq 1000 permit ::/0 le 48 // Based on the internet rules, the ISP's generally won't advertise prefixes longer than 48, thus additional premit statement to accept such prefixes should be allowed to provision internet connectivity and accept all relevant internet prefixes
+
+
+
+IOS-XR Config
+
+ipv6 prefix-set BOGON-RESERVED-IPV6
+  ::/8 le 128,
+  0100::/64,
+  200::/7 le 128,
+  400::/6 le 128,
+  800::/5 le 128,
+  1000::/4 le 128,
+  2d00::/8 le 128,
+  2e00::/7 le 128,
+  3000::/5 le 128,
+  3800::/6 le 128,
+  3c00::/7 le 128,
+  3e00::/8 le 128,
+  3f00::/9 le 128,
+  3f80::/10 le 128,
+  3fc0::/11 le 128,
+  3fe0::/12 le 128,
+  3ff0::/13 le 128,
+  3ff8::/14 le 128,
+  3ffc::/15 le 128,
+  3ffe::/16 le 128,
+  3fff::/20 le 128,
+  5f00::/16 le 128,
+  64:ff9b::/96 le 128,
+  100::/8 le 128,
+  100::/64,
+  2001::/23 le 128,
+  2001::/32 le 128,
+  2001:2::/48 le 128,
+  2001:10::/28 le 128,
+  2001:20::/28 le 128,
+  2001:30::/28 le 128,
+  2001:db8::/32 le 128,
+  2002::/16 le 128,
+  2620:4f:8000::/48 le 128,
+  fc00::/7 le 128,
+  fe00::/9 le 128,
+  fe80::/10 le 128,
+  fec0::/10 le 128,
+  ff00::/8 le 128
+end-set

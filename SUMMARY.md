@@ -3,18 +3,17 @@
 ## Media
 
 * [Fundamentals](README.md)
-* [L1   PHY](media/l1-phy.md)
+* [Physical Layer](media/physical-layer.md)
 * [Metallic](media/metallic.md)
 * [Fiber Optics](media/fiber-optics.md)
 * [Wireless](media/wireless.md)
 * [LAN Architecture](media/lan-architecture.md)
 * [WLAN](media/wlan.md)
 * [WAN Architecture](media/wan-architecture.md)
-* [System Management  - Cisco](media/system-management-cisco.md)
-* [Hardware Management - Cisco](media/hardware-management-cisco.md)
+* [System Management](media/system-management.md)
+* [Hardware Management](media/hardware-management.md)
 * [Switch Stacking](media/switch-stacking.md)
 * [Link Aggregation](media/link-aggregation.md)
-* [Cisco Hardware Portfolio](media/cisco-hardware-portfolio.md)
 * [Troubleshooting](media/troubleshooting.md)
 * [Packet Capture](media/packet-capture.md)
 * [Windows CMD](media/windows-cmd.md)
@@ -23,28 +22,26 @@
 ## Switching
 
 * [Switching](switching/switching.md)
-* [ARP](switching/arp.md)
 * [STP](switching/stp.md)
 * [VLAN](switching/vlan.md)
-* [.1Q Tunneling](switching/.1q-tunneling.md)
 
 ## Routing
 
 * [IPv4](routing/ipv4.md)
 * [IPv6](routing/ipv6.md)
 * [Routing](routing/routing.md)
+* [ARP](routing/arp.md)
 * [ICMP](routing/icmp.md)
-* [Packet Forwarding Architecture](routing/packet-forwarding-architecture.md)
+* [Packet Forwarding](routing/packet-forwarding.md)
 * [VRF](routing/vrf.md)
 * [EIGRP](routing/eigrp.md)
 * [ISIS](routing/isis.md)
 * [OSPFv2](routing/ospfv2.md)
 * [OSPFv3](routing/ospfv3.md)
 * [BGP](routing/bgp.md)
-* [BGP in Service Provider Networks](routing/bgp-in-service-provider-networks.md)
-* [Traffic Engineering and Policy Based Routing](routing/traffic-engineering-and-policy-based-routing.md)
-* [High Availability](routing/high-availability.md)
-* [L3 Gateway Redundancy](routing/l3-gateway-redundancy.md)
+* [TE and PBR](routing/te-and-pbr.md)
+* [High Availability Protocols](routing/high-availability-protocols.md)
+* [Gateway Redundancy](routing/gateway-redundancy.md)
 
 ## IP Services
 
@@ -61,11 +58,7 @@
 * [Security Threats](network-security/security-threats.md)
 * [Management Plane Security](network-security/management-plane-security.md)
 * [Control Plane Security](network-security/control-plane-security.md)
-* [Data Plane Security](network-security/data-plane-security/README.md)
-  * [.1X  EAP  MAB](network-security/data-plane-security/.1x-eap-mab.md)
-  * [IPsec](network-security/data-plane-security/ipsec.md)
-  * [MACsec](network-security/data-plane-security/macsec.md)
-  * [VPN](network-security/data-plane-security/vpn.md)
+* [Data Plane Security](network-security/data-plane-security.md)
 * [IPv6 Security](network-security/ipv6-security.md)
 * [Cisco Security Design](network-security/cisco-security-design.md)
 
@@ -80,12 +73,8 @@
 * [Segment Routing](service-provider/segment-routing.md)
 * [SRv6](service-provider/srv6.md)
 * [EVPN](service-provider/evpn.md)
-* [WDM](service-provider/wdm.md)
-* [OTN](service-provider/otn.md)
-* [RON](service-provider/ron.md)
-* [PON](service-provider/pon.md)
+* [Optical Networks](service-provider/optical-networks.md)
 * [Management and Assurance Tools for Service Providers](service-provider/management-and-assurance-tools-for-service-providers.md)
-* [E OAM](service-provider/e-oam.md)
 
 ## Software Defined Networking
 

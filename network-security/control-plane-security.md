@@ -47,9 +47,6 @@ Applying a policy to the whole control-plane is referred to as CoPP (Control Pla
 
 Applying a policy to a specific sub-interface is referred to as **CPPr (Control Plane Protection)**
 
-| hw-module slot rate-limit punt\_rate | This limits the rate of data that is redirected to the Route Processor (RP) |
-| ------------------------------------ | --------------------------------------------------------------------------- |
-
 CoPP is implemented using the Cisco IOS Modular QoS CLI (MQC), a highly flexible framework that allows users to create and attach traffic policies to interfaces. The Cisco Modular QoS CLI (MQC) mechanisms are used by CoPP to define the classification and policing descriptions for its policies. In this way, in addition to the limited permit and deny actions that are associated with simple ACLs, specific packets may be permitted but rate-limited when using the MQC structure. For example, you may wish to permit certain ICMP packet types, but rate limit them so that the route processor is not adversely impacted.
 
 #### Step 1: Create an ACL for classification
@@ -90,6 +87,8 @@ Rate limit incoming IGP packets is based on session or peer.
 Modify policer rate depending on traffic load.
 
 Block entire traffic that is based on a specific session without impacting other sessions with same flow.
+
+
 
 LPTS uses two components: the port arbitrator and flow managers. The port arbitrator and flow managers are processes that maintain the tables that describe packet flows for a logical router, which is known as the Internal Forwarding Information Base (IFIB). The IFIB is used to route received packets to the correct Route Processor for processing. For example, routing protocols, MPLS, IGMP, PIM, HSRP, VRRP, and other similar protocols are processed in the RP (Router Processor) CPU. However, ARP, ICMP, NetFlow, OAM/CFM (Operations, Administration, and Maintenance / Connectivity Fault Management), and Layer 2 protocols are processed in the line card CPU
 
@@ -140,87 +139,7 @@ For IPv6 - Do not accept prefixes longer than /48, as /48 is the minimum IPv6 pr
 
 To be implemented as prefix list and applied as route-map in IOS-XE and as prefix set and applied as RPL for IOS-XR. The following document includes prefixes that should be blocked in IOS-XE and
 
-<\<IPv6 Bogons - XE+XR.txt>>
-
-This is description of full bogon prefix set for IPv6 according to these sources:
-
-::/8 le 128 # Reserved "This network"
-
-0100::/64 # RFC 6666 Discard-Only
-
-200::/7 # Deprecated OSI NSAP-mapped
-
-400::/6 # Reserved by IETF
-
-800::/5 # Reserved by IETF
-
-1000::/4 # Reserved by IETF
-
-2d00::/8 # Reserved by IANA
-
-2e00::/7 # Reserved by IANA
-
-3000::/5 # Reserved by IANA
-
-3800::/6 # Reserved by IANA
-
-3c00::/7 # Reserved by IANA
-
-3e00::/8 # Reserved by IANA
-
-3f00::/9 # Reserved by IANA
-
-3f80::/10 # Reserved by IANA
-
-3fc0::/11 # Reserved by IANA
-
-3fe0::/12 # Reserved by IANA
-
-3ff0::/13 # Reserved by IANA
-
-3ff8::/14 # Reserved by IANA
-
-3ffc::/15 # Reserved by IANA
-
-3ffe::/16 # Deprecated 6bone
-
-3fff::/20 # RFC 9637 Documentation
-
-5f00::/16 # RFC 9602 SRv6 SIDs
-
-64:ff9b::/96 # IPv4-IPv6 Translation
-
-100::/8 # Reserved by IETF
-
-100::/64 # RFC 6666 Discard-Only
-
-2001::/23 # IETF Protocol Assignments
-
-2001::/32 # Teredo
-
-2001:2::/48 # RFC 5180 Benchmarking
-
-2001:10::/28 # Deprecated ORCHID
-
-2001:20::/28 # ORCHIDv2
-
-2001:30::/28 # Drone Remote ID Protocol Entity Tags (DETs)
-
-2001:db8::/32 # Documentation (RFC 3849)
-
-2002::/16 # 6to4
-
-2620:4f:8000::/48 # AS112 Service
-
-fc00::/7 # Unique Local (RFC 4193)
-
-fe00::/9 # Reserved by IETF
-
-fe80::/10 # Link-Local (RFC 4291)
-
-fec0::/10 # Deprecated Site-Local (RFC 3879)
-
-ff00::/8 # Multicast (RFC 4291)
+{% file src="../.gitbook/assets/IPv6 Bogons - XE+XR.txt" %}
 
 ### BGP FlowSpec
 

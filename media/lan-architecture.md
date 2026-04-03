@@ -333,8 +333,6 @@ Both Logical and Physical diagrams are usually documented in one file
 
 ![](<../.gitbook/assets/Unknown image (452)>)
 
-### Design documentation
-
 #### HLD (high-level design)
 
 **HLD (high-level design)** involves creating an overview or blueprint of the entire network. It focuses on defining the network's architecture, topological design and high-level requirements. At the HLD stage, you're concerned with designing the overall network structure, including the placement of routers, switches, firewalls and other network devices. You also consider factors like network segmentation, redundancy and scalability. The result of HLD will be documents like physical and logical topologies and high-level descriptions of network components and their interconnections.
@@ -382,7 +380,15 @@ Most of modern deployments consist of:
 
 It is a preliminary stage in the development process that aims to validate the concept and ensure its business value
 
-### Resiliency and continuity
+#### North-south vs east-west traffic flow
+
+**North-south traffic** This term refers to the data traffic that flows between the internal network of an organization and external networks
+
+**East-west traffic** refers to the data traffic that moves within the internal network of an organization, typically between devices in the same data center or between different departments
+
+If you have multiple networks that serve the same purpose for an example usernetworks from different buildings / floors then you can just terminate them on the switch and create p2p link to the firewall.
+
+The firewall would be transit box between zones and security segments that's the way I prefer doing it. East west traffic does not hit the firewall north south does.
 
 #### Disaster recovery plan (DRP)
 
@@ -403,15 +409,3 @@ Testing and training: regularly test the disaster recovery plan through simulate
 **Recovery time objective (RTO):** define the maximum acceptable duration of time within which a business process or service must be restored after a disruption.
 
 **Recovery point objective (RPO):** define the maximum amount of data loss that is acceptable in the event of a disruption or disaster.
-
-### Traffic flows
-
-#### North-south vs east-west
-
-**North-south traffic** This term refers to the data traffic that flows between the internal network of an organization and external networks
-
-**East-west traffic** refers to the data traffic that moves within the internal network of an organization, typically between devices in the same data center or between different departments
-
-If you have multiple networks that serve the same purpose for an example usernetworks from different buildings / floors then you can just terminate them on the switch and create p2p link to the firewall.
-
-The firewall would be transit box between zones and security segments that's the way I prefer doing it. East west traffic does not hit the firewall north south does.

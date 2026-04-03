@@ -125,7 +125,7 @@ After entering the desired AFI, it will navigate you to the sub config level (`c
 Neighbors must be activated per AFI/SAFI using `neighbor x.x.x.x activate`.
 {% endhint %}
 
-### VRF leaking (inter-VRF routing)
+### VRF leaking
 
 Used in complex or simple MPLS VPN use cases explained in MPLS section.
 

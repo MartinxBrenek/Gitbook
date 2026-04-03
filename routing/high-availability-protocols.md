@@ -17,9 +17,7 @@ layout:
     visible: true
 ---
 
-# High Availability
-
-This page covers common high-availability mechanisms and fast-failure detection.
+# High Availability Protocols
 
 ### Bidirectional Forwarding Detection (BFD)
 

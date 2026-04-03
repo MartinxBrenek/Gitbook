@@ -1,4 +1,5 @@
 ---
+description: L1 - PHY
 layout:
   width: default
   title:
@@ -17,7 +18,7 @@ layout:
     visible: true
 ---
 
-# L1   PHY
+# Physical Layer
 
 ### Signal
 
@@ -670,7 +671,7 @@ Ethernet switch supports Full-duplex communication, where half of the UTP wires 
 For example, point-to-point 100-Mbps connections have 100 Mbps of transmission capacity and 100 Mbps of receiving capacity for an effective 200-Mbps capacity on a single connection.
 
 The switch examines MAC addresses and stores them with ingress ports in CAM (MAC address table).\
-See also: [Packet Forwarding Architecture](../routing/packet-forwarding-architecture.md)
+See also: [Packet Forwarding Architecture](../routing/packet-forwarding.md)
 
 As devices are added or removed from the network, the switch update it's CAM table, adding new MAC addresses dynamically and aging out those that were disconnected
 

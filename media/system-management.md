@@ -17,9 +17,9 @@ layout:
     visible: true
 ---
 
-# System Management  - Cisco
+# System Management
 
-#### Internetworking Operating System (IOS)
+## Internetworking Operating System (IOS)
 
 **Internetworking Operating System (IOS)** is a proprietary operating system that runs on Cisco network devices
 

@@ -17,7 +17,7 @@ layout:
     visible: true
 ---
 
-# Hardware Management - Cisco
+# Hardware Management
 
 ### Switch and router installation
 
@@ -415,7 +415,3 @@ DC cannot be transmitted economically over long distances due to a drop in volta
 ![](<../.gitbook/assets/Unknown image (240)>)
 
 QSFP-DD modules use a flat top design, allowing for a larger "riding" heatsink instead of a smaller, integrated one. This innovative approach enables significantly better cooling performance and facilitates ongoing design improvements for optimal thermal management.
-
-### Advanced equipment cooling
-
-![](<../.gitbook/assets/Unknown image (241)>)
