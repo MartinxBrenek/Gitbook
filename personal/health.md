@@ -1359,3 +1359,65 @@ Certain supplements, like magnesium, active Vitamin B6, creatine, and CDP Cholin
 A holistic approach to health, or a "Performance Lifestyle," aims to optimize your well-being so that negative environmental factors have a minimal effect.
 
 It's important not to identify with a problem like "I have a bad memory" but to see it as an imbalance that can be corrected.
+
+## Engineering Reverse Aging
+
+* Aging is primarily **loss of epigenetic information**, not mutation of DNA itself
+* DNA stays mostly intact; what degrades is **gene expression control (epigenome)**
+* Cells “forget” their role → leads to dysfunction and disease
+* Aging is largely **modifiable**; lifestyle influences dominate over genetics
+* Environmental inputs continuously rewrite epigenetic state
+* **Hormesis is central mechanism**: controlled stress triggers repair pathways
+* No stress → degeneration; excessive stress → damage; optimal stress → adaptation
+* Major hormetic stressors:
+  * fasting
+  * physical exercise
+  * cold exposure
+  * heat exposure
+* These stressors activate survival pathways including:
+  * sirtuins
+  * AMPK
+  * mitochondrial biogenesis
+* **Sirtuins require NAD⁺** to function → NAD⁺ availability is a bottleneck for repair
+* NAD⁺ declines with age → repair systems weaken → damage accumulates
+* Mitochondrial dysfunction is a **core driver of aging**
+* Reduced mitochondrial efficiency → less energy + more oxidative stress
+* Improving mitochondrial function is one of the highest leverage interventions
+* Food acts as a **signaling system**, not just caloric input
+* Plant stress compounds (xenohormesis) activate human defense pathways
+* Example: compounds like sulforaphane trigger detox and protective gene expression
+* Chronic inflammation and metabolic dysfunction accelerate epigenetic aging
+* Many diseases (cancer, neurodegeneration, cardiovascular disease) are **downstream effects of aging processes**, not isolated causes
+* Experimental work shows **epigenetic reprogramming can reverse aging markers**
+* In animals, partial reprogramming restores tissue function and extends lifespan
+* Aging may be biologically **reversible at the cellular level**, but human application is still early-stage
+* Longevity strategy = maintain:
+  * epigenetic stability
+  * mitochondrial function
+  * NAD⁺ levels
+  * adaptive stress response
+* Healthspan (functionality) is more important than raw lifespan
+
+**NAD⁺ (nicotinamide adenine dinucleotide)** is a molecule present in every cell that acts as a **coenzyme for energy production and repair systems**.
+
+* It transfers electrons in metabolic reactions → required for ATP (energy) generation
+* It activates **sirtuins**, which are enzymes responsible for:
+  * DNA repair
+  * inflammation control
+  * mitochondrial maintenance
+
+With age:
+
+* NAD⁺ levels **decline significantly**
+* Result → reduced repair capacity + accumulation of damage
+
+Key implication:
+
+> Low NAD⁺ = cells lose ability to maintain themselves → aging accelerates
+
+Ways to increase/maintain NAD⁺:
+
+* fasting / caloric restriction
+* exercise
+* metabolic stress (cold, heat)
+* NAD⁺ precursors (NMN, NR — mentioned conceptually)
