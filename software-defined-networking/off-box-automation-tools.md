@@ -66,8 +66,6 @@ Also supports Windows Remote Management (WinRM) and other transport methods
 
 Ansible Automation Engine UI where users create playbooks for automation
 
-![](<../.gitbook/assets/Unknown image (919)>)
-
 #### Engine components
 
 **Task** the smallest unit of action (configure IP or execute show command)
@@ -83,8 +81,6 @@ Ansible Automation Engine UI where users create playbooks for automation
 **API** is used to interact with public and cloud managed devices; **Plugins** are pre-built pieces of code
 
 ![](<../.gitbook/assets/Unknown image (920)>)
-
-![](<../.gitbook/assets/Unknown image (921)>)
 
 ### Puppet
 
@@ -109,8 +105,6 @@ Facts contain info about puppet agents; sent to master to view current state of 
 Catalogs prepared by master for the agent with configuration changes (secured with SSL/cert during deploy)
 
 Puppet console executes tasks
-
-![](<../.gitbook/assets/Unknown image (922)>)
 
 Catalog structures
 
@@ -184,17 +178,11 @@ Beacon live on minions, to be monitored by reactor
 
 asterisk (\*) includes all nodes
 
-![](<../.gitbook/assets/Unknown image (923)>)
-
 ## Assurance tools
-
-### NetBox
 
 **NetBox** solution for modeling and documenting modern networks. By combining the traditional disciplines of IP address management (IPAM) and datacenter infrastructure management (DCIM) and APIs and extensions, NetBox provides "source of truth" to power network automation
 
 [https://github.com/netbox-community/netbox](https://github.com/netbox-community/netbox)
-
-#### ThousandEyes
 
 **ThousandEyes** is a SaaS product that offers network monitoring and diagnostic capabilities to analyze traffic patterns, identify performance, and troubleshoot issues with connectivity
 
@@ -222,43 +210,17 @@ Organizations can configure tests and measurements to be executed from both thei
 
 ![ThousandEyes Device Layer Review - RouterFreak](<../.gitbook/assets/Unknown image (925)>)
 
-#### IP Fabric
-
 **IP Fabric** is The lightweight discovery tool utilizing SSH/Telnet/CDP/LLDP to quickly detect the current network state, including detailed data for each address and port.
 
-A network model of gathered data reconstructs the topologies for each switching and routing protocol to enable a cross-technology analysis of upstream and downstream relationships
-
-is network infrastructure management platform that can discover entire network connections and present all data in a GUI.
-
-![](<../.gitbook/assets/Unknown image (926)>)
-
-#### Zabbix
-
 **Zabbix** is an open-source SNMP-based monitoring tool supporting ICMP, TCP, and UDP
-
-![Zabbix - Wikipedia](<../.gitbook/assets/Unknown image (927)>)
-
-#### Grafana
 
 **Grafana** is an open-source visualization and monitoring platform that integrates with various data sources, including databases, time-series databases, and monitoring tools like Zabbix
 
 The platform provides extensive customization options for dashboard design and layout, enabling users to tailor dashboards to their specific monitoring needs
 
-![Grafana monitoring and integration with Zabbix](<../.gitbook/assets/Unknown image (928)>)
-
-#### FlowMon
-
 **FlowMon** It is NetFlow/IPFIX-based monitoring tool, analyzyng network traffic in real-time
 
-![Enhanced Network Monitoring with Progress Flowmon | Flowmon](<../.gitbook/assets/Unknown image (929)>)
-
-#### Paessler Router Traffic Grapher (PRTG)
-
 **Paessler Router Traffic Grapher (PRTG)** monitoring tool supporting SNMP,Netflow,WMI (Windows Management Instrumentation)
-
-![Availability monitoring: Reach 100% percent uptime with PRTG!](<../.gitbook/assets/Unknown image (930)>)
-
-#### Batfish
 
 **Batfish** is an open source network validation tool that provides correctness guarantees for security, reliability, and compliance by analyzing the configuration of network devices.
 

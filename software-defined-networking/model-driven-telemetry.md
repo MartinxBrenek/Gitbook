@@ -104,7 +104,9 @@ JSON encoding
 
 The NetFlow technology creates an environment in which you have the tools to understand how network traffic is flowing. When you understand the network behavior, business processes improve, and an audit trail of how the network is used is available. This increased awareness reduces the vulnerability of the service provider network to outages and allows the network to operate efficiently. Improvements in network operation lower costs and encourage higher business revenues by enabling better utilization of the network infrastructure.
 
-Benefits
+
+
+**Benefits**
 
 Provides high-level diagnostics to classify and identify network anomalies.
 
@@ -124,15 +126,15 @@ Using the information to better structure and customize the set of available app
 
 NetFlow v9 records can contain the input interface number (SNMP ifIndex) that helps identify the incoming interface of a flow. This is essential for performing traceback or detailed flow analysis
 
-Components
+#### **Components**
 
-NetFlow Data Capture captures traffic statistics on ingress and egress in the Netflow cache
+**NetFlow Data Capture** captures traffic statistics on ingress and egress in the Netflow cache
 
 All packets with the same source and destination IP address, source and destination ports, protocol, interface, and class of service (CoS) are grouped into a unique flow and then packets and bytes are tallied. If a packet has one key field that is different from another packet, it is considered to belong to another flow. This methodology of fingerprinting or determining a flow is scalable because a large amount of network information is condensed into a database of NetFlow information that is called the NetFlow cache.
 
-NetFlow Data Export exports the statistical data to a NetFlow collector (Cisco DNA Center or Cisco Prime Infrastructure)
+**NetFlow Data Export** exports the statistical data to a NetFlow collector (Cisco DNA Center or Cisco Prime Infrastructure)
 
-NetFlow v9 packet format:
+**NetFlow v9 packet format:**
 
 Export packet: Built by a device (for example, a router) with NetFlow services enabled, this type of packet is addressed to another device (for example, a NetFlow collector). This other device processes the packet (parses, aggregates, and stores information on IP flows).
 
@@ -150,7 +152,7 @@ Data FlowSet: A data FlowSet is a collection of one or more data records that ha
 
 Data record: A data record provides information about an IP flow that exists on the device that produced an export packet. Each group of data records (each data FlowSet) references a previously transmitted template ID, which can be used to parse the data contained within the records.
 
-Netflow Versions
+#### **Netflow Versions**
 
 NetFlow versions 2, 3, 4, and 6 were not released and are not supported. Netflow v9 supports IPv6,multicast and MPLS flows in compare to v5
 
@@ -160,24 +162,7 @@ The basic output of NetFlow is a flow record. In NetFlow v9, a flow record follo
 
 Netflow v10 is called Internet Protocol Flow Information Export (IPFIX) and it is an IETF standard based on NetFlow Version 9 (NetFlow v9) with several extensions, the most popular of which are the Information Element identifiers.
 
-Configuration
-
-| ip flow-export version 9                       |                                                                                               |
-| ---------------------------------------------- | --------------------------------------------------------------------------------------------- |
-| ip flow-export destination 192.168.14.100 9999 | it's always UDP port 9999. You can configure a maximum of two export destinations for NetFlow |
-| interface Gi1                                  |                                                                                               |
-| ip flow ingress                                |                                                                                               |
-| ip flow egress                                 |                                                                                               |
-| ip flow-top-talkers                            |                                                                                               |
-| top 10                                         |                                                                                               |
-| sort-by \<bytes \| packets>                    | #show ip flow interface #show ip flow export                                                  |
-| show ip cache flow                             |                                                                                               |
-
-Note IP protocols are shown in hex
-
-![](<../.gitbook/assets/Unknown image (1623)>)
-
-#### Flexible NetFlow
+### Flexible NetFlow
 
 **Flexible NetFlow** provides enhanced optimization of the network infrastructure, reduces costs, and improves capacity planning and security detection beyond other flow-based technologies available today. Flexible NetFlow supports IPv6 and Network-Based Application Recognition (NBAR) 2 for IPv6. It also supports IPv6 transition techniques (IPv6 inside IPv4).
 
@@ -185,7 +170,7 @@ It performs Deep Packet Inspection (DPI) and supports a wide range of match crit
 
 In Flexible NetFlow, the administrator can specify what to track, resulting in fewer flows. This ability helps to scale in busy networks and use fewer resources that other features and services consume.
 
-Components
+#### Components
 
 Records: Flexible NetFlow records consist of key and non-key fields, defining how flow data is stored in the cache. Key fields identify unique flows, while non-key fields (e.g., TCP flags, byte counts) provide additional details.
 
@@ -195,35 +180,9 @@ Flow Monitors: Applied to interfaces to collect and analyze traffic based on flo
 
 Flow Samplers: reduces the CPU overhead by limiting the number of packets that are selected for analysis
 
-Config
+**Config**
 
 [https://www.cisco.com/c/en/us/td/docs/routers/ios/config/17-x/ntw-servs/b-network-services/m\_fnf-ipv4-uni.html](https://www.cisco.com/c/en/us/td/docs/routers/ios/config/17-x/ntw-servs/b-network-services/m_fnf-ipv4-uni.html)
-
-| Configure a flow record (optional)                         |                                   |
-| ---------------------------------------------------------- | --------------------------------- |
-| # flow record CUSTOM1                                      | show flow record <>               |
-| # description Custom Flow Record for IPv4 Traffic          |                                   |
-| # match ipv4 source address                                |                                   |
-| # match ipv4 destination address                           |                                   |
-| # match ipv4 source-port                                   |                                   |
-| # collect counter bytes                                    |                                   |
-| # collect counter packets                                  |                                   |
-| Configure a flow exporter for the flow monitor             |                                   |
-| # flow exporter CUSTOM1                                    | show flow exporter <>             |
-| # description EXPORT                                       |                                   |
-| # destination 192.168.14.100                               |                                   |
-| # export-protocol netflow-v9                               |                                   |
-| # transport UDP 9999                                       |                                   |
-| Configure a flow monitor and reference record and exporter |                                   |
-| flow monitor CUSTOM1                                       | show flow monitor <>              |
-| description <>                                             |                                   |
-| record CUSTOM1                                             |                                   |
-| cache active timeout 60                                    |                                   |
-| exporter CUSTOM1                                           |                                   |
-| Configure a flow sampler (optional)                        |                                   |
-| Apply monitor to an interface                              | # show flow monitor CUSTOM1 cache |
-| # interface ethernet0/1                                    |                                   |
-| # ip flow monitor CUSTOM1 input                            |                                   |
 
 To enable NetFlow to provide traceback information, a classification ACL must be configured to identify which type of traffic will be analyzed. NetFlow itself can capture detailed information about traffic flow, but to focus on specific types of traffic for traceback purposes, classification ACLs are necessary. These ACLs help filter and categorize traffic, facilitating a more efficient and precise analysis. While Cisco Express Forwarding (CEF) is a prerequisite for enabling NetFlow on a router, it is not an additional configuration specifically needed for providing traceback information; it is a foundational requirement for NetFlow to function in the first place.
 

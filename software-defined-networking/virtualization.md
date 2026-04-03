@@ -312,8 +312,3 @@ Allows network engineers to automate tasks directly on the network device withou
 Facilitates integration with third-party applications and tools by providing a Linux environment.
 
 Enhances troubleshooting capabilities by enabling the use of familiar Linux-based utilities and commands
-
-**IOS XE**
-
-| ## Enabling IOx service Router(config)# iox ## Configuring Guest Shell Router(config)# interface VirtualPortGroup Router(config-if)# ip address Router(config)# app-hosting appid guestshell Router(config-app-hosting)# app-vnic VirtualPortGroup guest-interface guest-ipaddress netmask Router(config-app-hosting)# app-default-gateway guest-interface ## Enabling Guest Shell Router# guestshell enable ## Entering Guest Shell Router# guestshell run bash guestshell:~~$ sudo yum install python3 guestshell:~~$ ping google.com | ## Show IOx service status Router# show iox-service ## Show detailed app-hosting status Router# show app-hosting detail |
-| --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------- |
