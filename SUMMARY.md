@@ -67,7 +67,6 @@
 * [Virtualization](software-defined-networking/virtualization.md)
 * [Cloud concepts](software-defined-networking/cloud-concepts.md)
 * [AI and ML](software-defined-networking/ai-and-ml.md)
-* [Network Automation](software-defined-networking/network-automation.md)
 * [Git](software-defined-networking/git.md)
 * [SDN](software-defined-networking/sdn.md)
 * [Management, Automation and Assurance tools](software-defined-networking/management-automation-and-assurance-tools.md)

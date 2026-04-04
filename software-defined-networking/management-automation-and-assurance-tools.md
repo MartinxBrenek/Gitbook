@@ -19,6 +19,238 @@ layout:
 
 # Management, Automation and Assurance tools
 
+## On box Automation tools
+
+### Embedded Event Manager (EEM)
+
+**Embedded Event Manager (EEM)** IOS built-in tool that allows to use scripting and build software applets that can automate many tasks
+
+Scripts can automatically execute, based on the event happening on a managed network device
+
+EEM Applets are composed of multiple building blocks // if-then statement logic
+
+#### Components
+
+**EEM server:** Consists of event detectors/publishers and event subscribers. Triggers a subscriber when a detector/publisher sends a notification about an interesting event (defined by the event subscribers)
+
+**Event detectors/publishers:** Monitoring the device for events happening (defined by the event subscribers) and notify the EEM server in case of an interesting event.
+
+**Event subscribers (Applet):** Scripts that get triggered through the EEM server by an event that happened at one of the event detectors/publishers.
+
+**Policy Director:** The policy director is responsible for coordinating and managing the applets. It ensures that the right applet is triggered when a registered event occurs.
+
+#### Possible detectors/publishers
+
+**Interface:** Allows interface parameters to be monitored (eg. threshold violation).
+
+**Routing:** Allows routing events to be monitored (eg. routes)
+
+**SNMP:** Allows MIB objects to be monitored.
+
+**Syslog:** Allows syslogs to be monitored for a specific pattern/string.
+
+**Timer:** Allows actions to be executed based on a specific time (eg. cron job).
+
+**Track:** Allows tracking objects to be monitored (eg. up/down state).
+
+![](<../.gitbook/assets/Unknown image (959)>)
+
+#### Action examples
+
+![](<../.gitbook/assets/Unknown image (960)>)
+
+Construct a script that changes the routing from gateway 1 to gateway 2 from 11:00 p.m. to 12:00 a.m. (2300 to 2400) only, daily.
+
+![](<../.gitbook/assets/Unknown image (961)>)
+
+10\*\*\* means 1 minute after 0 hour regardless of what day or month it is
+
+abcde
+
+a=minute (0-59)
+
+b=hour (0-23)
+
+c=day of month (1 - 31)
+
+d=month (1 - 12) January is 1
+
+e=day of week (0 - 6) Sunday is 0
+
+### Command Scheduler (KRON)
+
+**Command Scheduler (KRON)** allows customers to schedule fully-qualified EXEC mode CLI commands to run once, at specified intervals, at specified calendar dates and times, or upon system startup
+
+Command Scheduler has two basic processes. A policy list is configured containing lines of fully-qualified EXEC CLI commands to be run at the same time or same interval. One or more policy lists are then scheduled to run after a specified interval of time, at a specified calendar date and time, or upon system startup. Each scheduled occurrence can be set to run either once only or on a recurring basis.
+
+#### Configuration guide
+
+[https://www.cisco.com/c/en/us/td/docs/routers/ios/config/17-x/ntw-servs/b-network-services/m\_cns-cmd-sched.html](https://www.cisco.com/c/en/us/td/docs/routers/ios/config/17-x/ntw-servs/b-network-services/m_cns-cmd-sched.html)
+
+#### Example
+
+| kron occurrence OCCU\_BCKP at 22:00 Sun recurring policy-list BACKUP\_CONF ! kron policy-list BACKUP\_CONF cli write memory |   |
+| --------------------------------------------------------------------------------------------------------------------------- | - |
+
+## Off box Automation Tools
+
+**Configuration Drift** happens when individual changes made over time cause a device's configuration to deviate from the standard configurations as defined by the company
+
+Engineers make changes to devices (to troubleshoot and fix network issues, test configurations, etc.), so the configuration of a device can drift away from the standard
+
+Each change should be somehow documented, but text format is deprecated and can lead to typos and inaccurate data
+
+**Configuration provisioning** refers to application of configuration to new devices and also how configuration changes are applied to devices
+
+For network engineers we need to automation to increase network reliability and decrease repetitive tasks
+
+### Network automation benefits
+
+* Human errors reduced
+* Scalability, deployments and changes implemented almost immidiately
+* Generate and perform configurations for new devices on a large scale
+* Opex (operating expenses) costs are reduced due to automation efficiency (each task requires fewer human-hours)
+
+### Automation architecture
+
+Day 0: Provisioning automation - features like ZTP,PXE can be used to provision the device to the network
+
+Day 1: Model-driven programmability 0 - all programmatic interfaces like NETCONF,RESTCONF or gNMI based on YANG data model can be used to configure the device to the desired state
+
+Day 2: Model-driven telemetry - to allow telemetry on the device and get continuous state of the device
+
+Day N: Device optimization
+
+Configuration management tools facilitates the centralized control of large numbers of network devices. Two Main components Template and Variables. Client/server model is used
+
+### Ansible
+
+**Ansible** is a configuration management tool owned by Red Hat written in Python. Most popular; Is declarative
+
+Methology plan PPDIOO (Prepare, Plan, Design, Implement, Observe, Optimize)
+
+**Agentless** doesn't require any special software to run on the managed devices
+
+**Push model** server push configurations to the clients
+
+Control machine uses SSH for communication. Ansible-managed nodes must have an SSH server running
+
+Also supports Windows Remote Management (WinRM) and other transport methods
+
+Ansible Automation Engine UI where users create playbooks for automation
+
+#### Engine components
+
+**Task** the smallest unit of action (configure IP or execute show command)
+
+**Play** a set of tasks; grouping a set of hosts
+
+**Playbooks** a set of plays written in YAML; deploy configuration changes or retrieve info from clients
+
+**Inventory** list of devices, characteristics of each device and their roles (access/core switch, router, fw, ..)
+
+**Modules** tasks invoked by playbooks that are executed against clients
+
+**API** is used to interact with public and cloud managed devices; **Plugins** are pre-built pieces of code
+
+![](<../.gitbook/assets/Unknown image (920)>)
+
+### Puppet
+
+**Agent-based** (Specific software must be installed on the managed devices)
+
+**Pull model** clients pull configurations from the Puppet master
+
+Files use a DSL (Domain-Specific Language) based on Ruby
+
+Ruby is a dynamic, open-source programming language known for its elegant syntax and focus on simplicity and productivity.
+
+Puppet manages systems in a declarative manner meaning you define the state the target system should be in without worrying about how it happens. In reality, that is true for all these tools.
+
+Puppet master (server) linux based; can be deployed with backup
+
+Puppet agent (client) use TCP 8140 to communicate with the Puppet master
+
+#### Components
+
+Facts contain info about puppet agents; sent to master to view current state of agent
+
+Catalogs prepared by master for the agent with configuration changes (secured with SSL/cert during deploy)
+
+Puppet console executes tasks
+
+Catalog structures
+
+Resources a description of the desired machine state
+
+Manifests code that configures the clients
+
+Module collection of manifests used for automation task; stored in PuppetDB on master
+
+// Compile masters are multiple masters to increase supported nodes. An Master of masters (MoM) is then deployed to manage all masters
+
+Puppet Bolt is agentless version and connects via SSH/WinRM. Individual commands can be run in CLI of Linux/Windows or there is available GUI for enterprises
+
+Copies the script into a temporary directory on the remote device, executes the script, captures results, and removes the script from the remote system as if it were never copied there
+
+### Chef
+
+**Agent-based** also use a DSL based on Ruby; Is procedural
+
+**Pull model** The server uses TCP 10002 to send configurations to clients
+
+Key distinction is that Ansible uses YAML, a Python-based configuration language that is easier to learn and oriented to administrators, whereas Chef uses Ruby, a Domain Specific Language (DSL) that is oriented to developers
+
+#### Components
+
+Recipes configuration information written in Ruby
+
+Cookbooks a collections of receipes
+
+Chef-repository on workstation where cookboks are created
+
+Bookshelf respository of the server where cookboks are stored
+
+Knife Command line tool way that workstations communicate with the server (RSA public key pair)
+
+OHAI used to collect the current state of a node to send the information back to the Chef server
+
+kitchen is a place where all recipes and cookbooks can be tested prior to hitting any production nodes
+
+#### Chef server deployment types
+
+Chef Solo: The Chef server is hosted locally on the workstation
+
+Chef Client and Server This is a typical Chef deployment with distributed components
+
+Hosted Chef The Chef server is hosted in the cloud
+
+Private Chef All Chef components are within same enterprise network
+
+### SaltStack
+
+**SaltStack** works as both a push and pull model; agent-based and agentless (Salt SSH); written in Python and is declarative
+
+Instructions pushed out in YAML. Can be run in CLI of server or on GUI
+
+On the right is shown request of execution of network.interfaces on all clients to view IP and MAC info
+
+Salt master server
+
+Minions client
+
+#### Components
+
+Grains info about managed nodes sent to master
+
+Pillar store data that minions can retrieve; contains minion-specific data
+
+Reactor listens for any type of changes in the node or device that differ from the desired state or configuration
+
+Beacon live on minions, to be monitored by reactor
+
+asterisk (\*) includes all nodes
+
 ## Cisco Network Services Orchestrator (NSO)
 
 Primarily, **Cisco Network Services Orchestrator (NSO)** is a multivendor service orchestration platform that enables end-to-end service orchestration across physical or virtual devices. Cisco NSO can also be perceived as a multivendor service-layer SDN controller for data centers or service providers. It provides a single application programming interface (API), and a single user interface to the network.
@@ -986,158 +1218,65 @@ in IOS-XE the emsd (extensible manageability service daemon) process is responsi
 
 [https://www.cisco.com/c/en/us/td/docs/cloud-systems-management/crosswork-infrastructure/4-4/AdminGuide/b\_CiscoCrossworkAdminGuide\_4\_4/m-crosswork-data-gateway.html](https://www.cisco.com/c/en/us/td/docs/cloud-systems-management/crosswork-infrastructure/4-4/AdminGuide/b_CiscoCrossworkAdminGuide_4_4/m-crosswork-data-gateway.html)
 
-## Network performance tools
+## Assurance tools
 
-A loopback in networking is when traffic sent into a device or interface is sent back out again, allowing tests of connectivity, throughput, or troubleshooting without needing a remote peer.
+**NetBox** solution for modeling and documenting modern networks. By combining the traditional disciplines of IP address management (IPAM) and datacenter infrastructure management (DCIM) and APIs and extensions, NetBox provides "source of truth" to power network automation
 
-Selective Traffic Loopback means not all traffic is looped, only traffic that matches certain filters.
+[https://github.com/netbox-community/netbox](https://github.com/netbox-community/netbox)
 
-One way monitoring is better than two way (RTT), because with RTT you dont know in which direction you have a issue
+**ThousandEyes** is a SaaS product that offers network monitoring and diagnostic capabilities to analyze traffic patterns, identify performance, and troubleshoot issues with connectivity
 
-### Active measurement / test protocols
+As business traffic increasingly flows through the internet to cloud service providers, corporations often lack comprehensive visibility into the employee access patterns to the shared internal or cloud-based resources, so complete network monitoring is impossible because we cannot influence and monitor network traffic on the Internet
 
-TWAMP (RFC 5357) – Measures one-way/two-way delay, jitter, packet loss; used for end-to-end SLA enforcement.
+So the Thousdandeyes was designed to address these emerging cloud-based services that businesses rely on
 
-ETH-DM (Ethernet Delay Measurement, Y.1731 PM) – Ethernet OAM extension to measure delay, delay variation, loss, availability.
+ThousandEyes provides insights through a cloud-based graphical user interface (GUI) dashboard, allowing monitoring of corporate devices and providing data and performance statistics of their connections to the shared resources
 
-ETH-LB (Ethernet Loopback, 802.1ag/Y.1731) – Used for fault isolation and connectivity testing at Ethernet layer.
+ThousandEyes essentially enables corporations to see both inside-generated traffic from the offices and outside-generated traffic from the employees accessing resources from the "outside" internet
 
-ICMP Echo (Ping) – Simple test of reachability and RTT (round-trip delay).
+Thousandeyes employes **Synthetic monitoring** (proactive monitoring), which is a monitoring technique that is done by using a simulation or scripted recordings of network transactions
 
-UDP Echo – Sends UDP packets to test connectivity, latency, loss where ICMP may be filtered.
+Behavioral scripts (or paths) are created to simulate an action or path that a customer or end user would take on a website or cloud application,
 
-ETH-VS (Ethernet Vendor Specific) – Proprietary Ethernet OAM extensions; vendor-specific features.
+Those paths are then continuously monitored at specified intervals to measure overall performance such as response time and availability
 
-TCP Throughput (RFC 6349) – Measures end-to-end TCP performance (throughput, efficiency, buffer delay).
+Thousandeyes is installed as a plugin or software on the endpoints and corporate primary data center servers to track the activities
 
-Traceroute – Identifies path/hops and per-hop latency; useful for path visibility and fault localization.
+ThousandEyes also operates a global network of distributed software agents accessible via the internet.
 
-#### Benchmarking and service activation
+Organizations can configure tests and measurements to be executed from both their internal software agents and ThousandEyes' distributed agents. These tests provide visibility into the end-to-end performance of networks, including internet routing, ISP performance, and cloud service provider performance.
 
-RFC 2544 – Lab/device benchmarking: throughput, latency, frame loss, back-to-back frames. Not suited for live networks.
+![](<../.gitbook/assets/Unknown image (924)>)
 
-Y.1564 (Ethernet Service Activation) – Service provider turn-up & SLA validation; verifies CIR/EIR, multi-service testing, sustained load.
+![ThousandEyes Device Layer Review - RouterFreak](<../.gitbook/assets/Unknown image (925)>)
 
-### Operations, administration, and maintenance (OAM)
+**IP Fabric** is The lightweight discovery tool utilizing SSH/Telnet/CDP/LLDP to quickly detect the current network state, including detailed data for each address and port.
 
-IEEE 802.1ag CFM – Ethernet OAM for fault detection: continuity check, loopback, linktrace.
+**Zabbix** is an open-source SNMP-based monitoring tool supporting ICMP, TCP, and UDP
 
-ITU-T Y.1731 – Extends 802.1ag: adds performance monitoring (delay, jitter, loss, availability).
+**Grafana** is an open-source visualization and monitoring platform that integrates with various data sources, including databases, time-series databases, and monitoring tools like Zabbix
 
-IEEE 802.3ah EFM OAM – First-mile OAM; monitors access link health, remote failure indication.
+The platform provides extensive customization options for dashboard design and layout, enabling users to tailor dashboards to their specific monitoring needs
 
-#### Other monitoring and management
+**FlowMon** It is NetFlow/IPFIX-based monitoring tool, analyzyng network traffic in real-time
 
-IP SLA (Cisco proprietary) – Active measurement: latency, jitter, packet loss, MOS (voice QoS).
+**Paessler Router Traffic Grapher (PRTG)** monitoring tool supporting SNMP,Netflow,WMI (Windows Management Instrumentation)
 
-BFD (RFC 5880) – Fast fault detection (<50 ms) for routing adjacencies and links.
+**Batfish** is an open source network validation tool that provides correctness guarantees for security, reliability, and compliance by analyzing the configuration of network devices.
 
-SNMP/RMON – Passive stats collection: interfaces, errors, utilization, traffic.
+Batfish does NOT require direct access to network devices. Nor does it use data plane probes (e.g. ICMP).
 
-NETCONF/YANG Telemetry – Real-time, model-driven streaming of network state and performance for analytics.
+You feed Batfish configurations, it supports multiple vendors (e.g. AWS, Cisco, Arista...), and after you query it:
 
-#### Quick use-case mapping
+Can all my instances all reach the DNS server?
 
-Lab/benchmarking: RFC 2544.
+Does this specific VM have internet access?
 
-Service activation & SLA: Y.1564, TWAMP, Y.1731 PM.
+Are all BGP sessions in ESTABLISHED state?
 
-Fault management: 802.1ag CFM, ETH-LB, BFD.
+To find out more about Batfish visit their official website:
 
-Basic reachability: ICMP/UDP Echo, Traceroute.
-
-Last mile monitoring: 802.3ah.
-
-Enterprise monitoring: IP SLA, SNMP, Telemetry.
-
-TCP performance validation: RFC 6349.
-
-### E-OAM
-
-**E-OAM (802.3ah)** is a protocol for installing, monitoring, and troubleshooting Metro Ethernet networks and Ethernet WANs.
-
-It relies on an optional sublayer in the data link layer of the OSI model between LLC and MAC. You can implement E-OAM on any full-duplex point-to-point or emulated point-to-point Ethernet link. Systemwide implementation is unnecessary.
-
-Normal link operation does not require E-OAM. **OAM frames (OAM PDUs)** use the slow protocol destination MAC address `0180.c200.0002`. The MAC sublayer intercepts them, so they do not propagate beyond a single hop.
-
-E-OAM is a relatively slow protocol with modest bandwidth requirements. The frame transmission rate is limited to a maximum of 10 frames per second. The impact on normal operations is negligible. However, when you enable link monitoring, the CPU must poll error counters frequently. The required CPU cycles scale with the number of polled interfaces.
-
-#### E-OAM refresher
-
-* E-OAM contains two major components, the OAM client and the OAM sublayer.
-* The OAM client establishes and manages E-OAM on a link. The OAM client also enables and configures the OAM sublayer. During the OAM discovery phase, the OAM client monitors OAM PDUs that it receives from the remote peer. It enables OAM functionality on the link that is based on the local and remote state and configuration settings. Beyond the discovery phase (at steady state), the OAM client manages the rules of response to OAM PDUs and the OAM remote loopback mode.
-* The OAM sublayer presents two standard IEEE 802.3 MAC service interfaces: one faces the superior sublayers, which include the MAC client (or link aggregation), and the other interface faces the subordinate MAC control sublayer. The OAM sublayer provides a dedicated interface for passing OAM control information and OAM PDUs to and from a client.
-* The OAM sublayer has three components: control block, multiplexer, and p-parser:
-* The control block provides the interface between the OAM client and other blocks that are internal to the OAM sublayer. The control block incorporates the discovery process, which detects the existence and capabilities of remote OAM peers. It also includes the transmit process, which governs the transmission of OAM PDUs to the multiplexer, and a set of rules that govern the receipt of OAM PDUs from the p-parser.
-* The multiplexer manages frames that generate (or relay) from the MAC client, control block, and p-parser. The multiplexer passes untouched through frames that the MAC client generates. It passes OAM PDUs that the control block generates to the subordinate sublayer; for example, the MAC sublayer. Similarly, the multiplexer passes loopback frames from the p-parser to the same subordinate sublayer when the interface is in OAM remote loopback mode.
-* The p-parser classifies frames as OAM PDUs, MAC client frames, or loopback frames and then dispatches each class to the appropriate entity. OAM PDUs transmit to the control block. MAC client frames pass to the superior sublayer. Loopback frames dispatch to the multiplexer.
-
-### Cisco E-OAM implementation
-
-* The Cisco IOS Software implementation of E-OAM consists of the E-OAM shim and the E-OAM module:
-* The E-OAM shim is a thin layer that connects the E-OAM module and the platform code. It is implemented in the platform code (driver). The shim also communicates port state and error conditions to the E-OAM module via control signals.
-* The E-OAM module, which is implemented within the control plane, handles the OAM client and control-block functionality of the OAM sublayer. This module interacts with the CLI and Simple Network Management Protocol (SNMP) programmatic interface via control signals. Also, this module interacts with the E-OAM shim through OAM PDU flows.
-
-### E-OAM features
-
-* The OAM features as defined by IEEE 802.3ah, Ethernet in the First Mile (EFM), are discovery, link monitoring, remote fault detection, remote loopback, and vendor-specific extensions.
-
-#### Discovery
-
-* **Discovery** is the first phase of E-OAM, and it identifies the devices in the network and their OAM capabilities. Discovery uses information OAM PDUs. During the discovery phase, the following information advertises within periodic information OAM PDUs:
-* OAM mode: Conveyed to the remote OAM entity. The mode can be either active or passive and can determine device functionality. In active mode, the device initiates the discovery process sending traffic to the slow multicast MAC address (0180.c200.0002) in the Ethernet link.
-* OAM configuration (capabilities): Advertises the capabilities of the local OAM entity. With this information, a peer can determine what functions are supported and accessible; for example, loopback capability.
-* OAM PDU configuration: Includes the maximum OAM PDU size for receipt and delivery. This information, along with the rate limiting of 10 frames per second, can limit the bandwidth that you allocate to OAM traffic.
-* Platform identity: A combination of an organization unique identifier (OUI) and 32 bits of vendor-specific information. OUI allocation, which is controlled by the IEEE, is typically the first three bytes of a MAC address.
-* Discovery includes an optional phase in which the local station can accept or reject the request for configuration from the peer OAM entity. For example, a node may require that its partner support loopback capability for acceptance into the management network. You may implement these policy decisions as vendor-specific extensions.
-
-#### Link monitoring
-
-* **Link monitoring** in E-OAM detects and indicates link faults under various conditions. Link monitoring uses the event notification OAM PDU and sends events to the remote OAM entity when it detects problems on the link. The error events include the following:
-* Error symbol period (error symbols per second): The number of symbol errors that occur during a specified period that exceed a threshold. These errors are coding symbol errors.
-* Error frame (error frames per second): The number of frame errors that it detects during a specified period that exceed a threshold.
-* Error frame period (error frames per n frames): The number of frame errors within the last n frames that exceed a threshold.
-* Error frame seconds summary (error seconds per m seconds): The number of error seconds (1-second intervals with at least one frame error) within the last m seconds that exceed a threshold.
-* Because IEEE 802.3ah OAM provides no guaranteed delivery of any OAM PDU, the event notification OAM PDU may transmit multiple times to reduce the probability of a lost notification. A sequence number recognizes duplicate events.
-
-#### Remote Failure Indication
-
-* **Remote Failure Indication** provides a mechanism for an OAM entity to convey failure conditions to its peer via specific flags in the OAM PDU. The following failure conditions can disseminate:
-* Link fault: The receiver detects loss of signal. For instance, the peer’s laser is malfunctioning. A link fault transmits once per second in the information OAM PDU. Link fault applies only when the physical sublayer is capable of independent transmit and receive operations.
-* Dying gasp: An unrecoverable condition occurred, such as a power failure. This type of condition is vendor-specific. A notification about the condition may transmit immediately and continuously.
-* Critical event: An unspecified critical event occurred that is vendor-specific. A critical event may transmit immediately and continuously.
-
-#### Remote loopback
-
-* **Remote loopback** allows an OAM entity to put its remote peer into loopback mode by using the loopback control OAM PDU. Loopback mode helps an administrator ensure the quality of links during installation or troubleshooting. In loopback mode, every frame that is received transmits back on the same port except for OAM PDUs and pause frames. The periodic exchange of OAM PDUs must continue during the loopback state to maintain the OAM session.
-* The loopback command is acknowledged by responding with an information OAM PDU with the loopback state that is indicated in the state field. This acknowledgment allows an administrator, for example, to estimate if a network segment can satisfy a service-level agreement. Acknowledgment makes it possible to test delay, jitter, and throughput.
-* When you set an interface to the remote loopback mode, the interface no longer participates in any other Layer 2 or Layer 3 protocols such as STP or Open Shortest Path First (OSPF). The reason is that when two connected ports are in a loopback session, no frames other than the OAM PDUs transmit to the CPU for software processing. The non-OAM PDU frames either loop back at the MAC level or discard at the MAC level.
-* From a user’s perspective, an interface in loopback mode is in a link-up state.
-
-#### Vendor-specific extensions
-
-* **Vendor-specific extensions** allow vendors to extend the protocol by creating their own type-length-value (TLV) fields.
-
-### E-OAM messages
-
-* E-OAM messages or OAM PDUs are standard length, untagged Ethernet frames within the normal frame length bounds of 64 to 1518 bytes. Two peers negotiate the maximum OAM PDU frame size that exchanges between them during the discovery phase.
-* OAM PDUs always have the destination address of slow protocols (0180.c200.0002) and an EtherType of 8809. OAM PDUs do not transmit beyond a single hop and have a hard-set maximum transmission rate of 10 OAM PDUs per second. Some OAM PDU types may transmit multiple times to increase the likelihood that a deteriorating link will successfully receive them.
-* E-OAM supports four types of OAM messages:
-* Information OAM PDU: A variable-length OAM PDU that you use for discovery. This OAM PDU includes local, remote, and organization-specific information.
-* Event notification OAM PDU: A variable-length OAM PDU that you use for link monitoring. This type of OAM PDU may transmit multiple times to increase the chance of a successful receipt, as in the case of high-bit errors. Event notification OAM PDUs also may include a time stamp when they generate.
-* Loopback control OAM PDU: An OAM PDU that is fixed at 64 bytes in length and enables or disables the remote loopback mode.
-* Vendor-specific OAM PDU: A variable-length OAM PDU that allows the addition of vendor-specific extensions to OAM.
-
-### E-OAM supported high availability features
-
-* High availability is necessary in access and service provider networks that use Ethernet technology, especially on E-OAM components that manage EVC connectivity. End-to-end connectivity status information is critical, and you must use a hot standby Route Switch Processor (RSP) to maintain it. (A standby RSP must have the same software image as the active RSP and support synchronization of line card, protocol, and application state information between RSPs for supported features and protocols.)
-* The customer edge (CE), provider edge (PE), and access aggregation PE (uPE) network nodes maintain end-to-end connectivity status that is based on information that protocols receive (such as Connectivity Fault Management \[CFM] and 802.3ah). This status information stops traffic or switches to backup paths when an EVC is down. Metro Ethernet clients (for example, CFM and 802.3ah) maintain configuration data and dynamic data, which they learn through protocols. Every transaction involves either accessing or updating data among the various databases. If the databases synchronize across active and standby modules, the RSPs are transparent to clients.
-* Cisco infrastructure provides various component APIs for clients that are helpful in maintaining a hot standby RSP. Metro Ethernet high-availability clients interact with these components, update the databases, and trigger necessary events to other components. Examples include high availability In-Service Software Upgrade (ISSU), CFM high availability ISSU, and 802.3ah high availability ISSU.
-* Benefits of 802.3ah high availability include the following:
-* Eliminates network downtime for Cisco software image upgrades, which results in higher availability.
-* Eliminates resource scheduling challenges that associate with planned outages and late-night maintenance windows.
-* Accelerates deployment of new services and applications and enables faster implementation of new features, hardware, and fixes by eliminating network downtime during upgrades.
-* Reduces operating costs due to outages while delivering higher service levels by eliminating network downtime during upgrades.
+[https://www.batfish.org/](https://www.batfish.org/)
 
 ## Intent-based Assurance
 
@@ -1340,3 +1479,156 @@ Orchestrator will be integrated into Analytics
 The sesor c
 
 On the black belt you have sales/technical/deployment training for this solution
+
+## Network performance tools
+
+A loopback in networking is when traffic sent into a device or interface is sent back out again, allowing tests of connectivity, throughput, or troubleshooting without needing a remote peer.
+
+Selective Traffic Loopback means not all traffic is looped, only traffic that matches certain filters.
+
+One way monitoring is better than two way (RTT), because with RTT you dont know in which direction you have a issue
+
+### Active measurement / test protocols
+
+TWAMP (RFC 5357) – Measures one-way/two-way delay, jitter, packet loss; used for end-to-end SLA enforcement.
+
+ETH-DM (Ethernet Delay Measurement, Y.1731 PM) – Ethernet OAM extension to measure delay, delay variation, loss, availability.
+
+ETH-LB (Ethernet Loopback, 802.1ag/Y.1731) – Used for fault isolation and connectivity testing at Ethernet layer.
+
+ICMP Echo (Ping) – Simple test of reachability and RTT (round-trip delay).
+
+UDP Echo – Sends UDP packets to test connectivity, latency, loss where ICMP may be filtered.
+
+ETH-VS (Ethernet Vendor Specific) – Proprietary Ethernet OAM extensions; vendor-specific features.
+
+TCP Throughput (RFC 6349) – Measures end-to-end TCP performance (throughput, efficiency, buffer delay).
+
+Traceroute – Identifies path/hops and per-hop latency; useful for path visibility and fault localization.
+
+#### Benchmarking and service activation
+
+RFC 2544 – Lab/device benchmarking: throughput, latency, frame loss, back-to-back frames. Not suited for live networks.
+
+Y.1564 (Ethernet Service Activation) – Service provider turn-up & SLA validation; verifies CIR/EIR, multi-service testing, sustained load.
+
+### Operations, administration, and maintenance (OAM)
+
+IEEE 802.1ag CFM – Ethernet OAM for fault detection: continuity check, loopback, linktrace.
+
+ITU-T Y.1731 – Extends 802.1ag: adds performance monitoring (delay, jitter, loss, availability).
+
+IEEE 802.3ah EFM OAM – First-mile OAM; monitors access link health, remote failure indication.
+
+#### Other monitoring and management
+
+IP SLA (Cisco proprietary) – Active measurement: latency, jitter, packet loss, MOS (voice QoS).
+
+BFD (RFC 5880) – Fast fault detection (<50 ms) for routing adjacencies and links.
+
+SNMP/RMON – Passive stats collection: interfaces, errors, utilization, traffic.
+
+NETCONF/YANG Telemetry – Real-time, model-driven streaming of network state and performance for analytics.
+
+#### Quick use-case mapping
+
+Lab/benchmarking: RFC 2544.
+
+Service activation & SLA: Y.1564, TWAMP, Y.1731 PM.
+
+Fault management: 802.1ag CFM, ETH-LB, BFD.
+
+Basic reachability: ICMP/UDP Echo, Traceroute.
+
+Last mile monitoring: 802.3ah.
+
+Enterprise monitoring: IP SLA, SNMP, Telemetry.
+
+TCP performance validation: RFC 6349.
+
+### E-OAM
+
+**E-OAM (802.3ah)** is a protocol for installing, monitoring, and troubleshooting Metro Ethernet networks and Ethernet WANs.
+
+It relies on an optional sublayer in the data link layer of the OSI model between LLC and MAC. You can implement E-OAM on any full-duplex point-to-point or emulated point-to-point Ethernet link. Systemwide implementation is unnecessary.
+
+Normal link operation does not require E-OAM. **OAM frames (OAM PDUs)** use the slow protocol destination MAC address `0180.c200.0002`. The MAC sublayer intercepts them, so they do not propagate beyond a single hop.
+
+E-OAM is a relatively slow protocol with modest bandwidth requirements. The frame transmission rate is limited to a maximum of 10 frames per second. The impact on normal operations is negligible. However, when you enable link monitoring, the CPU must poll error counters frequently. The required CPU cycles scale with the number of polled interfaces.
+
+#### E-OAM refresher
+
+* E-OAM contains two major components, the OAM client and the OAM sublayer.
+* The OAM client establishes and manages E-OAM on a link. The OAM client also enables and configures the OAM sublayer. During the OAM discovery phase, the OAM client monitors OAM PDUs that it receives from the remote peer. It enables OAM functionality on the link that is based on the local and remote state and configuration settings. Beyond the discovery phase (at steady state), the OAM client manages the rules of response to OAM PDUs and the OAM remote loopback mode.
+* The OAM sublayer presents two standard IEEE 802.3 MAC service interfaces: one faces the superior sublayers, which include the MAC client (or link aggregation), and the other interface faces the subordinate MAC control sublayer. The OAM sublayer provides a dedicated interface for passing OAM control information and OAM PDUs to and from a client.
+* The OAM sublayer has three components: control block, multiplexer, and p-parser:
+* The control block provides the interface between the OAM client and other blocks that are internal to the OAM sublayer. The control block incorporates the discovery process, which detects the existence and capabilities of remote OAM peers. It also includes the transmit process, which governs the transmission of OAM PDUs to the multiplexer, and a set of rules that govern the receipt of OAM PDUs from the p-parser.
+* The multiplexer manages frames that generate (or relay) from the MAC client, control block, and p-parser. The multiplexer passes untouched through frames that the MAC client generates. It passes OAM PDUs that the control block generates to the subordinate sublayer; for example, the MAC sublayer. Similarly, the multiplexer passes loopback frames from the p-parser to the same subordinate sublayer when the interface is in OAM remote loopback mode.
+* The p-parser classifies frames as OAM PDUs, MAC client frames, or loopback frames and then dispatches each class to the appropriate entity. OAM PDUs transmit to the control block. MAC client frames pass to the superior sublayer. Loopback frames dispatch to the multiplexer.
+
+### Cisco E-OAM implementation
+
+* The Cisco IOS Software implementation of E-OAM consists of the E-OAM shim and the E-OAM module:
+* The E-OAM shim is a thin layer that connects the E-OAM module and the platform code. It is implemented in the platform code (driver). The shim also communicates port state and error conditions to the E-OAM module via control signals.
+* The E-OAM module, which is implemented within the control plane, handles the OAM client and control-block functionality of the OAM sublayer. This module interacts with the CLI and Simple Network Management Protocol (SNMP) programmatic interface via control signals. Also, this module interacts with the E-OAM shim through OAM PDU flows.
+
+### E-OAM features
+
+* The OAM features as defined by IEEE 802.3ah, Ethernet in the First Mile (EFM), are discovery, link monitoring, remote fault detection, remote loopback, and vendor-specific extensions.
+
+#### Discovery
+
+* **Discovery** is the first phase of E-OAM, and it identifies the devices in the network and their OAM capabilities. Discovery uses information OAM PDUs. During the discovery phase, the following information advertises within periodic information OAM PDUs:
+* OAM mode: Conveyed to the remote OAM entity. The mode can be either active or passive and can determine device functionality. In active mode, the device initiates the discovery process sending traffic to the slow multicast MAC address (0180.c200.0002) in the Ethernet link.
+* OAM configuration (capabilities): Advertises the capabilities of the local OAM entity. With this information, a peer can determine what functions are supported and accessible; for example, loopback capability.
+* OAM PDU configuration: Includes the maximum OAM PDU size for receipt and delivery. This information, along with the rate limiting of 10 frames per second, can limit the bandwidth that you allocate to OAM traffic.
+* Platform identity: A combination of an organization unique identifier (OUI) and 32 bits of vendor-specific information. OUI allocation, which is controlled by the IEEE, is typically the first three bytes of a MAC address.
+* Discovery includes an optional phase in which the local station can accept or reject the request for configuration from the peer OAM entity. For example, a node may require that its partner support loopback capability for acceptance into the management network. You may implement these policy decisions as vendor-specific extensions.
+
+#### Link monitoring
+
+* **Link monitoring** in E-OAM detects and indicates link faults under various conditions. Link monitoring uses the event notification OAM PDU and sends events to the remote OAM entity when it detects problems on the link. The error events include the following:
+* Error symbol period (error symbols per second): The number of symbol errors that occur during a specified period that exceed a threshold. These errors are coding symbol errors.
+* Error frame (error frames per second): The number of frame errors that it detects during a specified period that exceed a threshold.
+* Error frame period (error frames per n frames): The number of frame errors within the last n frames that exceed a threshold.
+* Error frame seconds summary (error seconds per m seconds): The number of error seconds (1-second intervals with at least one frame error) within the last m seconds that exceed a threshold.
+* Because IEEE 802.3ah OAM provides no guaranteed delivery of any OAM PDU, the event notification OAM PDU may transmit multiple times to reduce the probability of a lost notification. A sequence number recognizes duplicate events.
+
+#### Remote Failure Indication
+
+* **Remote Failure Indication** provides a mechanism for an OAM entity to convey failure conditions to its peer via specific flags in the OAM PDU. The following failure conditions can disseminate:
+* Link fault: The receiver detects loss of signal. For instance, the peer’s laser is malfunctioning. A link fault transmits once per second in the information OAM PDU. Link fault applies only when the physical sublayer is capable of independent transmit and receive operations.
+* Dying gasp: An unrecoverable condition occurred, such as a power failure. This type of condition is vendor-specific. A notification about the condition may transmit immediately and continuously.
+* Critical event: An unspecified critical event occurred that is vendor-specific. A critical event may transmit immediately and continuously.
+
+#### Remote loopback
+
+* **Remote loopback** allows an OAM entity to put its remote peer into loopback mode by using the loopback control OAM PDU. Loopback mode helps an administrator ensure the quality of links during installation or troubleshooting. In loopback mode, every frame that is received transmits back on the same port except for OAM PDUs and pause frames. The periodic exchange of OAM PDUs must continue during the loopback state to maintain the OAM session.
+* The loopback command is acknowledged by responding with an information OAM PDU with the loopback state that is indicated in the state field. This acknowledgment allows an administrator, for example, to estimate if a network segment can satisfy a service-level agreement. Acknowledgment makes it possible to test delay, jitter, and throughput.
+* When you set an interface to the remote loopback mode, the interface no longer participates in any other Layer 2 or Layer 3 protocols such as STP or Open Shortest Path First (OSPF). The reason is that when two connected ports are in a loopback session, no frames other than the OAM PDUs transmit to the CPU for software processing. The non-OAM PDU frames either loop back at the MAC level or discard at the MAC level.
+* From a user’s perspective, an interface in loopback mode is in a link-up state.
+
+#### Vendor-specific extensions
+
+* **Vendor-specific extensions** allow vendors to extend the protocol by creating their own type-length-value (TLV) fields.
+
+### E-OAM messages
+
+* E-OAM messages or OAM PDUs are standard length, untagged Ethernet frames within the normal frame length bounds of 64 to 1518 bytes. Two peers negotiate the maximum OAM PDU frame size that exchanges between them during the discovery phase.
+* OAM PDUs always have the destination address of slow protocols (0180.c200.0002) and an EtherType of 8809. OAM PDUs do not transmit beyond a single hop and have a hard-set maximum transmission rate of 10 OAM PDUs per second. Some OAM PDU types may transmit multiple times to increase the likelihood that a deteriorating link will successfully receive them.
+* E-OAM supports four types of OAM messages:
+* Information OAM PDU: A variable-length OAM PDU that you use for discovery. This OAM PDU includes local, remote, and organization-specific information.
+* Event notification OAM PDU: A variable-length OAM PDU that you use for link monitoring. This type of OAM PDU may transmit multiple times to increase the chance of a successful receipt, as in the case of high-bit errors. Event notification OAM PDUs also may include a time stamp when they generate.
+* Loopback control OAM PDU: An OAM PDU that is fixed at 64 bytes in length and enables or disables the remote loopback mode.
+* Vendor-specific OAM PDU: A variable-length OAM PDU that allows the addition of vendor-specific extensions to OAM.
+
+### E-OAM supported high availability features
+
+* High availability is necessary in access and service provider networks that use Ethernet technology, especially on E-OAM components that manage EVC connectivity. End-to-end connectivity status information is critical, and you must use a hot standby Route Switch Processor (RSP) to maintain it. (A standby RSP must have the same software image as the active RSP and support synchronization of line card, protocol, and application state information between RSPs for supported features and protocols.)
+* The customer edge (CE), provider edge (PE), and access aggregation PE (uPE) network nodes maintain end-to-end connectivity status that is based on information that protocols receive (such as Connectivity Fault Management \[CFM] and 802.3ah). This status information stops traffic or switches to backup paths when an EVC is down. Metro Ethernet clients (for example, CFM and 802.3ah) maintain configuration data and dynamic data, which they learn through protocols. Every transaction involves either accessing or updating data among the various databases. If the databases synchronize across active and standby modules, the RSPs are transparent to clients.
+* Cisco infrastructure provides various component APIs for clients that are helpful in maintaining a hot standby RSP. Metro Ethernet high-availability clients interact with these components, update the databases, and trigger necessary events to other components. Examples include high availability In-Service Software Upgrade (ISSU), CFM high availability ISSU, and 802.3ah high availability ISSU.
+* Benefits of 802.3ah high availability include the following:
+* Eliminates network downtime for Cisco software image upgrades, which results in higher availability.
+* Eliminates resource scheduling challenges that associate with planned outages and late-night maintenance windows.
+* Accelerates deployment of new services and applications and enables faster implementation of new features, hardware, and fixes by eliminating network downtime during upgrades.
+* Reduces operating costs due to outages while delivering higher service levels by eliminating network downtime during upgrades.
