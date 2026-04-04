@@ -19,8 +19,6 @@ layout:
 
 # Cloud concepts
 
-### Overview
-
 Cloud service providers, such as Microsoft Azure and Amazon Web Services, offer companies and individuals convenient availability of various software, platform or infrastructure services on-demand for a fee, depending on the level of usage of the service (pay-as-you-go basis), saving expenses to individuals and opex for businesses
 
 With cloud computing, companies can leverage resources like applications, server storage and cloud computing power, so that they don't have to maintain their own hardware infrastructure

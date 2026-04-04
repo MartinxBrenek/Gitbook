@@ -17,9 +17,7 @@ layout:
     visible: true
 ---
 
-# Traffic Engineering and Policy Based Routing
-
-**Traffic Engineering (TE)** focuses on measuring, modeling, and managing traffic to ensure efficient network operation and achieve desired outcomes.
+# Traffic engineering
 
 ### Why traffic engineering
 
@@ -34,6 +32,8 @@ Long-terms of realization
 Costs
 
 Failure scenarios
+
+
 
 By default, routing is a destination-based logic. With policy-based or TE routing, the default behavior of a router can be influenced
 

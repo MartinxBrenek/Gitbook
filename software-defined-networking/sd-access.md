@@ -119,8 +119,6 @@ Policy extended nodes
 
 ![](<../.gitbook/assets/Unknown image (1548)>)
 
-![](/broken/files/a0cc62778bfc93cf67d40d7e86b054772fd17b0f)
-
 #### Controller layer
 
 Cisco ISE and the Catalyst Center (NCP and NDP) integrate with each other to share contextual info between via APIs
@@ -150,8 +148,6 @@ Part of the complexity in a network comes from the fact that policies are tied t
 The concepts of overlay and fabric are not new in the networking industry. Existing technologies such as Multiprotocol Label Switching (MPLS), Generic Routing Encapsulation (GRE), Locator/ID Separation Protocol (LISP), and Overlay Transport Virtualization (OTV) are all examples of network tunneling technologies that implement an overlay. Another common example is Cisco Unified Wireless Network (Cisco UWN), which uses Control and Provisioning of Wireless Access Points (CAPWAP) to create an overlay network for wireless traffic.
 
 The Cisco SD-Access architecture is supported by a fabric technology implemented for the campus, enabling the use of virtual networks (overlay networks) running on a physical network (underlay network) creating alternative topologies to connect devices.
-
-![](/broken/files/1337eb0bda70981a8fe1db4e2b13011cb7b2ccb5)
 
 Cisco SD-Access network underlay (or simply, underlay) is comprised of the physical network devices, such as routers, switches, and WLCs, plus a traditional Layer 3 routing protocol. This provides a simple, scalable, and resilient foundation for communication between the network devices. The network underlay is not used for client traffic (client traffic uses the fabric overlay).
 

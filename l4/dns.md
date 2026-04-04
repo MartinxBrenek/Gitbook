@@ -19,8 +19,6 @@ layout:
 
 # DNS
 
-## Overview
-
 **Domain Name System (DNS)** is a decentralized naming system for computers, services, or any resource connected to the Internet or a private network.
 
 It translates human-readable domain names, also called **Fully Qualified Domain Names (FQDNs)**, like `google.com`, into IP addresses.

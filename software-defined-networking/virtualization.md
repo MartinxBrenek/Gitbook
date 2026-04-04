@@ -19,8 +19,6 @@ layout:
 
 # Virtualization
 
-### Overview
-
 **Virtualization** is a technology that allows us to create multiple independent machines (VM's) or containerized operating systems (containers) on a single physical server
 
 **Virtual Machine (VM)** is a software emulation of a physical server with an operating system (OS)

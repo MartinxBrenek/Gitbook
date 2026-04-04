@@ -19,8 +19,6 @@ layout:
 
 # MPLS TE
 
-### Overview
-
 WAN connections are an expensive item in the service provider budget. The cost saving that results from a more efficient use of resources, will help to reduce the overall cost of operations. Also, more efficient use of bandwidth resources means that a service provider can avoid a situation where some parts of a network are congested, while other parts are underutilized.
 
 In a Layer 3 routing network, packets are forwarded hop-by-hop. In each hop, the destination address of the packet is used to make a routing table lookup. The routing tables are created by an interior gateway protocol (IGP), which finds the least-cost route, according to its metric, to each destination in the network.
