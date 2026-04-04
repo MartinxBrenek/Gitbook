@@ -35,6 +35,9 @@ A segment list equals an address list in the SRH.
 
 The active segment is indicated by the destination address of the packet, and the next segment is indicated by a pointer in the SRH
 
+Segment Left - pointer to active Segment from Segment List\
+Only value of Pointer is changed - Segments List \[xxx] is not removed like MPLS label
+
 SRv6 introduces the network programming framework that enables a network operator or an application to specify a packet processing program by encoding a sequence of instructions in the IPv6 packet header. Each instruction is implemented on one or several nodes in the network and identified by an SRv6 SID in the packet.
 
 ![](<../.gitbook/assets/Unknown image (1374)>)
