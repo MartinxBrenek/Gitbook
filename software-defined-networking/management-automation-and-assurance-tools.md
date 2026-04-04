@@ -884,7 +884,7 @@ Third-party Management Tools: ACI can also be integrated with third-party manage
 
 **Virtual Device Context (VDC)** is a feature provided by some network devices, particularly Cisco Nexus switches. VDC networking allows the physical switch to be partitioned into multiple virtual switches, each operating independently with its own set of resources and configurations. It enables network administrators to logically separate and manage different network environments within a single physical device.
 
-## Management and Assurance Tools for Service Provider Networking
+## Service Provider Management Tools
 
 ### Cisco Crosswork Network Controller (CNC)
 
@@ -976,6 +976,240 @@ Built into NCS1010 (or 1014) controller card
 
 ▪ Card & Port configs
 
+## Assurance tools
+
+**NetBox** solution for modeling and documenting modern networks. By combining the traditional disciplines of IP address management (IPAM) and datacenter infrastructure management (DCIM) and APIs and extensions, NetBox provides "source of truth" to power network automation
+
+[https://github.com/netbox-community/netbox](https://github.com/netbox-community/netbox)
+
+**ThousandEyes** is a SaaS product that offers network monitoring and diagnostic capabilities to analyze traffic patterns, identify performance, and troubleshoot issues with connectivity
+
+As business traffic increasingly flows through the internet to cloud service providers, corporations often lack comprehensive visibility into the employee access patterns to the shared internal or cloud-based resources, so complete network monitoring is impossible because we cannot influence and monitor network traffic on the Internet
+
+So the Thousdandeyes was designed to address these emerging cloud-based services that businesses rely on
+
+ThousandEyes provides insights through a cloud-based graphical user interface (GUI) dashboard, allowing monitoring of corporate devices and providing data and performance statistics of their connections to the shared resources
+
+ThousandEyes essentially enables corporations to see both inside-generated traffic from the offices and outside-generated traffic from the employees accessing resources from the "outside" internet
+
+Thousandeyes employes **Synthetic monitoring** (proactive monitoring), which is a monitoring technique that is done by using a simulation or scripted recordings of network transactions
+
+Behavioral scripts (or paths) are created to simulate an action or path that a customer or end user would take on a website or cloud application,
+
+Those paths are then continuously monitored at specified intervals to measure overall performance such as response time and availability
+
+Thousandeyes is installed as a plugin or software on the endpoints and corporate primary data center servers to track the activities
+
+ThousandEyes also operates a global network of distributed software agents accessible via the internet.
+
+Organizations can configure tests and measurements to be executed from both their internal software agents and ThousandEyes' distributed agents. These tests provide visibility into the end-to-end performance of networks, including internet routing, ISP performance, and cloud service provider performance.
+
+![](<../.gitbook/assets/Unknown image (924)>)
+
+![ThousandEyes Device Layer Review - RouterFreak](<../.gitbook/assets/Unknown image (925)>)
+
+**IP Fabric** is The lightweight discovery tool utilizing SSH/Telnet/CDP/LLDP to quickly detect the current network state, including detailed data for each address and port.
+
+**Zabbix** is an open-source SNMP-based monitoring tool supporting ICMP, TCP, and UDP
+
+**Grafana** is an open-source visualization and monitoring platform that integrates with various data sources, including databases, time-series databases, and monitoring tools like Zabbix
+
+The platform provides extensive customization options for dashboard design and layout, enabling users to tailor dashboards to their specific monitoring needs
+
+**FlowMon** It is NetFlow/IPFIX-based monitoring tool, analyzyng network traffic in real-time
+
+**Paessler Router Traffic Grapher (PRTG)** monitoring tool supporting SNMP,Netflow,WMI (Windows Management Instrumentation)
+
+**Batfish** is an open source network validation tool that provides correctness guarantees for security, reliability, and compliance by analyzing the configuration of network devices.
+
+Batfish does NOT require direct access to network devices. Nor does it use data plane probes (e.g. ICMP).
+
+You feed Batfish configurations, it supports multiple vendors (e.g. AWS, Cisco, Arista...), and after you query it:
+
+Can all my instances all reach the DNS server?
+
+Does this specific VM have internet access?
+
+Are all BGP sessions in ESTABLISHED state?
+
+To find out more about Batfish visit their official website:
+
+{% embed url="https://www.batfish.org/" %}
+
+## Intent-based Assurance
+
+Networks have become far too complex to manage with traditional service assurance. With 5G rollouts, SD-WAN, SASE, multi-cloud, and IoT, operators are managing millions of devices, links, and virtualized functions. Old models rely on engineers manually deciding where to place sensors, configuring telemetry, and mapping raw metrics (packet loss, jitter, delay) to something that resembles user experience. This doesn’t scale — especially when customers demand predictable end-to-end performance and fast remediation.
+
+**Intent-Based Assurance (IBA)** is the evolution of service assurance to match the intent-based networking model. Instead of configuring probes and KPIs by hand, an operator expresses a service-level intent (for example: “Connect Site A and Site B with 99.9% availability and <50ms latency”). The IBA system then:
+
+Translates that intent into network-level instrumentation — deciding where probes and sensors need to go.
+
+Maps telemetry to KPIs that reflect actual service health and user experience, not just raw counters.
+
+Monitors continuously, using both active probes (synthetic tests) and passive telemetry.
+
+Predicts and alerts when an SLO/SLA is at risk, not just when it’s already violated.
+
+Feeds results back into orchestration or automation systems to remediate issues automatically (closing the loop).
+
+In short: IBA makes service assurance proactive, automated, and scalable, moving away from fragmented monitoring toward a unified, intent-driven system.
+
+### Cisco Provider Connectivity Assurance (PCA) (formerly Accedian Skylight)
+
+**Cisco Provider Connectivity Assurance (PCA)** solves the challenges of fragmented multidomain tools and lack of end-to-end visibility on service quality, and enables differentiated services based on quality of experience (QoE) and enhanced SLAs. Cisco Provider Connectivity Assurance delivers network-wide visibility and precise synthetic network and service testing for high-performance networks. Network and end-to-end service quality is visible in a single pane of glass for efficient operations and troubleshooting. Granular performance metrics from Cisco Provider Connectivity Assurance sensors can be correlated with third party data and combined with machine learning powered analytics for near real-time performance insights.
+
+Designed for communications service provider, webscaler, global enterprise and federal or public sector networks with stringent performance requirements, Cisco Provider Connectivity Assurance enables
+
+proactive service assurance for efficient troubleshooting and exceptional customer experience—all while lowering the cost of operations. Cisco Provider Connectivity Assurance provides continuous visibility of end-to-end network and service quality as well as per-segment visibility, all with microsecond precision performance data that’s needed to automate assurance.
+
+#### How it works
+
+Provider Connectivity Assurance orchestrates and fully automates monitoring and assurance capabilities through the Crosswork Network Automation platform. Crosswork Network Controller and Crosswork Network Services Orchestrator drive automation decisions based on real-time network performance information and proactive alerting. Here’s how it works:
+
+● Assurance Sensors are deployed using Crosswork NSO as part of the automated workflow when new transport layers or VPNs are defined using service intent. Activation testing templates and other automated test sequences are used to activate service assurance.
+
+● NSO triggers these templates using the NETCONF and YANG API to achieve closed-loop automation. This actively verifies that services work after being provisioned by NSO and continue to perform over the service lifecycle.
+
+● Performance data and events can be further analyzed in Provider Connectivity Assurance or can be sent back to Crosswork Network Controller to correlate KPIs with other events coming from the infrastructure. This process supports SLA management, AI/analytics, databus, and end-customer SLA reporting portals.
+
+Proven scalability (already deployed at Tier-1 carriers).
+
+Multi-vendor support with standards-based telemetry.
+
+Strong integration with Cisco’s Crosswork automation suite.
+
+Flexible sensors (software + hardware).
+
+Benchmarking network assurance tool that can be integrated with Cisco CNC and NSO, allowing it to close the loop - meaning that based on the performance it can signal to NSO or CNC to adjust the configuration or path
+
+Patented In-service throughput testing (does not restrict operation)
+
+Assurance Analytics and reporting dashboard/GUI is SaaS in a cloud can be used for both the SP operations to measure the link as well as other tenants like end-user so that they can also access the performance data analysis SLA assurance & QoS monitoring
+
+
+
+Solution meant for business critical services/links such as:
+
+Military
+
+Healthcare
+
+DCI
+
+Federal
+
+Tier 1 SP - Main PCA customers
+
+Managed Service Providers
+
+The Provider Connectivity Assurance (PCA) / Performance Assurance Sensors are not service routers, they don’t instantiate L2VPNs or L3VPNs. Their job is to:
+
+Insert test packets into live services
+
+They can tag packets (VLAN, MPLS label, IP header, DSCP, etc.) so the probes follow the same forwarding path as a specific customer service.
+
+Example: send synthetic traffic over a given VLAN in an EVPN instance, or over a specific L3VPN VRF.
+
+Measure KPIs on that service
+
+Latency, jitter, frame loss, throughput.
+
+Both one-time (turn-up tests like Y.1564/RFC 2544) and continuous (Y.1731/TWAMP).
+
+Assurance sensor modules
+
+In-line with service traffic or out of-line in a spare port (with no impact to customer service traffic)
+
+Pri In-line - jeden port do subscribera e.g UNI/CE a druhy do site NNI/PE
+
+Je i Softwarova verze jako container na routeru
+
+![](<../.gitbook/assets/Unknown image (1520)>)
+
+Network flow sensor: A Docker container hosting a software agent on a Cisco Cell Site Router (CSR).
+
+PCA platform: The router monitors the desired interface and sends packets via the Switched Port Analyzer (SPAN) to the network flow sensor. The sensor analyzes and characterizes traffic flows, exporting metrics to the data platform for visualization and analysis.
+
+[https://www.cisco.com/c/en/us/products/collateral/cloud-systems-management/provider-connectivity-assurance-sensors/provider-connect-assurance-user-exp-ds.html](https://www.cisco.com/c/en/us/products/collateral/cloud-systems-management/provider-connectivity-assurance-sensors/provider-connect-assurance-user-exp-ds.html)
+
+#### FAQ
+
+Q: Can Provider Connectivity Assurance monitor systems from other vendors?
+
+A: Yes, the platform is vendor-agnostic and excels in multivendor environments, offering a unified view of network and
+
+service performance. It generates numerous measurements and KPIs that are analyzed to enhance ecosystem insights
+
+and inform actions. The platform can interwork with existing standards-based network elements, such as TWAMP, for
+
+synthetic/active monitoring and can also ingest other data, e.g., Cisco device and infrastructure telemetry from
+
+mechanisms like Model-drive Telemetry (MDT)
+
+Q: How does Cisco Provider Connectivity Assurance interwork with Crosswork suite products such as CNC, NSO and HCO?
+
+A: Cisco's controllers and orchestrators (CNC and NSO) have been integrated with Provider Connectivity Assurance so
+
+that whenever a new service is set up, it is defined from the start of the service lifecycle with assurance in place. We
+
+can then monitor the service 24/7 and flag issues or behaviors according to predefined policies, which can then be
+
+turned into actions to be executed by the controller. These actions could include things such as a change of route, a
+
+change of path, an addition of bandwidth, or a more granular monitoring session, among many other possibilities that
+
+will vary according to the customer's use case.
+
+Q: I already have ThousandEyes (TE) deployed but I am interested in Provider Connectivity Assurance. Can they work
+
+together and if so, how?
+
+A: Yes, Thousand Eyes and Provider Connectivity Assurance can coexist and together provide a more comprehensive
+
+view of any service traversing the access, distribution, and core, extending out to the application in the cloud. Having
+
+that telescopic, macro view that Thousand Eyes provides or the unowned and parts of the owned network, combined
+
+with the microscopic detail that Provider Connectivity Assurance offers of the owned network, delivers a complete endto-end from user to cloud, and everywhere in between visibility perspective.
+
+Cisco boasts a world-class control plane within the Crosswork Network Automation portfolio, which encompasses various solution elements necessary to adjust the configuration and settings of a network to maintain a desired state. Cisco and the Crosswork portfolio has now integrated Provider Connectivity Assurance to establish the feedback loop,
+
+providing the instrumentation and analytics needed to measure the network's actual state and how its services are performing. This feedback is then relayed to Cisco's control plane, allowing it to automatically maintain the desired state in near real-time and continuously, before any impact on network and service quality affects customer experience.
+
+What kinds of closed-loop scenarios and "action" items are you focused on?
+
+A: Congestion scenario: Imagine a connectivity service experiencing congestion. The platform's feedback loop, which
+
+measures the actual state, can detect this and signal back to the Crosswork suite to adjust the Committed Information
+
+Rate (CIR) in near real-time, thus preventing any impact on customer experience without human intervention.
+
+Low latency service scenario: In situations where low latency is required, Provider Connectivity Assurance would
+
+provide real-time feedback to Crosswork about the latency of a specific service on a given circuit. Crosswork could then
+
+make the decision to switch the service from a default latency circuit to one that is optimized for low latency.
+
+Accedian, long known for network performance monitoring, has adapted its Skylight platform to deliver intent-based assurance. Skylight provides visibility across the entire service path — from user device, through access and core, to cloud.
+
+Instrumentation: Skylight uses lightweight software agents (VMs, containers) and specialized hardware probes (like SFP modules with embedded FPGAs) for precision measurement where built-in telemetry is missing.
+
+Service Modeling: Given a high-level service description (endpoints, SLO/SLA targets), Skylight figures out which sensors and tests are needed, deploys them, and automatically generates KPIs and alert thresholds.
+
+Integration & APIs: Skylight integrates with automation systems (notably Cisco Crosswork), exposing REST/gNMI/Kafka APIs so assurance data can flow into orchestration platforms for closed-loop remediation.
+
+Analytics: The platform uses a streaming analytics engine with ML for anomaly detection, correlation, and predictive insights. When end-to-end KPIs can’t be directly measured, Skylight synthesizes them from multiple sources.
+
+User Experience: Operators get dashboards that focus on services and customer experience rather than raw counters, and end-customers can also view their own service health.
+
+The AI/ML stuff mainly does that for example when there is high latency between two sites having like 5 routers in between, the AI is able to consolidate and flag it as one issue as these latency alerts pulled from all the nodes between the sites are related - normally 5 or more tickets would be generated because of that
+
+All the analysis and probing data pulled from the devices are then tied to the metadata created by the user - like creating a region/city and associating the nodes that connecting two regions to the data pulled from the devices - forming one circuit - this allows to create the map of the devices and circuits so that the AI and ML can then correlate future issues and analysis based on the data associated with our metadata
+
+Orchestrator will be integrated into Analytics
+
+On the black belt you have sales/technical/deployment training for this solution
+
 ## Network Telemetry
 
 **Telemetry** refers to automated remote collection of data and it's transmission to remote nodes, which uses these data for monitoring and analysis
@@ -989,8 +1223,6 @@ The data to be streamed is driven through subscription. Subscriptions allow appl
 ### SNMP limitations
 
 With SNMP, all requested data must be edited and sent at once - with Push based, the sending of individual data can be spread out, which reduces the load on the network and devices
-
-.
 
 1. Limited Data Granularity: SNMP's limited data coverage and predefined polling intervals hinder real-time monitoring and analysis of network conditions, as it may not capture comprehensive data or transient events occurring between intervals.
 2. Polling Overhead: SNMP's polling mechanism, involving periodic data requests from the management system, adds network traffic and overhead, impacting performance, especially in large-scale networks with numerous devices.
@@ -1217,268 +1449,6 @@ in IOS-XE the emsd (extensible manageability service daemon) process is responsi
 [https://www.cisco.com/c/en/us/products/collateral/cloud-systems-management/crosswork-network-automation/datasheet-c78-743287.html](https://www.cisco.com/c/en/us/products/collateral/cloud-systems-management/crosswork-network-automation/datasheet-c78-743287.html)
 
 [https://www.cisco.com/c/en/us/td/docs/cloud-systems-management/crosswork-infrastructure/4-4/AdminGuide/b\_CiscoCrossworkAdminGuide\_4\_4/m-crosswork-data-gateway.html](https://www.cisco.com/c/en/us/td/docs/cloud-systems-management/crosswork-infrastructure/4-4/AdminGuide/b_CiscoCrossworkAdminGuide_4_4/m-crosswork-data-gateway.html)
-
-## Assurance tools
-
-**NetBox** solution for modeling and documenting modern networks. By combining the traditional disciplines of IP address management (IPAM) and datacenter infrastructure management (DCIM) and APIs and extensions, NetBox provides "source of truth" to power network automation
-
-[https://github.com/netbox-community/netbox](https://github.com/netbox-community/netbox)
-
-**ThousandEyes** is a SaaS product that offers network monitoring and diagnostic capabilities to analyze traffic patterns, identify performance, and troubleshoot issues with connectivity
-
-As business traffic increasingly flows through the internet to cloud service providers, corporations often lack comprehensive visibility into the employee access patterns to the shared internal or cloud-based resources, so complete network monitoring is impossible because we cannot influence and monitor network traffic on the Internet
-
-So the Thousdandeyes was designed to address these emerging cloud-based services that businesses rely on
-
-ThousandEyes provides insights through a cloud-based graphical user interface (GUI) dashboard, allowing monitoring of corporate devices and providing data and performance statistics of their connections to the shared resources
-
-ThousandEyes essentially enables corporations to see both inside-generated traffic from the offices and outside-generated traffic from the employees accessing resources from the "outside" internet
-
-Thousandeyes employes **Synthetic monitoring** (proactive monitoring), which is a monitoring technique that is done by using a simulation or scripted recordings of network transactions
-
-Behavioral scripts (or paths) are created to simulate an action or path that a customer or end user would take on a website or cloud application,
-
-Those paths are then continuously monitored at specified intervals to measure overall performance such as response time and availability
-
-Thousandeyes is installed as a plugin or software on the endpoints and corporate primary data center servers to track the activities
-
-ThousandEyes also operates a global network of distributed software agents accessible via the internet.
-
-Organizations can configure tests and measurements to be executed from both their internal software agents and ThousandEyes' distributed agents. These tests provide visibility into the end-to-end performance of networks, including internet routing, ISP performance, and cloud service provider performance.
-
-![](<../.gitbook/assets/Unknown image (924)>)
-
-![ThousandEyes Device Layer Review - RouterFreak](<../.gitbook/assets/Unknown image (925)>)
-
-**IP Fabric** is The lightweight discovery tool utilizing SSH/Telnet/CDP/LLDP to quickly detect the current network state, including detailed data for each address and port.
-
-**Zabbix** is an open-source SNMP-based monitoring tool supporting ICMP, TCP, and UDP
-
-**Grafana** is an open-source visualization and monitoring platform that integrates with various data sources, including databases, time-series databases, and monitoring tools like Zabbix
-
-The platform provides extensive customization options for dashboard design and layout, enabling users to tailor dashboards to their specific monitoring needs
-
-**FlowMon** It is NetFlow/IPFIX-based monitoring tool, analyzyng network traffic in real-time
-
-**Paessler Router Traffic Grapher (PRTG)** monitoring tool supporting SNMP,Netflow,WMI (Windows Management Instrumentation)
-
-**Batfish** is an open source network validation tool that provides correctness guarantees for security, reliability, and compliance by analyzing the configuration of network devices.
-
-Batfish does NOT require direct access to network devices. Nor does it use data plane probes (e.g. ICMP).
-
-You feed Batfish configurations, it supports multiple vendors (e.g. AWS, Cisco, Arista...), and after you query it:
-
-Can all my instances all reach the DNS server?
-
-Does this specific VM have internet access?
-
-Are all BGP sessions in ESTABLISHED state?
-
-To find out more about Batfish visit their official website:
-
-[https://www.batfish.org/](https://www.batfish.org/)
-
-## Intent-based Assurance
-
-Networks have become far too complex to manage with traditional service assurance. With 5G rollouts, SD-WAN, SASE, multi-cloud, and IoT, operators are managing millions of devices, links, and virtualized functions. Old models rely on engineers manually deciding where to place sensors, configuring telemetry, and mapping raw metrics (packet loss, jitter, delay) to something that resembles user experience. This doesn’t scale — especially when customers demand predictable end-to-end performance and fast remediation.
-
-**Intent-Based Assurance (IBA)** is the evolution of service assurance to match the intent-based networking model. Instead of configuring probes and KPIs by hand, an operator expresses a service-level intent (for example: “Connect Site A and Site B with 99.9% availability and <50ms latency”). The IBA system then:
-
-Translates that intent into network-level instrumentation — deciding where probes and sensors need to go.
-
-Maps telemetry to KPIs that reflect actual service health and user experience, not just raw counters.
-
-Monitors continuously, using both active probes (synthetic tests) and passive telemetry.
-
-Predicts and alerts when an SLO/SLA is at risk, not just when it’s already violated.
-
-Feeds results back into orchestration or automation systems to remediate issues automatically (closing the loop).
-
-In short: IBA makes service assurance proactive, automated, and scalable, moving away from fragmented monitoring toward a unified, intent-driven system.
-
-### Cisco Provider Connectivity Assurance (PCA) (formerly Accedian Skylight)
-
-**Cisco Provider Connectivity Assurance (PCA)** solves the challenges of fragmented multidomain tools and lack of
-
-end-to-end visibility on service quality, and enables differentiated services based on quality of experience
-
-(QoE) and enhanced SLAs. Cisco Provider Connectivity Assurance delivers network-wide visibility and
-
-precise synthetic network and service testing for high-performance networks. Network and end-to-end
-
-service quality is visible in a single pane of glass for efficient operations and troubleshooting. Granular
-
-performance metrics from Cisco Provider Connectivity Assurance sensors can be correlated with third party
-
-data and combined with machine learning powered analytics for near real-time performance insights.
-
-Designed for communications service provider, webscaler, global enterprise and federal or public sector
-
-networks with stringent performance requirements, Cisco Provider Connectivity Assurance enables
-
-proactive service assurance for efficient troubleshooting and exceptional customer experience—all while
-
-lowering the cost of operations. Cisco Provider Connectivity Assurance provides continuous visibility of
-
-end-to-end network and service quality as well as per-segment visibility, all with microsecond precision
-
-performance data that’s needed to automate assurance.
-
-#### How it works
-
-Provider Connectivity Assurance orchestrates and fully automates monitoring and assurance capabilities through the Crosswork Network Automation platform. Crosswork Network Controller and Crosswork Network Services Orchestrator drive automation decisions based on real-time network performance information and proactive alerting. Here’s how it works:
-
-● Assurance Sensors are deployed using Crosswork NSO as part of the automated workflow when new transport layers or VPNs are defined using service intent. Activation testing templates and other automated test sequences are used to activate service assurance.
-
-● NSO triggers these templates using the NETCONF and YANG API to achieve closed-loop automation. This actively verifies that services work after being provisioned by NSO and continue to perform over the service lifecycle.
-
-● Performance data and events can be further analyzed in Provider Connectivity Assurance or can be sent back to Crosswork Network Controller to correlate KPIs with other events coming from the infrastructure. This process supports SLA management, AI/analytics, databus, and end-customer SLA reporting portals.
-
-Proven scalability (already deployed at Tier-1 carriers).
-
-Multi-vendor support with standards-based telemetry.
-
-Strong integration with Cisco’s Crosswork automation suite.
-
-Flexible sensors (software + hardware).
-
-Benchmarking network assurance tool that can be integrated with Cisco CNC and NSO, allowing it to close the loop - meaning that based on the performance it can signal to NSO or CNC to adjust the configuration or path
-
-Patented In-service throughput testing (does not restrict operation)
-
-Assurance Analytics and reporting dashboard/GUI is SaaS in a cloud can be used for both the SP operations to measure the link as well as other tenants like end-user so that they can also access the performance data analysis
-
-SLA assurance & QoS monitoring
-
-Solution meant for business critical services/links such as:
-
-Military
-
-Healthcare
-
-DCI
-
-Federal
-
-Tier 1 SP - Main PCA customers
-
-Managed Service Providers
-
-The Provider Connectivity Assurance (PCA) / Performance Assurance Sensors are not service routers, they don’t instantiate L2VPNs or L3VPNs. Their job is to:
-
-Insert test packets into live services
-
-They can tag packets (VLAN, MPLS label, IP header, DSCP, etc.) so the probes follow the same forwarding path as a specific customer service.
-
-Example: send synthetic traffic over a given VLAN in an EVPN instance, or over a specific L3VPN VRF.
-
-Measure KPIs on that service
-
-Latency, jitter, frame loss, throughput.
-
-Both one-time (turn-up tests like Y.1564/RFC 2544) and continuous (Y.1731/TWAMP).
-
-Assurance sensor modules
-
-In-line with service traffic or out of-line in a spare port (with no impact to customer service traffic)
-
-Pri In-line - jeden port do subscribera e.g UNI/CE a druhy do site NNI/PE
-
-Je i Softwarova verze jako container na routeru
-
-![](<../.gitbook/assets/Unknown image (1520)>)
-
-● Network flow sensor: A Docker container hosting a software agent on a Cisco Cell Site Router (CSR).
-
-● PCA platform: The router monitors the desired interface and sends packets via the Switched Port Analyzer (SPAN) to the network flow sensor. The sensor analyzes and characterizes traffic flows, exporting metrics to the data platform for visualization and analysis.
-
-[https://www.cisco.com/c/en/us/products/collateral/cloud-systems-management/provider-connectivity-assurance-sensors/provider-connect-assurance-user-exp-ds.html](https://www.cisco.com/c/en/us/products/collateral/cloud-systems-management/provider-connectivity-assurance-sensors/provider-connect-assurance-user-exp-ds.html)
-
-#### FAQ
-
-Q: Can Provider Connectivity Assurance monitor systems from other vendors?
-
-A: Yes, the platform is vendor-agnostic and excels in multivendor environments, offering a unified view of network and
-
-service performance. It generates numerous measurements and KPIs that are analyzed to enhance ecosystem insights
-
-and inform actions. The platform can interwork with existing standards-based network elements, such as TWAMP, for
-
-synthetic/active monitoring and can also ingest other data, e.g., Cisco device and infrastructure telemetry from
-
-mechanisms like Model-drive Telemetry (MDT)
-
-Q: How does Cisco Provider Connectivity Assurance interwork with Crosswork suite products such as CNC, NSO
-
-,
-
-and
-
-HCO?
-
-A: Cisco's controllers and orchestrators (CNC and NSO) have been integrated with Provider Connectivity Assurance so
-
-that whenever a new service is set up, it is defined from the start of the service lifecycle with assurance in place. We
-
-can then monitor the service 24/7 and flag issues or behaviors according to predefined policies, which can then be
-
-turned into actions to be executed by the controller. These actions could include things such as a change of route, a
-
-change of path, an addition of bandwidth, or a more granular monitoring session, among many other possibilities that
-
-will vary according to the customer's use case.
-
-Q: I already have ThousandEyes (TE) deployed but I am interested in Provider Connectivity Assurance. Can they work
-
-together and if so, how?
-
-A: Yes, Thousand Eyes and Provider Connectivity Assurance can coexist and together provide a more comprehensive
-
-view of any service traversing the access, distribution, and core, extending out to the application in the cloud. Having
-
-that telescopic, macro view that Thousand Eyes provides or the unowned and parts of the owned network, combined
-
-with the microscopic detail that Provider Connectivity Assurance offers of the owned network, delivers a complete endto-end from user to cloud, and everywhere in between visibility perspective.
-
-Cisco boasts a world-class control plane within the Crosswork Network Automation portfolio, which encompasses various solution elements necessary to adjust the configuration and settings of a network to maintain a desired state. Cisco and the Crosswork portfolio has now integrated Provider Connectivity Assurance to establish the feedback loop,
-
-providing the instrumentation and analytics needed to measure the network's actual state and how its services are performing. This feedback is then relayed to Cisco's control plane, allowing it to automatically maintain the desired state in near real-time and continuously, before any impact on network and service quality affects customer experience.
-
-What kinds of closed-loop scenarios and "action" items are you focused on?
-
-A: Congestion scenario: Imagine a connectivity service experiencing congestion. The platform's feedback loop, which
-
-measures the actual state, can detect this and signal back to the Crosswork suite to adjust the Committed Information
-
-Rate (CIR) in near real-time, thus preventing any impact on customer experience without human intervention.
-
-Low latency service scenario: In situations where low latency is required, Provider Connectivity Assurance would
-
-provide real-time feedback to Crosswork about the latency of a specific service on a given circuit. Crosswork could then
-
-make the decision to switch the service from a default latency circuit to one that is optimized for low latency.
-
-Accedian, long known for network performance monitoring, has adapted its Skylight platform to deliver intent-based assurance. Skylight provides visibility across the entire service path — from user device, through access and core, to cloud.
-
-Instrumentation: Skylight uses lightweight software agents (VMs, containers) and specialized hardware probes (like SFP modules with embedded FPGAs) for precision measurement where built-in telemetry is missing.
-
-Service Modeling: Given a high-level service description (endpoints, SLO/SLA targets), Skylight figures out which sensors and tests are needed, deploys them, and automatically generates KPIs and alert thresholds.
-
-Integration & APIs: Skylight integrates with automation systems (notably Cisco Crosswork), exposing REST/gNMI/Kafka APIs so assurance data can flow into orchestration platforms for closed-loop remediation.
-
-Analytics: The platform uses a streaming analytics engine with ML for anomaly detection, correlation, and predictive insights. When end-to-end KPIs can’t be directly measured, Skylight synthesizes them from multiple sources.
-
-User Experience: Operators get dashboards that focus on services and customer experience rather than raw counters, and end-customers can also view their own service health.
-
-The AI/ML stuff mainly does that for example when there is high latency between two sites having like 5 routers in between, the AI is able to consolidate and flag it as one issue as these latency alerts pulled from all the nodes between the sites are related - normally 5 or more tickets would be generated because of that
-
-All the analysis and probing data pulled from the devices are then tied to the metadata created by the user - like creating a region/city and associating the nodes that connecting two regions to the data pulled from the devices - forming one circuit - this allows to create the map of the devices and circuits so that the AI and ML can then correlate future issues and analysis based on the data associated with our metadata
-
-Orchestrator will be integrated into Analytics
-
-The sesor c
-
-On the black belt you have sales/technical/deployment training for this solution
 
 ## Network performance tools
 
