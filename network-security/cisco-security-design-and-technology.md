@@ -17,9 +17,9 @@ layout:
     visible: true
 ---
 
-# Cisco Security Design
+# Cisco Security Design and Technology
 
-### Cisco SAFE
+## Cisco SAFE
 
 **Cisco SAFE** is a security architectural framework that helps design secure solutions. Cisco Validated Design (CVD) guides provide detailed networking design and implementation guidance
 

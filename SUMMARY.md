@@ -9,6 +9,7 @@
 * [Hardware Management](l1/hardware-management.md)
 * [Troubleshooting](l1/troubleshooting.md)
 * [Host OS CMD](l1/host-os-cmd.md)
+* [AI and ML](l1/ai-and-ml.md)
 
 ## L2
 
@@ -26,9 +27,10 @@
 * [ISIS](l3/isis.md)
 * [OSPF](l3/ospf.md)
 * [BGP](l3/bgp.md)
-* [Traffic engineering](l3/traffic-engineering.md)
-* [High Availability Mechanisms](l3/high-availability-mechanisms.md)
+* [Traffic Engineering](l3/traffic-engineering.md)
+* [High Availability](l3/high-availability.md)
 * [IPv6](l3/ipv6.md)
+* [LISP](l3/lisp.md)
 
 ## L4
 
@@ -43,8 +45,8 @@
 * [Management Plane Security](network-security/management-plane-security.md)
 * [Control Plane Security](network-security/control-plane-security.md)
 * [Data Plane Security](network-security/data-plane-security.md)
+* [Cisco Security Design and Technology](network-security/cisco-security-design-and-technology.md)
 * [IPv6 Security](network-security/ipv6-security.md)
-* [Cisco Security Design](network-security/cisco-security-design.md)
 
 ## Service Provider Networking
 
@@ -52,7 +54,7 @@
 * [MPLS L3VPN](service-provider-networking/mpls-l3vpn.md)
 * [MPLS L2VPN](service-provider-networking/mpls-l2vpn.md)
 * [MPLS TE](service-provider-networking/mpls-te.md)
-* [Inter domain MPLS VPN](service-provider-networking/inter-domain-mpls-vpn.md)
+* [Inter-domain MPLS VPN](service-provider-networking/inter-domain-mpls-vpn.md)
 * [Multicast VPN](service-provider-networking/multicast-vpn.md)
 * [Segment Routing](service-provider-networking/segment-routing.md)
 * [SRv6](service-provider-networking/srv6.md)
@@ -62,15 +64,10 @@
 ## Software Defined Networking
 
 * [Virtualization](software-defined-networking/virtualization.md)
-* [Cloud concepts](software-defined-networking/cloud-concepts.md)
-* [AI and ML](software-defined-networking/ai-and-ml.md)
 * [Git](software-defined-networking/git.md)
-* [SDN](software-defined-networking/sdn.md)
+* [Network Programmability](software-defined-networking/network-programmability.md)
 * [Management, Automation and Assurance tools](software-defined-networking/management-automation-and-assurance-tools.md)
-* [SD WAN](software-defined-networking/sd-wan.md)
-* [SD Access](software-defined-networking/sd-access.md)
-* [VXLAN](software-defined-networking/vxlan.md)
-* [LISP](software-defined-networking/lisp.md)
+* [SDN](software-defined-networking/sdn.md)
 
 ## Personal
 

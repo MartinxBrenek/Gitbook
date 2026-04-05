@@ -19,6 +19,8 @@ layout:
 
 # SDN
 
+## Software-Defined Networking (SDN)
+
 Traditional networks comprise several devices (for example, routers, switches, and WLCs) that are equipped with software and networking functionality:
 
 The **data (or forwarding) plane** is responsible for the forwarding of data through a network device.
@@ -47,7 +49,7 @@ The control (and management) plane becomes centralized.
 
 Physical devices retain data plane functions only.
 
-## Software-Defined Networking (SDN)
+
 
 **Software-Defined Networking (SDN)** refers to the set of techniques that are used to manage and change a network’s behavior through an open interface rather than closed-box methods
 
@@ -115,1296 +117,622 @@ With assurance, an intent-based network performs continuous verification that th
 
 Software-Defined Networking (SDN) allows network engineers to provision, manage, and program networks more rapidly, as it greatly simplifies automation tasks by providing a single point of administration for the programming of the infrastructure.
 
-### Network programmability
+## Software-Defined WAN
 
-Network programmability is a method of remote configuration where software is used to interact with and configure network devices, avoiding the need for manual CLI configuration. This approach streamlines network management, enabling automation, centralized control, and dynamic adjustments to meet evolving requirements.
+**Software-Defined WAN (SD-WAN)** is a solution for Enterprise and DC networks that was developed to address new requirement for WAN
 
-It also allows for more efficient management of networks, and enables dynamic and adaptive network behavior in response to changing conditions and requirements.
+The traditional company network traffic flowed directly between company locations and data centers, which allowed the company to have all network traffic under complete management
 
-Network programmability typically involves using software development tools and languages, such as Python, to write scripts and programs that can interact with network infrastructure.
+Today, enterprises rely on external cloud services such as software as a service, platform as a service or infrastructure as a service to reduce the cost of maintaining the applications and resources needed for business operations
 
-Open Source software is part of a community-driven trend to develop and promote open standards development particularly in the networking industry.
+However, this is changing the structure of traffic, so that most business traffic is going directly to public clouds and the Internet, which they cannot control.
 
-Traditional network management methods like SNMP and SSH/Telnet - CLI are inadequate for modern networks due to their manual nature, lack of scalability, and limitations in automation. The evolution of network management is shifting towards programmatic approaches using open APIs, standardized data models, and open transport protocols to address these shortcomings. This new framework offers increased agility and scalability compared to legacy methods
+These changes create new requirements for security, application performance, cloud connectivity and overall traffic that traditional WAN solutions were not designed to handle.
 
-Model-driven programmability is an approach to automate device programming using standardized data model languages like YANG, enabling consistent configuration, monitoring, and operation across devices through protocols like NETCONF or gRPC.
+SD-WAN solutions address these challenges by offering features such as dynamic path selection, Application-aware routing (AAR), secure cloud connectivity and centralized management
 
-On-box programming/automation refers to scripting mechanisms such as the Tool Command Language (Tcl) or Embedded Event Manager (EEM) which are both pre-built into the NOS of various Cisco platforms. Several platforms expose a native Linux interface and offer access to a Python execution engine used to extend on-box programmability. On-box mechanisms are normally specific to the platform itself.
+* Cisco SD-WAN architecture applied the principles of SDN networks to the WAN by separating the production traffic (data plane) and the control traffic (control plane) and the remote management of branch routers (management plane)
 
-Off-box programming/automation refers to scripting mechanisms that exist outside a network device. It can be in the form of an external controller or some external server that often communicates to the network device using robust and modern APIs. Examples of these APIs include NETCONF, REST, and RESTCONF.
+The control plane is responsible for running and configuring remote routers that provide WAN connectivity for individual locations.
 
-![](<../.gitbook/assets/Unknown image (997)>)
+Control and management plane vManage, vSmart and vBond can run as virtual machines (VMs) on a server or as dedicated hardware appliances, depending on the deployment model chosen by the organization
 
-#### Cisco IOS XE programmability references
+The server can then be managed directly at the main location of the organization (on-prem), or it can be managed from a cloud environment provided by a cloud provider, so the company does not have to maintain the server at its own premises
 
-[https://www.ciscolive.com/c/dam/r/ciscolive/global-event/docs/2024/pdf/BRKDEV-2017.pdf](https://www.ciscolive.com/c/dam/r/ciscolive/global-event/docs/2024/pdf/BRKDEV-2017.pdf)
+* SD-WAN solution offers Transport independence, creating an overlay network that is built on top of any type of circuit or transport
+* Applications are steered across available transport circuits to ensure their SLA needs as well as load-balancing
+* Traffic segmentation is delivered by leveraging VPNs that are in SD-WAN synonymous to VRFs
+* Companies can leverage Direct Internet Access (DIA), which is a premium internet service that provides businesses with a private connection to the internet or cloud
 
-[https://www.cisco.com/c/en/us/products/collateral/switches/catalyst-9300-series-switches/catalyst-programmability-automation-wp.html#Programmabilityandautomationoverview](https://www.cisco.com/c/en/us/products/collateral/switches/catalyst-9300-series-switches/catalyst-programmability-automation-wp.html#Programmabilityandautomationoverview)
+This is in contrast to the shared internet access among all subscribers such as typical SOHO networks
 
-### DevOps basics
+This allows a branch to send internet traffic destined to cloud applications directly to the Internet or directly to the cloud service providers without having to route the traffic via their private Hub or Data center, which would introduce latency or jitter to the employees and consume bandwidth of more expensive transports such as MPLS circuits, which should be used to route traffic destined only to the business internal resources
 
-**DevOps** is an IT development approach that emphasizes collaboration, communication, and integration between software development and IT operations teams. The goal of DevOps is to deliver high-quality software quickly and efficiently, while also ensuring that it meets the needs of end-users and is reliable and scalable.
+* SDN also includes Zero-Touch provisioning (ZTP), where no manual intervention is required to connect a new network element to the SDN infrastructure
 
-**Continuous Integration (CI)** is the practice of frequently integrating code changes into a shared repository and validating those changes through automated testing. By doing so, developers can quickly identify and address issues before they become bigger problems.
+The provisioning of the new device is done automatically without intervention - hence zero touch
 
-**Continuous Delivery (CD)** is the practice of automating the software release process to ensure that changes to the software can be delivered to end-users quickly and reliably. This includes automated testing, building, and deployment processes designed to minimize the risk of errors and downtime.
+There is also assumption that the WAN provider assigns the CE IP to the connected device via DHCP
 
-![](<../.gitbook/assets/Unknown image (998)>)
+Alternatively, the IP address can only be set for the interface connected to the ISP device, which mediates the connection to the WAN
 
-![](<../.gitbook/assets/Unknown image (999)>)
+* The orchestration plane assists in the automatic onboarding of the SD-WAN routers into the SD-WAN overlay.
+* The management plane is responsible for centralized configuration and monitoring.
+* The control plane builds and maintains the network topology and makes decisions on where traffic flows.
+* The data plane is responsible for forwarding packets based on decisions from the control plane.
 
-### APIs used for network programmability
+SD-WAN represents an evolution of networking from an older, hardware-based model to a secure, software-based, virtual IP fabric. The overlay network forms a software overlay that runs over standard network transport services, including the public internet, MPLS, and broadband. The overlay network also supports next-generation software services, thereby accelerating the shift to cloud networking.
 
-**An API** is software that acts as an interface, enabling two applications to communicate with each other. These applications can reside on a server and a client, which may include network equipment, facilitating interaction and control of network devices. NETCONF, RESTCONF, and gNMI are all APIs used for network device configuration and management, but they have different architectures. An API is a set of functions and procedures that enable communication with a service
+![](<../.gitbook/assets/Unknown image (1551)>)
 
-**OpenFlow:** An industry-standard API, which the Open Networking Foundation (ONF) defines. OpenFlow allows direct access to and manipulation of the forwarding plane of network devices such as switches and routers, both physical and virtual (hypervisor-based). The actual configuration of the devices is by the use of Network Configuration Protocol (NETCONF).
+### Cisco SD-WAN (Viptela)
 
-**NETCONF:** An IETF standardized network management protocol. It provides mechanisms to install, manipulate, and delete the configuration of network devices via Remote Procedure Call (RPC) mechanisms. The messages are encoded by using XML. Not all devices support NETCONF—the ones that do support it advertise their capabilities via the API.
+Provide secure connectivity to remote offices, branch offices, campus networks, data centers, and the cloud over any type of IP-based underlay transport network (Internet, 3G/4G LTE, and MPLS). Meant for organizations requiring solution with segmentation, advanced routing, security, and complex topologies while connecting to cloud instances
 
-**RESTCONF:** In the simplest terms, RESTCONF adds a REST API to NETCONF.
+![](<../.gitbook/assets/Unknown image (1552)>)
 
-**OpFlex:** An open-standard protocol that provides a distributed control system that is based on a declarative policy information model. The big difference between OpFlex and OpenFlow lies with their respective SDN models. OpenFlow uses an imperative SDN model, where a centralized controller sends detailed and complex instructions to the control plane of the network elements to implement a new application policy. In contrast, OpFlex uses a declarative SDN model. The controller, which, in this case, is called by its marketing name, Cisco Application Policy Infrastructure Controller (APIC), sends a more abstract policy to the network elements. The controller trusts the network elements to implement the required changes using their own control planes.
+![](<../.gitbook/assets/Unknown image (1553)>)
 
-**REST:** The software architectural style of the world wide web. REST APIs allow controllers to monitor and manage infrastructure through the HTTP and HTTPS protocols, with the same HTTP verbs (GET, POST, PUT, DELETE, and so on) that web browsers use to retrieve webpages.
+### SD-WAN planes and components
 
-**SNMP:** SNMP is used to communicate management information between the network management stations and the agents in the network elements.
+#### Orchestration plane (vBond / validator)
 
-**Vendor-specific protocols:** Many vendors use their own proprietary solutions, which provide REST API to a device, for example, Cisco uses NX-API for the Cisco Nexus family of data center switches.
+This software-based component performs the initial authentication of WAN Edge devices and orchestrates vSmart and WAN Edge connectivity. It also has an important role in enabling the communication of devices that sit behind Network Address Translation (NAT).
 
-In recent years, NETCONF is becoming a dominant protocol that allows you to modify the configuration of a networking device, whereas OpenFlow is a protocol that allows you to modify its forwarding table. If you need to reconfigure a device, NETCONF is the way to go. If you want to implement a new functionality that is not easily configurable within the software that your networking device is running, you should be able to modify the forwarding plane directly by using OpenFlow, if the networking device supports OpenFlow.
+Creates temporary DTSL (UDP port 12346) tunnel with SDWAN router to authenticate them with certificates and informs vSmart and vManage about their request to join the network and providing connectivity information about vSmart and vManage to routers. Once control plane connectivity is up to vSmart and vManage, the connection to the vBond is torn down
 
-This method provides increased functionality and scalability over traditional network management methods. In order to transmit information, APIs require a transport mechanism such as SSH, HTTP, and HTTPS, though there are other possible transport mechanisms as well.
+It is the only device that must have a public IP address so that all SD-WAN devices in network can connect to it
 
-Model-driven APIs support one or more transport methods including SSH, TLS, and HTTP/HTTPS
+Does have control plane connection over a DTLS tunnel with each vSmart controller
 
-![](<../.gitbook/assets/Unknown image (1000)>)
+Acts as a Session Traversal Utilities for NAT (STUN) server, which allows other controllers and SD-WAN routers to discover their own mapped/translated IP addresses and port numbers
 
-### Data encoding / serialization
+#### Control plane (vSmart controller)
 
-**Data encoding / serialization** is the process of converting data into a standardized format that can be stored in a file or transmitted over a network and reconstructed later by a different application
+This software-based component is responsible for the centralized control plane of the SD-WAN network. It establishes a secure connection to each WAN Edge router and distributes routes and policy information via the Overlay Management Protocol (OMP). It also orchestrates the secure data plane connectivity between the WAN Edge routers by distributing crypto key information.
 
-This allows the data to be communicated between applications in a way both applications understand
+Overlay Management Protocol (OMP) is used to influence control and data plane operations
 
-YANG uses these formats for data serialization. For example, data defined in a YANG model can be encoded in XML (for NETCONF) or JSON (for RESTCONF).
+Configuration and policies are created on vM and pushed to WAN edges via NETCONF
 
-Model-driven APIs support the choice of encoding including XML and JSON, but also custom encodings such as Google protocol buffers
+Handles the security and encryption of the fabric by providing key management
 
-It is in stark contrast to using SSH issuing CLI commands, in which the data is sent as strings over the wire
+Can handle up to 5,400 connections per vSmart server with up to 20 vSmarts in a single deployment
 
-XML and JSON are used for the data transmission and they are:
+After authentication, each vSmart controller establishes a permanent DTLS tunnel to each SD-WAN router and uses these tunnels to establish OMP neighborship
 
-Human readable, because they are self-describing
+![](<../.gitbook/assets/Unknown image (1554)>)
 
-Hierarchical, because they store values within values
+![](<../.gitbook/assets/Unknown image (1555)>)
 
-Can be parsed and used by lots of programming languages
+#### Management plane (vManage)
 
-#### XML (Extensible Markup Language)
+Centralized network management system provides a GUI interface to monitor, configure, and maintain all Cisco SD-WAN devices and links in the underlay and overlay network.
 
-offers a way to provide structured data exchange between computer systems. While it is not as easy for humans to understand visually, it is easy for machines to parse and generate. It was originally as a markup languages (ie. HTML) used mainly to format text (font, size, color, headings, etc.)
+Network administrators can simulate traffic flows to show data paths, troubleshoot WAN impairment, and access the configuration and routing tables of all devices
 
-XML may look similar to HTML, but they are in fact different. While both use tags to define objects and elements, HTML is used to display data. It is the web browser that knows how to display websites (consumes an HTML object and displays it). However, XML is used to describe data in such a way that the XML client (programming language, and so on) can consume an object that has meaning to it.
+Onboards SD-WAN routers into the SD-WAN overlay by pushing configuration to them
 
-XML was designed to describe data
+Onboarding refers to the commissioning of the device and its introduction into the network infrastructure
 
-HTML was designed to display data
+Each WAN Edge will form a single management plane connection to vManage. If device has multiple transports available, only one will be used for management plane connectivity to vManage
 
-XML tags are created by the author
+Programmatic APIs (REST): Programmatic control over all aspects of SD-WAN Manager administration.
 
-HTML tags are predefined in the HTML standard
+Analytics (SD-WAN Analytics):
 
-They are complementary
+optional analytics and assurance service, requires additional licensing and isn’t on by default. vM is for real-time data, whilst vAnalytics is used to review the historical performance of network
 
-Example
+If a branch office is experiencing latency or loss on its MPLS link, vAnalytics detects this, and it compares that loss or latency with information on other organizations in the area that it is also monitoring to see, if they are also having that same loss and latency in their circuits. If they are, vAnalytics can then report the issue with confidence to the SPs
 
-1
+Help predict how much bandwidth is truly required for any location (useful in deciding whether a circuit can be downgraded to a lower bandwidth to reduce costs)
 
-Loopback0
+#### Data plane (WAN Edge / cEdge / vEdge)
 
-10.0.0.4
+This device, available as either a hardware appliance or software-based router, sits at a physical site or in the cloud and provides secure data plane connectivity among the sites over one or more WAN transports. It is responsible for traffic forwarding, security, encryption, QoS, routing protocols such as BGP and OSPF, and more.
 
-0.0.0.3
+end nodes at the boundary of a site establishing a data plane between other sites and the control site
 
-0
+At each site, WAN Edge routers are used to directly connect to the available transports. Colors are used to identify an individual WAN transport, as different WAN transports are assigned different colors, such as mpls, private1, biz-internet, metro-ethernet, lte, and so on. The topology uses one color for the biz-internet transport and a different one for the public-internet transport.
 
-Root element is the parent element for all the other elements .
+The WAN Edge routers form a Datagram Transport Layer Security (DTLS) or Transport Layer Security (TLS) control connection to the SD-WAN Controllers and connect to both of the SD-WAN Controllers over each transport. The WAN Edge routers securely connect to WAN Edge routers at other sites with IPsec tunnels over each transport. The Bidirectional Forwarding Detection (BFD) protocol is enabled by default and will run over each of these tunnels, detecting loss, latency, jitter, and path failures.
 
-Prolog an optional element and must be the first element in the document, if it's defined.
+Policies are an important part of the Cisco Catalyst SD-WAN solution and are used to influence the flow of data traffic among the WAN Edge routers in the overlay network. Policies apply either to control plane or data plane traffic and are configured either centrally on SD-WAN Controllers (centralized policy) or locally (localized policy) on WAN Edge routers.
 
-Tags are case-sensitive. Elements are represented as value
+Establishes IPsec sessions with other SD-WAN routers in the fabric to convey multiple VPNs for traffic segmentation
 
-The tag is different from the tag .
+Have local intelligence to make site-local decisions regarding routing, high availability (HA), interfaces, ARP, and ACLs
 
-All elements must have a closing tag. ... or
+vEdge The original Viptela platforms running Viptela software. Available as hardware, software, cloud, or virtualized routers
 
-All elements must be properly nested within each other.
+cEdge Viptela software integrated with Cisco IOS-XE. Has couple of more security features embedded than vEdge
 
-White space is insignificant
+Centralized control policies operate on the routing and transport location (TLOC) information and allow for customizing routing decisions and determining routing paths through the overlay network. These policies can be used in configuring traffic engineering, path affinity, service insertion, and different types of VPN topologies (full-mesh, hub-and-spoke, regional mesh, and so on). Another centralized control policy is application-aware routing, which selects the optimal path based on real-time path performance characteristics for different traffic types. Localized control policies allow you to affect routing policy at a local site.
 
-Attributes are part of the XML elements in a form of name/valu.
+Data policies influence the flow of data traffic through the network based on fields in the IP packet headers and VPN membership. Centralized data policies can be used in configuring application firewalls, service chaining, traffic engineering, and QoS. Localized data policies allow you to configure how data traffic is handled at a specific site, such as ACLs, QoS, mirroring, and policing. Some centralized data policy may affect handling on the WAN Edge itself, as in the case of app-route policies or a QoS classification policy. In these cases, the configuration is still downloaded directly to the SD-WAN Controllers, but any policy information that needs to be conveyed to the WAN Edge routers is communicated through Overlay Management Protocol (OMP).
 
-Comments syntax is similar to that of HTML.
+### Multi-tenancy options
 
-XML namespaces are like a "library" in that it defines the context and meaning of tags. A URI serves as a unique identifier for this "library". The hierarchy of elements and subelements themselves is defined in an XML Schema (XSD) or DTD. The namespace and schema work together to define the structure and meaning of an XML document.
+**Dedicated tenancy** each tenant has dedicated components and the data plane is segmented as well
 
-Namespaces are like labels on boxes, preventing confusion when you have similar items from different sources. They work with schemas to provide a complete definition of an XML document's structure and meaning
+**Multi-tenancy** (multiple customers are running on same infrastucture) v prekladu najem
 
-The main characteristics of the XML namespaces:
+**VPN tenancy** segments only the data plane of the VPN topology and allows you to define read-only users who can view and monitor their VPN within vManage. VPN tenancy still shares the same SD-WAN components
 
-Provide a means to mitigate element name conflicts
+**Enterprise tenancy** the orchestration and management planes are operating in multi-tenancy mode, but the control plane requires dedicated, per-tenant appliances. Because the control plane is dedicated, it can be deployed as a container or nested virtual machine to decrease scalability concerns
 
-It is defined with the attribute xmlns:prefix="URI", prefix is used as abbreviation of the namespace in the tag.
+![](<../.gitbook/assets/Unknown image (1556)>)
 
-You can have a default namespace using xmlns=url eliminating need to have attribute in each tag
+### Overlay Management Protocol (OMP)
 
-Example
+**Overlay Management Protocol (OMP)** is proprietary routing protocol similar to BGP that perform best-path selection routing policy advertisement, data plane security information distribution including encryption keys.
 
-\<ipv4-ospf-cfg:ospf xmlns:ipv4-ospf-cfg="http://cisco.com/ns/yang/Cisco-IOS-XE-ospf">
+Admin Distance 250 for Viptela OS (251 for XE)
 
-[ipv4-ospf-cfg:id](ipv4-ospf-cfg:id)1\</ipv4-ospf-cfg:id>
+OMG Advertisements
 
-[ipv4-ospf-cfg:passive-interface](ipv4-ospf-cfg:passive-interface)
+OMP Routes (vRoutes) prefixes learned from vEdge from it's connected interfaces, static routes, and underlay dynamic routing protocols
 
-[ipv4-ospf-cfg:interface](ipv4-ospf-cfg:interface)Loopback0\</ipv4-ospf-cfg:interface>
+These prefixes are redistributed into OMP and advertised to the vSmart controller which operates similarly to a BGP route reflector in iBGP. The vSmart receives routing information from each WAN Edge and apply policies before advertising this information back out to other WAN Edges. OMP routes resolve their next-hop to a TLOC (next hop of the OMP route). OMP route is installed in the forwarding table only if the next-hop TLOC is known and there is a BFD session in UP state
 
-\</ipv4-ospf-cfg:passive-interface>
+Service routes advertise a specific service used for service chaining policies
 
-\</ipv4-ospf-cfg:ospf>
+Service chaining allows data traffic to be routed to a remote site through one or more services (firewalls,
 
-IOS Example
+IPS,IDS, load balancers, or an IDP) before being routed to the traffic’s original destination
 
-![](<../.gitbook/assets/Unknown image (1001)>)
+Devices that provide services for the overlay must be Layer 2 adjacent for traffic to be redirected through them (Layer 2 adjacency can be achieved with IPsec or GRE tunnels)
 
-when no data exist, you can represent a level of XML hierarchy in one of two ways:
+**TLOC (Transport Locator)** identifier that ties an OMP route to a physical location
 
-using opening and closing tags:
+Represents the endpoint of the data plane tunnels and sends data plane instructions to vSmart
 
-using shorthand notation:
+![](<../.gitbook/assets/Unknown image (1557)>)
 
-#### JSON (JavaScript Object Notation)
+TLOC attributes
 
-open standard file format and data interchange format that uses human-readable text to store and transmit data objects, commonly used by APIs. Whitespace is insignificant
+System-IP unique identifier of the WAN edge device across the SD-WAN fabric (similar to the Router-ID)
 
-Primitive data types
+It does not need to be routable or reachable across the fabric
 
-String is a text value, surrounded by double quotes "Hello." "five" "true" "null"
+Transport Color identify local WAN transports such as MPLS, Internet, LTE, 5G, etc
 
-Number is a numeric value 1 100 1000
+Encapsulation Type specifies the type of encapsulation (IPsec, GRE) used for the data plane tunnel
 
-Boolean is a data type that has only two possible values: true false
+TLOC private address derived from the physical interface of the WAN Edge
 
-Null value represents the intentional absence of any object value
+TLOC public address publicly routable IP address assigned to the WAN Edge
 
-![](<../.gitbook/assets/Unknown image (1002)>)
+If both public and private addresses match in a TLOC route, the device is considered to not be behind a NAT
 
-Structured data types
+Preference similar to OMP Preference, used to prefer one TLOC over another; higher preference
 
-Object is an unordered list of key-value variable pairs surrounded by curly brackets { } Nested Objects are objects within the objects
+Site ID identifies the originator of this TLOC route and is used to control how data plane tunnels are built
 
-Key is a string. Value is any valid JSON data type.
+Tag similar to OMP tags; can control how prefixes are exchanged and, ultimately, how traffic will flow
 
-![](<../.gitbook/assets/Unknown image (1003)>)
+Weight path selection method. Similar to BGP Weight and is locally significant; higher preference
 
-Array is a series of values separated by commas. Surrounded by \[ ]
+Above TLOC and following attributes can be used to influence routing decisions
 
-![](<../.gitbook/assets/Unknown image (1004)>)
+Origin source of the route is inserted into update; contains an identifier
 
-![](<../.gitbook/assets/Unknown image (1005)>)
+(BGP, OSPF, EIGRP, Connected, or Static), along with the protocol’s original metric
 
-#### YAML (Yet Another Markup Language)
+Originator system IP of the advertiser
 
-used by the network automation tool Ansible. Whitespace is significant. Reoresented as: key:value Starts with ---
+Preference (OMP preference) similar to LOCAL\_PREF in BGP; higher preference
 
-![](<../.gitbook/assets/Unknown image (1006)>)
+Service a service (firewall) is associated to this route
 
-### Data models
+![](<../.gitbook/assets/Unknown image (1558)>)
 
-Foundation of the API are data models. Data models define the syntax and semantics including constraints of working with the API.
+Site ID is BGP ASN
 
-Data models such as YANG are structured representations that define how data (configuration parameters) are organized, stored, and accessed within a system or database. They provide a blueprint for understanding the attributes abd relationships of the data
+Tag an optional, transitive attribute that an OMP peer can apply to the route (route tag in traditional routing)
 
-The typical CLI format is clear text, which is easy for humans to read and interpret. However, it is suboptimal for computer programs to interpret because it lacks "structure" and often uses white space and position information to indicate meaning
+VPN communicates what VPN/VRF this route was advertised from
 
-Not used to actually send information to devices and instead rely on protocols such as NETCONF and RESTCONF.
+![](<../.gitbook/assets/Unknown image (1559)>)
 
-Device configuration can be validated against a data model to check if the changes are a valid for the device before committing the changes.
+Clear text IPsec tunnel is used primarily for network management and control purposes
 
-One misconception is that data models are used to send data to/from a device. But that is not the case. Instead, protocols such as NETCONF/RESTCONF send JSON and XML encoded documents that are governed by a given model.
+This clear text tunnel allows for real-time monitoring, analysis, and optimization of network traffic without the overhead of encryption and decryption.
 
-Model-driven APIs also support multiple options for protocol with the three core protocols being NETCONF, RESTCONF, and gRPC. Remember, they are the core protocols that work with model driven APIs. REST is not explicitly listed because when REST is used in a modeled device, it becomes RESTCONF.
+It ensures that the SD-WAN controller has the necessary insights to dynamically route traffic based on application requirements, network conditions, and business priorities.
 
-![](<../.gitbook/assets/Unknown image (1007)>)
+Encrypted IPsec tunnel is used to secure the actual user data traffic that flows between different locations in an SD-WAN deployment
 
-## Yet Another Next Generation (YANG)
+In Cisco SD-WAN, key exchange and distribution have been moved to the vSmart. Each WAN Edge will compute its own keys per transport and distribute these to the vSmart. The vSmart will then distribute them to each WAN Edge, depending on defined policy. In addition, the vSmart is also responsible for rekeying of the IPsec Security Associations (SA) when they expire. By moving key exchange to a centralized location, we achieve greater scale as each WAN Edge doesn’t need to handle key negotiation or distribution
 
-**Yet Another Next Generation (YANG)** is a data modeling language similar to SNMP MIBs
+If there is a situation where control connectivity was established but, due to an outage, has been lost, then data plane connectivity will continue to flow. By default, WAN Edges will continue forwarding data plane traffic in the absence of control plane connectivity for 12 hours, utilizing the last-known state of the routing table, though this is configurable, depending on your requirements. When control plane connectivity is reestablished, WAN Edges will be updated with any policy changes that were made during the outage. When the control connection is restored, the route table is flushed and the newly received route table is installed. This will cause a brief outage to the data plane when this occurs
 
-In YANG, data models are represented by definition hierarchies called schema trees. Instances of schema trees are called data trees and are encoded in XML
+### Onboarding and provisioning
 
-YANG modules are for RESTCONF/NETCONF to what MIBs are for SNMP with readability being its number one priority.
+When the WAN Edge initially gets connected to the network, it first tries to reach out to a Plug and Play (PNP) or Zero Touch Provisioning (ZTP) server
 
-YANG data models provide a variety of options to configure, manage, and understand the operational state of the network device.
+There are two methods of auto-provisioning of WAN Edges: PNP and ZTP. PNP uses HTTPS to connect to Cisco PNP servers, and ZTP uses UDP port 12346 to connect. Cisco XE SD-WAN routers use PNP, while Cisco vEdges use ZTP for provisioning.
 
-YANG (Yet Another Next Generation) je jazyk pro modelování dat, který definuje strukturu a hierarchii konfigurace síťových zařízení. Samotný YANG pouze popisuje, jak mají být data strukturována, ale neřeší jejich přenos..
+One remaining functionality that the vBond provides is network address translation (NAT) traversal. By default, the vBond operates as a STUN Server (RFC 5389). The WAN Edge operates as a STUN client. What this means is that the vBond can detect when WAN Edges are behind a NAT device such as a firewall. When the WAN Edge goes to establish its DTLS tunnel, the interface IP it knows about will be written into the outer IP header and noted within a payload of the message. When the vBond receives this information, it performs a XOR operation comparing the two values. If the two values are different, it can be inferred that NAT is in the transit path of the WAN Edge (since the outer IP header was changed to a NAT’d IP address and no longer matches the IP address noted in the payload of the packet). The vBond will communicate this back to the WAN Edge, and the WAN Edge can communicate this information to the rest of the overlay components—ultimately allowing data plane connectivity to be established through a NAT device
 
-Notably, there are industry standard and vendor/platform specific models:
+![](<../.gitbook/assets/Unknown image (1560)>)
 
-Industry standard: These models come from various working groups. Two core groups are the IETF and the OpenConfig working group. It is their focus to create vendor and platform-independent models—they are core features and operational stats relevant across a wide variety of devices.
+![](<../.gitbook/assets/Unknown image (1561)>)
 
-Cisco common: Because many features are common across Cisco devices, there are also Cisco native models and native models per Cisco operating system.
+### Cloud OnRamp
 
-Cisco platform-specific: Also, when there are platform or hardware-specific features, there are additional models that are used to ensure even features mapped to a given platform are still model driven meaning APIs can still be used for those features.
+**Cloud OnRamp** delivers the best application quality of experience (QoE) for SaaS applications by continuously monitoring SaaS performance across diverse paths and selecting the best-performing path based on performance metrics (jitter, loss, and delay)
 
-All YANG modules are publicly available. You can see the largest collection of models now on GitHub at:
+Simplifies hybrid cloud and multicloud IaaS connectivity by extending the SD-WAN fabric to the public cloud while at the same time increasing high availability and scale
 
-[https://github.com/YangModels/yang](https://github.com/YangModels/yang) This repository includes models from the IEEE and IETF and vendor-specific models.
+1st picture Can be configured on the vManage NMS and can become active on the remote site router. The router at the remote site starts sending small HTTP probes to the SaaS application through both DIA circuits to measure latency and loss. Based on the results, the router will know which circuit is performing better (in this case, ISP2) and sends the SaaS application traffic out that circuit. The process of probing continues, and if a change in performance characteristics of ISP2’s DIA circuit occurs (for example, due to loss or latency), the remote site router makes an appropriate forwarding decision.
 
-[https://github.com/openconfig/public](https://github.com/openconfig/public) The OpenConfig working group has also built out a repository for all public models the OC WG has produced.
+2nd picture Cloud OnRamp for SaaS also gets enabled on the regional hub SD-WAN router and is designated as the gateway node. Quality probing service via HTTP toward the cloud SaaS application of interest starts on both the remote site and the regional hub. BFD runs through the DTLS session between the remote site and the regional hub.
 
-### Modules and submodules
+The regional hub router reports its HTTP connection loss and latency characteristics to the remote site router in OMP message exchange through the vSmart controllers. At this time, the remote site router can evaluate the performance characteristics of its local DIA circuit compared to the performance characteristics reported by the regional hub
 
-**Modules:** The basic building blocks in YANG, similar to libraries in programming. They define data models, which can be complete or extend existing ones.
+It also takes into consideration the loss and latency incurred by traversing the SD-WAN fabric between the remote site and the hub site (calculated using BFD) and then makes an appropriate forwarding decision, sending application traffic down the best-performing path toward the cloud SaaS application of choice.
 
-**Submodules:** Extensions of modules that help split large modules into smaller, more manageable parts. A submodule always belongs to a single module.
+// Viptela Quality of Experience (vQoE) SaaS app score on a scale of 0 to 10, with 0 being the worst quality and 10 being the best. vQoE can be observed in the vManage GUI
 
-#### Guidelines
+![](<../.gitbook/assets/Unknown image (1562)>)
 
-Modules can include submodules (using include) and reference other modules (using import).
+![](<../.gitbook/assets/Unknown image (1563)>)
 
-Submodules can include other submodules of the same module but cannot be shared across different modules.
+![](<../.gitbook/assets/Unknown image (1564)>)
 
-Modules and submodules share the same namespace.
+## Meraki SD-WAN
 
-Submodules make it easier to manage large models.
+### Overview
 
-![](<../.gitbook/assets/Unknown image (975)>)
+Cisco Meraki represents a powerful shift in the way networks are managed, aligning with the broader trend of moving IT services to the cloud. This transition is driven by the need for simplicity, scalability, and the ability to manage systems from anywhere at any time. Cloud services offer significant cost savings, enhanced collaboration, and automatic updates, which are essential in today's fast-paced digital world.
 
-Each module must have the following sections:
+Cisco Meraki brings these advantages to network management. When Cisco Meraki devices—like access points, switches, and routers—are powered on, they automatically connect to the Cisco Meraki cloud. Once connected, you are able to utilize the Cisco Meraki Dashboard GUI to monitor and configure your enterprise network from anywhere.
 
-Module name: Must be the same as the module’s filename. (Case-sensitive equality between module name and filename prevents a warning message when validating a module.)
+It is a Unified Threat Management (UTM) solution for organizations requiring all-in-one solution delivered in a single appliance including SD-WAN and Firewall functionalities (including IPS/IDS, Web content filtering and VPN)
 
-Header information: Describes the module and gives information about the module itself:
+### Benefits
 
-Namespace (mandatory): Defines the Uniform Resource Identifier (URI) of XML namespace.
+Cisco Meraki offers these benefits:
 
-Prefix (mandatory): The prefix statement is used to define the prefix that is associated with the module and its namespace. The prefix statement’s argument is the prefix string that is used as a prefix to access a module.
+Deployment: Many features can be deployed quickly and easily. Rolling out deployments is much easier.
 
-Organization, contact (optional): Describes the module origin (such as company and author).
+Cloning configurations: When creating a new network, administrators can choose to clone the configuration for the new network from an existing network.
 
-Description (optional): Provides a description of the module (what it is, what it does, and so on).
+Configuration templates: An administrator can make one change that can be applied to many networks and the devices within those networks.
 
-Revision information: Provides versioning of the module and facilitates the importing of modules based on revisions.
+Zero-touch deployment: The cloud architecture allows you to configure devices without having the hardware. This approach is possible because configurations are stored and managed in the cloud, so administrators can stage configurations before they have the hardware.
 
-Imports and includes: The import and include statements are used to make definitions available to other modules and submodules.
+Cisco Meraki solutions are very scalable and can extend to hundreds of thousands of devices. Scaling means simply adding more devices and licenses to the dashboard.
 
-Type definitions: In addition to built-in data types, custom types can be defined and later used in the data models.
+![](<../.gitbook/assets/unknown (1).png>)
 
-Reusable node declarations: In addition to type definitions, a more complex set of YANG code can be defined and later reused.
+The Cisco Meraki ecosystem encompasses a range of device families designed to create a seamless, cloud-managed network:
 
-Configuration and operational data declarations: The main part of the module where the actual data model is defined.
+MR: Access Points supporting Wi-Fi 6/6E and WPA3.
 
-Configurational: These models are used to add new or modify existing configuration on the network device
+MX: Security Appliances supporting up to 6Gbps firewall throughput.
 
-Operational: These models are used to retrieve the operational state of a network device
+MS: Switches supporting PoE+, multigigabit connectivity (nGig), and SFP+ uplinks.
 
-RPC, action, and notification declarations: Defines NETCONF Remote Procedure Calls (RPCs) and notifications to be used within the module.
+SM: System Manager for mobile device management (MDM).
 
-![](<../.gitbook/assets/Unknown image (976)>)
+MV: Smart Cameras for indoor and outdoor, with up to 360-degree coverage.
 
-Cisco ACI data model
+MI: Insights for network visibility and traffic analytics.
 
-Each of these platforms were built using a custom object model that offers the same properties as if they were built using YANG models. For example, with ACI everything is an object. Every object as associated properties and constraints. These constraints are defined in the ACI Management Information Model as opposed to a YANG model. The most important point to note is that YANG is not the only way to model network devices
+MT: Sensors for temperature, humidity, water leak detection, air quality, and security.
 
-![](<../.gitbook/assets/Unknown image (977)>)
+![](<../.gitbook/assets/unknown (2).png>)
 
-Example
+### Cisco Cloud Monitoring
 
-rw represents configuration data
+The Cisco Cloud Monitoring feature provides a cohesive view of your network by displaying statistics, configurations, and offering troubleshooting tools for both Cisco Catalyst wireless and switch devices. It is important to note that Cloud Monitoring is primarily a visual and informational tool, meaning that it doesn't replace comprehensive management solutions for configuring wireless controllers and switches.
 
-ro represents operational data/state
+The Cisco Meraki product lineup has expanded to include Cisco Cloud Monitoring (CCM) tools. The product lineup offers you the capability to monitor and manage your existing Cisco Catalyst 9000 series devices through the Cisco Meraki Dashboard for a unified management experience.
 
-module: openconfig-bgp
+Cisco Meraki Cloud Monitoring is currently supported on the following Cisco Catalyst hardware:
 
-+--rw bgp!
+Cisco Catalyst 9200/L Series
 
-+--rw global
+Cisco Catalyst 9300/L/X Series
 
-\| +--rw config
+Cisco Catalyst 9500 Series
 
-\| | +--rw as
+Catalyst 9800 Wireless LAN Controller
 
-\| | +--rw router-id?
+## Software-Defined Access (SDA)
 
-\| +--ro state
+### Challenges with traditional networks
 
-\| | +--ro as
+A slow-to-deploy network impedes the ability of many organizations to innovate rapidly and adopt new technologies such as video, collaboration, and connected workspaces. The ability of a company to adopt any of these is impeded if the network is slow to change and adapt. In addition, one of the major challenges with wireless deployment today is that it does not easily utilize network segmentation. While wireless can leverage multiple service set identifiers (SSIDs) for traffic separation over the air, these are limited in the number that can be deployed and are ultimately mapped back into VLANs at the wireless LAN controller (WLC). The WLC itself has no concept of virtual routing and forwarding (VRF) or Layer 3 segmentation, making deployment of a true wired and wireless network virtualization solution very challenging.
 
-\| | +--ro router-id?
+Policy is one of those abstract words that can mean many different things to different people. However, in the context of networking, every organization has multiple policies that they implement. Use of security access control lists (ACLs) on a switch, or security rulesets on a firewall, is security policy. Using quality of service (QoS) to sort traffic into different classes, and using queues on network devices to prioritize one application versus another, is QoS policy. Placing devices into separate VLANs based on their role is device-level access control policy. The traditional methods used today for policy administration (large and complex ACLs on devices and ̀firewalls) are difficult to implement and maintain. Also, most organizations want to establish user and device identity for end-to-end policy. In addition, most organizations lack comprehensive visibility into network operation, limiting their ability to proactively respond to changes. All these issues influence how long it takes for a new network service to be deployed. A more comprehensive, end-to-end approach is needed, one that allows insights to be drawn from the mass of data that potentially can be reported from the underlying infrastructure.
 
-\| | +--ro total-paths?
 
-\| | +--ro total-prefixes?
 
-<... omitted ...>
+**Software-Defined Access (SDA)** is a programmable network architecture that provides software-based policy and segmentation from the edge of the network to the applications. SD-Access is implemented via Cisco Catalyst Center, which provides design settings, policy definition, and automated provisioning of the network elements, as well as assurance analytics for an intelligent wired and wireless network.
 
-### Data types
+In an enterprise architecture, the network may span multiple domains, locations, or sites such as main campuses and remote branches, each with multiple devices, services, and policies. The Cisco SD-Access solution offers an end-to-end architecture that ensures consistency in terms of connectivity, segmentation, and policy across different locations (sites).
 
-Just like programming languages have standard data types such as strings and integers, so does YANG
+Cisco SD-Access comprises these elements:
 
-Built-in data types: YANG has a set of built-in types, similar to those types of many programming languages, but with some differences due to special requirements from the management domain.
+Cisco Catalyst Center: Cisco SDN Controller for automation, policy, assurance, and integration infrastructure
 
-Examples:
+SD-Access fabric: Physical and logical network-forwarding infrastructur
 
-| Type           | Description         |
-| -------------- | ------------------- |
-| int8/16/32/64  | Integer             |
-| uint8/16/32/64 | Unsigned integer    |
-| decimal64      | Non-integer         |
-| string         | Unicode string      |
-| enumeration    | Set of alternatives |
-| boolean        | True or false       |
+Cisco Catalyst Center provides a central management plane for building and operating an SD-Access fabric. The management plane is responsible for forwarding configuration and policy distribution, as well as device management and analytics.
 
-| To reference built-in data types, use: | type uint32; |
-| -------------------------------------- | ------------ |
+SD-Access provides automated end-to-end services (such as segmentation, QoS, and analytics) for user, device, and application traffic. SD-Access automates user policy so organizations can ensure that the appropriate access control and application experience are set for any user or device to any application across the network. This is accomplished with a single network fabric across LAN and WLAN, which creates a consistent user experience, anywhere, without compromising on security.
 
-Common data types: RFC 6991 defines additional data types (IETF YANG data types and Inet data types).
+### Architecture
 
-| Type                    | Description                                                                            |
-| ----------------------- | -------------------------------------------------------------------------------------- |
-| counter32/64            | Non-negative 32/64-bit integer that monotonically increases                            |
-| zero-based-counter32/64 | A counter32/64 that has the defined initial value zero                                 |
-| gauge32/64              | Non-negative integer, which may increase or decrease                                   |
-| date-and-time           | ISO 8601 standard for representation of dates and times                                |
-| timestamp               | TimeStamp (SNMPv2-TC)                                                                  |
-| phys-address            | Colon-separated hexadecimal pairs (e.g. 1a:ba:da:ba:d0) PhysAddress (SNMPv2-TC)        |
-| mac-address             | Six colon-separated hexadecimal pairs (e.g. 1a:ba:da:ba:d0:00) MAC address (SNMPv2-TC) |
+![](<../.gitbook/assets/Unknown image (1546)>)
 
-| First, you need to import IETF YANG data types module: | import ietf-yang-types { prefix yang; } |
-| ------------------------------------------------------ | --------------------------------------- |
-| To reference IETF YANG data types, use:                | type yang:counter64;                    |
+![](<../.gitbook/assets/Unknown image (1547)>)
 
-The following table lists the common data types (IETF Inet data types) defined in RFC 6991.
+#### Management layer
 
-| Type            | Description                                             |
-| --------------- | ------------------------------------------------------- |
-| ip-version      | IP protocol version: 1=IPv4, 2=IPv6, 0=unknown          |
-| dscp            | Differentiated Services Code Point value: 0 to 63       |
-| ipv6-flow-label | 32-bit integer in the range from 0 to 1048575           |
-| port-number     | 16-bit integer in the range from 0 to 65535             |
-| as-number       | 32-bit integer representing 2 or 4 octet BGP AS numbers |
-| ip-address      | IPv4 or IPv6 address                                    |
-| ip4-address     | IPv4 address (e.g. 10.1.2.3)                            |
-| ipv6-address    | IPv6 address (e.g. fd85:b310:6513:194b::1)              |
-| ip-prefix       | IPv4 or IPv6 prefix                                     |
-| ip4-prefix      | IPv4 prefix (e.g. 10.1.2.0/24)                          |
-| ip6-prefix      | IPv6 prefix (e.g. fd85:b310:6513:194b::/64)             |
-| domain-name     | DNS domain name                                         |
+**Cisco Catalyst Center (CCC)**
 
-| First, you need to import IETF Inet data types module: | import ietf-inet-types { prefix inet; } |
-| ------------------------------------------------------ | --------------------------------------- |
-| To reference IETF Inet data types, use:                | type inet:ip-address;                   |
+is the user interface/user experience (UI/UX) layer, where all the information from the other layers is presented to the user in the form of a centralized management dashboard
 
-Derived data types: Derived (custom) data types can be defined as part of the data model or they may be available by importing other modules that contain additional data type definitions. For example, Cisco NSO comes with a set of additional data types that are useful in describing device or service configurations.
+Cisco Catalyst Center and Cisco ISE controller appliances provide mgmt, provisioning and monitoring for SDA
 
-There is a simple rule, that restrictions of the derived type must be equal or more strict as for the base type.
+#### Physical layer
 
-In general, restrictions fall in two categories:
+All devices participating in SD-Access must support ASICs and Field-Programmable Gate Arrays (FPGAs)
 
-Numeric restrictions: range and fraction digits substatements
+Cisco Catalyst Switches provide wired and wireless (embedded WLC) access to the fabric. Default MTU is 9100
 
-String restrictions: length and pattern substatements
+Cisco ASR 1000, ISR, and CSR routers provide WAN access to the fabric
 
-OpenConfig Models: These models are created by a vendor-neutral forum known as 'OpenConfig', which is led by Google, Meta, Apple, Microsoft, Comcast, and more. These models serve as a common baseline for all network vendors, such as Cisco, Juniper, Arista, and others.
+#### Network layer
 
-#### `typedef` statement
+Overlay involves all overlay control plane protocols, configuration and addressing. Fully automated
 
-The typedef statement defines a new data type (derived data type), which can be be used inside the module or submodule. It can be imported in other modules accordingly to the import rules. The type from which you are deriving a new type is called base type. The type statement of the typedef statement defines base type for the derived type.
+When it comes to the overlay, SD-Access supports both IPv6-only wired and wireless endpoints. That IPv6 traffic is encapsulated in IPv4 and VXLAN header within the SD-Access fabric until they reach the fabric border nodes. The fabric border nodes decapsulate the IPv4 and VXLAN header, which pursues the normal IPv6 unicast routing process from then.
 
-In the following list are four substatements to the type statement:
+Underlay IPv6 functionality for overlay depends on the underlay. The IPv6 overlay uses the IPv4 underlay IP addressing to create LISP control plane and VXLAN data plane tunnels. You can always enable the dual-stack for the underlay routing protocol. Only the SD-Access overlay LISP depends on the IPv4 routing. This requirement is for the current version of DNA-C (2.3.x) and is removed in later releases where the underlay can only be dual-stack or single IPv6 stack.
 
-Range Statement: This is like setting a rule for numbers (or decimals) you allow, such as "only numbers from 1 to 10" (written as 1..10), where "min" is the smallest number and "max" is the biggest, and you can list multiple rules like "1..10 | 20..30" meaning either range is okay.
+Configured manually via CLI, via API or with automated approach with Catalyst Center that can deploy unicast and multicast routing (By default, this is disabled)
 
-Length Statement: This is a rule for how many characters a text can have, like "a name must be 2 to 5 letters" (2..5), where "min" is the shortest and "max" is the longest, and you can allow multiple lengths like "2..5 | 10..15" for different options.
+If broadcast, Link local multicast and ARP flooding is required, it must be specifically enabled on a per-subnet basis using Layer 2 flooding feature
 
-Pattern Statement: This is like a filter for text that only lets through words matching a specific shape, such as "must start with A" (using a pattern like ^A), and if you add more filters (e.g., "must end with Z"), everything must match all of them, even if the text was already filtered before.
+IS-IS is used as underlay routing protocol for it's simplicity
 
-Fraction-Digits Statement: This is a rule for decimal numbers (like 3.14) in a decimal64 type, saying how many decimal places are allowed (e.g., 2 means differences like 0.01), set between 1 and 18, so numbers are limited to something like "5 x 10^-2" (0.05).
+Control plane based on LISP
 
-![](<../.gitbook/assets/Unknown image (978)>)
+Data plane based on VXLAN-GPO
 
-Enumeration Built-in Type: This is like a list of specific names (e.g., "red," "blue," "green") you can choose from for a value, where you set these names with an "enum" rule under a "type" statement, and each name must be a non-empty string without extra spaces at the start or end, with no way to limit it further.
+Policy plane based on Cisco TrustSec with ISE
 
-Union Built-in Type: This is like a flexible box that can hold one value from different types (e.g., a number or text), defined by listing member types in a "type" statement, where the value is checked against each type in order until it matches one, but it can’t include "empty" or "leafref" types and doesn’t inherit defaults or units from those types
+ISE identifies users and devices connecting to the network and provides network access control and segmentation
 
-In the first output is the definition of the acl-id-type data type, which is able to store the string value for all notations of the ACL. The second output demonstrates the usage of the union statement in a combination with the enum statement.
+Security Group Access Control Lists (SGACLs) provides simpler and more scalable form of policy enforcement based on identity instead of IP address
 
-![](<../.gitbook/assets/Unknown image (979)>)
+We can either manage policy in CCC with ISE in read-only mode for a simpler, policy-enforcement-focused approach, suitable for smaller networks or use ISE with its UI for granular policy control, advanced authentication, dynamic policy changes, and comprehensive reporting, ideal for larger or complex networks with stringent security needs
 
-### XPath
+#### Fabric roles
 
-**XPath** is an XML Path Language defined by the W3C. It uses expressions to reference or extract parts of XML documents. It also contains a number of useful functions for nodes, numbers, and strings. Although there are newer versions of XPath, YANG uses XPath version 1.0. XPath is often used with Leafrefs when referencing Leaf or Leaf-List values elsewhere in the data tree, with when and must statements to add constraints to data model definitions.
+**Control Plane Node** is a host database, that manage SGT mapping (assumes LISP MS/MR role)
 
-Expressions address an XML document and return a result that can be of one of the following type categories:
+All registrations are sent to control node, which then updates fabric edge nodes and border nodes with wired and wireless client mobility and RLOC information
 
-Node set: multiple elements extracted from the XML document
+**Border Node** gateway between the fabric and external networks (assumes LISP PxTRs). Translate reachability and policy information such as VRF and SGT from one domain to another
 
-String: a single string element
+Internal border connects only to the known areas of the organization
 
-Number: a single number element
+Default border connects only to unknown areas outside the organization. Configured with a default route to reach external unknown networks such as the Internet or the public cloud
 
-Boolean: true or false
+Advertises EID summary prefix to the outside eBGP neigbor and imports external prefixes to the LISP domain
 
-![](<../.gitbook/assets/Unknown image (980)>)
+**Edge Node** It is a LISP tunnel router (xTR) that provides onboarding and mobility services for wired endpoints and perform en/de-capsulation of host traffic to and from its connected endpoints. Authenticate endpoints using .1x and places them in a host pool (SVI and VRF instance) and scalable group, then registers EID host address (MAC, /32 IPv4, or /128 IPv6) with the control plane node. Single L3 anycast SVI gateway with the same IP on all fabric edge nodes is implemented
 
-![](<../.gitbook/assets/Unknown image (981)>)
+**WLC Node** fabric edge for wireless clients. The control plane node maps the host EID to the current AP and edge node location the AP is attached to
 
-The following XML source data will be used for the example, to demonstrated the usage of the Xpath expressions.
+Fabric APs are part of overlay as they establish a VXLAN tunnel to the fabric edge to transport wireless client data traffic through the VXLAN tunnel instead of the CAPWAP tunnel, which improves performance. SD-Access Embedded Wireless is a feature that enables wireless controller functionality on Catalyst 9000 Series switches without a hardware WLC
 
-0
+**Intermediate Nodes** device covering L3 underlay network that connects the border nodes and edge nodes. It provides IP reachability between devices that operate in a fabric function
 
-10.1.1.17
+**Fusion device** enables VRF leaking across SD-Access fabric domains and enables host connectivity to shared services
 
-255.255.255.255
+**Extended node** device that extends the fabric overlay and segmentation to non-fabric devices (such as IoT), acting as a bridge between the traditional routed network and the SDA fabric
 
-0/1
+Policy extended nodes
 
-10.1.2.1
+![](<../.gitbook/assets/Unknown image (1548)>)
 
-255.255.255.252
+#### Controller layer
 
-0/2
+Cisco ISE and the Catalyst Center (NCP and NDP) integrate with each other to share contextual info between via APIs
 
-10.1.2.5
+**Cisco Network Control Platform (NCP)**
 
-255.255.255.252
+subsystem integrated directly into Cisco Catalyst Center that ensures the underlay and fabric automation and orchestration services using NETCONF/YANG, SNMP, SSH/Telnet
 
-<... omitted ...>
+**Cisco Network Data Platform (NDP)**
 
-The example extracts IP addresses from all interfaces taken from the configuration of a Cisco IOS router encoded in the XML format, with the following XPath expression.
+is a data collection and analytics and assurance subsystem integrated directly into Catalyst Center, providing data to NCP and ISE
 
-/\*/ip/address/primary/address
+NDP analyzes and correlates various network events through multiple sources (NetFlow, SPAN)
 
-or
+**Cisco Identity Services Engine (ISE)**
 
-//primary/address
+provides network access control and identity services for dynamic endpoint-to-group mapping and policy definition in a variety of ways, including using 802.1x, MAB, and WebAuth.
 
-In the following output is a result of the XPath expression:
+ISE then places the profiled endpoints into the correct scalable group and host pool; also collects and uses the contextual info shared from NDP and NCP
 
-10.1.1.1710.1.2.110.1.2.510.1.2.910.1.2.1310.1.3.110.1.3.510.1.3.910.1.3.13
+![](<../.gitbook/assets/Unknown image (1549)>)
 
-The example uses the index into the node set to extract a specific node or a range of nodes. In XPath, the first element of a node is at index 1.
+### SD-Access fabric (underlay vs overlay)
 
-//GigabitEthernet\[position()=1]//primary/address
+Part of the complexity in a network comes from the fact that policies are tied to network constructs such as IP addresses, VLANs, ACLs, and so on. The concept of fabric changes that. With a fabric, an enterprise network is thought of as being divided into two different layers, each for different objectives. One layer is dedicated to the physical devices and forwarding of traffic (known as an underlay), and the other entirely virtual layer (known as an overlay) is where wired and wireless users and devices are logically connected together, and services and policies are applied. This provides a clear separation of responsibilities and maximizes the capabilities of each sublayer while dramatically simplifying deployment and operations since a change of policy would only affect the overlay and the underlay would not be touched.
 
-or
+The concepts of overlay and fabric are not new in the networking industry. Existing technologies such as Multiprotocol Label Switching (MPLS), Generic Routing Encapsulation (GRE), Locator/ID Separation Protocol (LISP), and Overlay Transport Virtualization (OTV) are all examples of network tunneling technologies that implement an overlay. Another common example is Cisco Unified Wireless Network (Cisco UWN), which uses Control and Provisioning of Wireless Access Points (CAPWAP) to create an overlay network for wireless traffic.
 
-//GigabitEthernet\[1]//primary/address
+The Cisco SD-Access architecture is supported by a fabric technology implemented for the campus, enabling the use of virtual networks (overlay networks) running on a physical network (underlay network) creating alternative topologies to connect devices.
 
-In the following output is a result of the XPath expression.
+Cisco SD-Access network underlay (or simply, underlay) is comprised of the physical network devices, such as routers, switches, and WLCs, plus a traditional Layer 3 routing protocol. This provides a simple, scalable, and resilient foundation for communication between the network devices. The network underlay is not used for client traffic (client traffic uses the fabric overlay).
 
-10.1.2.1
+All network elements of the underlay must establish IPv4 connectivity between each other. This means an existing IPv4 network can be leveraged as the network underlay. Although any topology and routing protocol could be used in the underlay, the implementation of a well-designed Layer 3 access topology (that is, a routed access topology) is highly recommended. Using a routed access topology (leveraging routing all of the way down to the access layer) eliminates the need for Spanning Tree Protocol (STP), VLAN Trunk Protocol (VTP), Hot Standby Router Protocol (HSRP), Virtual Router Redundancy Protocol (VRRP), and other similar protocols in the network underlay, simplifying the network and at the same time increasing resiliency and improving fault tolerance.
 
-### YANG statements
+Cisco Catalyst Center provides a prescriptive LAN automation service to automatically discover, provision, and deploy network devices according to Cisco design best practices. Once discovered, the automated underlay provisioning leverages plug-and-play (PnP) to apply the required IP address and routing protocol configurations.
 
-![](<../.gitbook/assets/Unknown image (982)>)
+Cisco SD-Access fabric overlay (or simply, overlay) is the logical, virtualized topology built on top of the physical underlay. An overlay network is created on top of the underlay to create a virtualized network. In the SD-Access fabric, the overlay networks are used for transporting user traffic within the fabric. The fabric encapsulation also carries scalable group information used for traffic segmentation inside the overlay. The data plane traffic and control plane signaling are contained within each virtualized network, maintaining isolation among the networks as well as independence from the underlay network. The SD-Access fabric implements virtualization by encapsulating user traffic in overlay networks using IP packets that are sourced and terminated at the boundaries of the fabric. The fabric boundaries include borders for ingress and egress to a fabric, fabric edge switches for wired clients, and fabric APs for wireless clients. Overlay networks can run across all or a subset of the underlay network devices. Multiple overlay networks can run across the same underlay network to support multitenancy through virtualization.
 
-![](<../.gitbook/assets/Unknown image (983)>)
+### Core overlay constructs
 
-![](<../.gitbook/assets/Unknown image (984)>)
+#### Virtual network (VN)
 
-Key: A unique label for each item in a List, like a name to find it easily.
+**Virtual network (VN)** provides virtualization at the device level, using VRF instances to create multiple L3 routing tables.
 
-Leaf: A single data point in a List, like an IP address, tied to a specific type. It represents the simplest atom of information—a single value of a specific type. This is similar to scalar variables in programming languages.
+In the control plane, LISP instance IDs are used to maintain separate VRF instances. In the data plane, edge nodes add a VXLAN VNID to the fabric encapsulation
 
-![](<../.gitbook/assets/Unknown image (985)>)
+#### Host pool
 
-| Substatements | Description                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    |
-| ------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| config        | Whether this leaf is a configurable value \_true\_or operational value \_false.\_Takes as an argument the string true or false. If config is true, the definition represents configuration. Data nodes representing configuration will be part of the reply to a request, and can be sent in a or request. If config is false, the definition represents state data. Data nodes representing state data will be part of the reply to a but not to a request, and cannot be sent in a or request. If config is not specified, the default is the same as the parent schema node’s config value. If the parent node is a case node, the value is the same as the case node’s parent choice node. If the top node does not specify a config statement, the default is true. If a node has config set to false, no node underneath it can have config set to true. |
-| default       | Specifies default value for this leaf; implies that leaf is optional                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           |
-| mandatory     | Whether the leaf is mandatory \_true\_or optional _false_                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      |
-| must          | XPath constraint that will be enforced for this leaf                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           |
-| type          | The data type (and range, etc.) of this leaf                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   |
-| when          | Conditional leaf, present only if XPath expression is true                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     |
-| description   | Human-readable definition and help text for this leaf                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          |
-| reference     | Human-readable reference to some other element or spec                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         |
-| units         | Human-readable unit specification (e.g., Hz, MBps, ℉)                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          |
-| status        | Whether this leaf is _current_, _deprecated_, or _obsolete_                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    |
+**Host pool** group of endpoints assigned to an IP pool subnet. Fabric edge nodes have SVI for each host pool that is used by endpoints as their default gateway
 
-Leaf-list: A simple list of individual values (e.g., multiple IP addresses) within a Container, similar to an array of scalars.
+The SD-Access fabric uses EID mappings to advertise each host pool (per instance ID), which allows host-specific (/32, /128, or MAC) advertisement and mobility.
 
-![](<../.gitbook/assets/Unknown image (986)>)
+Host pools can be assigned dynamically (802.1x) and/or statically per port
 
-Container: A folder that groups related information together, like a record in programming.
+#### Scalable group (SGT)
 
-![](<../.gitbook/assets/Unknown image (987)>)
+**Scalable group (SGT)** group of endpoints with similar policies. The SD-Access policy plane assigns every endpoint to a scalable group using TrustSec SGT tags. Assignment to a scalable group can be either static per fabric edge port or using dynamic authentication through AAA or RADIUS using Cisco ISE. The same scalable group is configured on all fabric edge and border nodes
 
-List: A checklist inside a Container, holding multiple items like a list of interfaces.
+Scalable groups can be defined in Cisco Catalyst Center and/or Cisco ISE and are advertised through Cisco TrustSec
 
-substatements, which apply to the list and leaf-list statements:
+The fabric edge and border nodes include the SGT tag ID in each VXLAN header, which is carried across the fabric data plane
 
-Max-elements: Maximum number of elements in the list. If max-elements is not specified, there is no upper limit—that is, unbounded.
+#### Anycast gateway
 
-Min-elements: Minimum number of elements in the list. If min-elements is not specified, there is no lower limit—that is, 0.
+**Anycast gateway** provides Layer 3 default gateway where the same SVI is provisioned on every edge node with the same SVI IP and MAC add. This allows an IP subnet to be stretched across the SD-Access fabric. For example, if the subnet 10.1.0.0/24 is provisioned on an SD-Access fabric, this subnet will be deployed across all of the edge nodes in the fabric, and an endpoint located in that subnet can be moved to any edge node within the fabric without a change to its IP address or default gateway. Simplifying the IP address assignment and allowing fewer but larger IP subnets to be deployed. In essence, the fabric behaves like a logical switch that spans multiple buildings
 
-Ordered-by: List entries are sorted by system or user. System means that elements are sorted in a natural order (numerically, alphabetically, and so on). “User means that the order in which the operator entered them is preserved. "ordered-by user" is meaningful when the order among the elements has significance—for example, a DNS server search order or firewall rules
+#### Transit and peer networks
 
-![](<../.gitbook/assets/Unknown image (988)>)
+**Transit and peer networks** connect multiple fabric sites together or between a fabric site and the external world. They are configured on the border nodes of the fabric sites.
 
-![](<../.gitbook/assets/Unknown image (989)>)
+SD-Access transit uses a native SD-Access fabric with a domain-wide control plane node
 
-![](<../.gitbook/assets/Unknown image (990)>)
+IP-based transit uses a traditional IP-based network with VRF and SGT remapping
 
-### `grouping` statement
+#### Transit Control Plane Node
 
-Groups of nodes can be assembled into reusable collections with the use of the grouping statement. A grouping defines a set of nodes that are instantiated with the uses statement.
+**Transit Control Plane Node** construct that operates as a domain-wide control plane node for inter-site communication. It is only required when using SD-Access transits
 
-The example illustrates the usage of a template (grouping) that is then used twice to describe the IP and TCP port that is used for two services. Both services further refine the template by adding their default TCP port values
+It is part of the underlay network and needs to have reachability to the border nodes and Cisco DNA Center. It helps to exchange LISP mapping information between fabric sites
 
-![](<../.gitbook/assets/Unknown image (991)>)
+#### Fabric domain
 
-![](<../.gitbook/assets/Unknown image (992)>)
+**Fabric domain** hierarchical representation of fabric sites managed by Cisco DNA Center. A fabric domain can consist of multiple fabric sites and each site has its own devices that provide scale, resiliency and survivability. A fabric site is a logical grouping of devices that share the same control plane, data plane and policy plane.
 
-### `leafref`
+#### Fabric in a box
 
-Leafref: A pointer to actual data elsewhere in the model, like a symbolic link in a Linux file system.
+**Fabric in a box** construct where the border node, control plane node, and edge node are running on the same fabric node
 
-The leafref type is used to reference a particular leaf instance in the data tree. The path substatement selects a set of leaf instances, and the leafref value space is the set of values of these leaf instances. If the leaf with the leafref type represents configuration data, the leaf that it refers to must also represent configuration. Such a leaf puts a constraint on valid data. All leafref nodes must reference existing leaf instances or leafs with default values in use for the data to be valid. There must not be any circular chains of leafrefs. The path keyword is used to match the position in the tree, with one or more keys if referring to a leaf-list or leafs within a list (all key leafs must be referenced
+This may be a single switch, a switch with hardware stacking, or a StackWise Virtual deployment. The Fabric in a Box Site Reference Model should target less than 200 endpoints.
 
-Example
+Collocated Design border and control node is on the same device
 
-1. Services List
+Distributed Design border and control plane node are on different devices. Additional configuration and iBGP peering required
 
-The services list contains two key leafs:
+The Cisco SD-Access and Cisco SD-WAN technology domains are integrated to enable communication between Cisco SD-Access sites across the Cisco SD-WAN fabric.
 
-ip: An IPv4 address
+![](<../.gitbook/assets/Unknown image (1550)>)
 
-port: A 16-bit unsigned integer
+### IPv6 support
 
-yang
+Control plane node: The control plane node is configured to allow all IPv6 host subnets and the /128 host routes within the subnet ranges to be registered in its mapping database.
 
-Copy
+Border nodes: On the border nodes, IPv6 BGP peering with fusion devices is enabled. The border node decapsulates the IPv4 header from the fabric egress traffic while the ingress IPv6 traffic is encapsulated with the IPv4 header by the border nodes as well.
 
-Edit
+Fabric edge: All the switch virtual interfaces (SVIs) configured in Fabric Edge must be IPv6. This configuration is pushed by the Center Catalyst Center (DNA Center).
 
-2. App Container
+Cisco Catalyst Center (DNA Center): The Cisco Catalyst Center (DNA Center) physical interfaces do not currently support dual-stack. It can deploy only in a single stack with either IPv4 or IPv6 only in the management and or enterprise interfaces of the Cisco Catalyst Center (DNA Center).
 
-The app container contains two leafrefs:
+Clients: Cisco SD-Access supports dual-stack (IPv4 and IPv6) or single stack either IPv4 or IPv6. However, when you deploy an IPv6 single stack, Cisco Catalyst Center (DNA Center) still requires creating a dual-stack pool to support an IPv6-only client. The IPv4 in the dual-stack pool is a dummy address only, as the IPv6 the client is expected to disable the IPv4 address.
 
-address: References an IP from /services/ip
+### Underlay deployment
 
-port: References a port from the same service entry that matches the address
+#### Manual (custom)
 
-How the leafrefs Work
+Advantages of manual is that it can be customized to fit the own requirements/compliance rules, suitable for for brownfield and greenfield deployments
 
-address leaf
+Disadvantages are that the problems must be fixed by the administrators themselves (eg. MTU issues, improper routing/addressing, fragmentation, excessive latency, …)
 
-Can only hold a value that exists in /services/ip.
+Administrator must provide a fully functional IP-reachable underlay network (physical/logical interface configurations, control-plane protocols, address configurations) between all fabric-enabled devices and Cisco DNAC/ISE. Configuration can be either done fully manually on the devices themselves or using device templates defined in DNAC
 
-This ensures the app can only reference an existing service.
+The Loopback0 interface IP address (= “Fabric Node Router ID”) must be explicitly advertised in the IGP because it is the destination of packets destined from/to the device (eg. LISP Source Locator, …)
 
-port leaf
+#### Automated (LAN Automation)
 
-Uses path "/services\[ip=current()/../address]/port";
+DNAC provisions a fully functional IP-reachable underlay network (autmatic discovery, physical/logical interface configurations, control-plane protocols, address configurations) between all fabric-enabled devices and Cisco DNAC/ISE. Meant for greenfield deployments. IS-IS is the only possible underlay routing protocol when using LAN Automation
 
-What this means:
+Advantages: Eliminates misconfiguration and complexity and heavily simplifies and speeds up the building of the underlay network
 
-current()/../address → Goes to the address leaf in app.
+Disadvantages: Cannot be customized to fit the own requirements/compliance rules because standardized design will be used for every DNAC/SDA deployment
 
-services\[ip=current()/../address] → Finds the matching service where the ip is the same as address.
+Process
 
-/port → Selects the corresponding port from that service.
+! In order for LAN Automation to work, the downstream devices need to be fully wiped to factory settings (everything including any certificates must be removed) !
 
-This ensures that the port belongs to the same service as the selected IP.
+1. Seed device/s (at least one, ideally two) must be added to DNAC either manually or via the Device Discovery feature and assigned to a site
 
-![](<../.gitbook/assets/Unknown image (993)>)
+Connection reachability has to be established between seed devices to allow DNAC for auto discovery and LAN automation
 
-Example Use Case
+2. Global IP address Pool must be created and from the Global pool, we have to create Reserved IP address pool for each site
+3. When LAN Automation is started, DNAC will push out a standardized (best practice) configuration to the seed device/s including IS-IS configuration, a temporary DHCP server (will be used for LAN Automation only and is deleted after it is complete) and puts the selected device ports in VLAN1
+4. DNAC starts to discover all attached downstream network devices which are attached to the seed device and configures them
 
-{
+DNAC also discovers all network devices which are attached to already discovered network devices and/or are more than 1 CDP hop away
 
-"services": \[
+5. When everything is discovered and the status shows “Completed”, LAN Automation must be stopped and DNAC will remove some configuration (eg. DHCP server from seed device) and modify some configuration (eg. peer links will be configured to L3 instead of L2), then the LAN Automation is completed and the Routed Underlay network is ready to use
 
-{ "ip": "192.168.1.10", "port": 8080 },
+#### Plug and Play (PnP) onboarding
 
-{ "ip": "192.168.1.20", "port": 9090 }
+IPv4 is still required as of DNAC v1.3 (IPv6-only underlay is not possible)
 
-],
+A system MTU of 9100 is recommended to prevent fragmentation
 
-"app": {
+Switches need “ip routing” enabled to participate in the fabric
 
-"address": "192.168.1.10",
+A Loopback0 interface with a /32 mask, which is used as “Fabric Node Router ID”, is required
 
-"port": 8080
+**Day-0 template / network profile**
 
-}
+Before using the Lan Automation process, a Day-0 template “Onboarding Template” has to be created, which is an initial device configuration applied to the device when claiming it, it can includes parameters like the hostname, loopback interface, …
 
-}
+Network Profile must be created which links to the Day-0 Template Network. It is attached to the fabric site the device gets assigned to
 
-### Pyang tool
+Normal PnP process for onboarding
 
-**pyang** is an open-source tool for the validation, transformation and code generation for the YANG data models. It is written in python and can be used for the validation and visual representation of the YANG modules
+Device (router, switches, APs) boots up and tries to acquire an IP address via DHCP on every port
 
-The pyang is able to perform the following useful functions:
+The DHCP server provides the device not only with an IP address but also with the IP address of DNAC, either via…
 
-Convert YANG to YIN
+Option A: DHCP Option 43 (if available)
 
-Convert YANG to an HTML file that contains a collapsible tree representing the data model. This conversion is especially useful in large and complex models where a basic editor is no longer the best choice for viewing and editing the YANG data model. In this case, it is recommended that you use a dedicated YANG IDE that supports a collapsible tree view. Alternatively, you can use pyang to convert the YANG file to an HTML file and view the collapsible data model tree using any browser that supports JavaScript.
+Option B: Contact DNS server and ask for a name resolution of “pnpserver.localdomain” (localdomain = Domain provided via DHCP)
 
-Convert YANG to a text file where the hierarchy is illustrated, using ASCII characters.
+Option C: Cisco Cloud will be contacted and Daddress will be acquired form the Smart Account
 
-Convert YANG to an UML diagrams for visualization purposes.
+Device will appear under Provision -> Devices -> Plug and Play as unclaimed device
 
-Validate YANG modules and submodules.
+Device must be claimed and a Day-0 template (“Onboarding Template”) can be applied to it which merges with the running-config
 
-For the syntax validation of the yang module, you will use pyang.
+Pre-provisioned PnP process for onboarding
 
-cisco@linux:\~$ pyang lpbck.yang
+Device must be added to DNAC (Serial number, etc.) and added to a site so that the device will be automatically claimed when it gets added
 
-lpbck.yang:9: error: unterminated statement definition for keyword "key", looking at u
+Device (router, switches, APs) boots up and tries to acquire an IP address via DHCP on every port
 
-rcisco@linux:\~$
+The DHCP server provides the device not only with an IP address but also with the IP address of DNAC, either via…
 
-cisco@linux:\~$ vim lpbck.yang
+Option A: DHCP Option 43 (if available)
 
-cisco@linux:\~$
+Option B: Contact DNS server and ask for a name resolution of “pnpserver.localdomain” (localdomain = Domain provided via DHCP)
 
-cisco@linux:\~$ pyang lpbck.yang
+Option C: Cisco Cloud will be contacted and DNAC address will be acquired form the Smart Account
 
-lpbck.yang:1: warning: unexpected modulename "loopback" in lpbck.yang, should be lpbck
-
-lpbck.yang:4: error: expected keyword "prefix" as child to "import"
-
-lpbck.yang:5: warning: imported module ietf-yang-types not used
-
-lpbck.yang:9: warning: all keys in the list are redundantly present in the unique statement
-
-lpbck.yang:17: error: syntax error in pattern: xmlRegexpCompile() failed
-
-lpbck.yang:22: error: the identifier "ip-address" in the unique argument does not reference an existing container
-
-lpbck.yang:26: error: bad value "0-999" (should be range-arg)
-
-lpbck.yang:26: error: restriction range not allowed for this base type
-
-lpbck.yang:30: error: prefix "inet" is not defined (reported only once)
-
-cisco@linux:\~$
-
-cisco@linux:\~$ mv lpbck.yang loopback.yang
-
-cisco@linux:\~$
-
-cisco@linux:\~$ vim loopback.yang
-
-cisco@linux:\~$
-
-cisco@linux:\~$ pyang loopback.yang
-
-Python most common open source programming language for networking. It is used to interact with networking devices via API calls to extract certain information or push configuration
-
-### Cisco YANG Suite
-
-**Cisco YANG Suite** is a graphical interface tool designed for working with YANG models, used in network automation for NETCONF, RESTCONF, and gNMI protocols. It's commonly used for configuring and managing Cisco devices.
-
-[Getting Started with Cisco YANG Suite](https://www.youtube.com/watch?v=nnd4KqeeqIw\&t=472s\&ab_channel=0x2142-NetworkingNonsense)
-
-## Network Configuration Protocol (NETCONF)
-
-**Network Configuration Protocol (NETCONF)** is a next-generation network management protocol that is designed specifically for transactional-based network management and to improve upon the weaknesses of SNMP.
-
-It is defined by the IETF, allowing to install, manipulate, and delete the configuration of network devices NETCONF and RESTCONF describe the protocols and methods for network management data transport.
-
-NETCONF makes a distinction between configuration and operational data. The information that can be retrieved from a running system is separated into two classes—configuration data and operational data. Configuration data is the set of writable data that is required to transform a system from its initial default state into its current state. Operational data is the additional data on a system that is not configuration data, such as read-only status information and collected statistics.
-
-NETCONF is stateful protocol establishig session over SSH on TCP port 830
-
-YANG describes the data model used by the network systems during the transmission and internal processing
-
-Data model interfaces (DMIs) are a set of services that facilitate the management of network elements
-
-Application layer protocols such as, NETCONF and RESTCONF access these DMIs over a network.
-
-Operations between remote systems are performed with Remote Procedure Call (RPC) (similar to HTTP verb/CRUD) messages in XML format to send the information between hosts using XML-encoding, in order to perform operations upon the device. Such as , and . Information and configurations are stored in datastores
-
-### Terminology
-
-**NETCONF Agent:** NETCONF-capable device
-
-**NETCONF Manager:** Client Application to do configuration stuff
-
-**Datastore:** Database/table of information of the Agent. Target of NETCONF commands.
-
-![](<../.gitbook/assets/Unknown image (966)>)
-
-### RPC operations
-
-![](<../.gitbook/assets/Unknown image (967)>)
-
-![Network Automation and the Rise of NETCONF | by karim okasha | Medium](<../.gitbook/assets/Unknown image (968)>)
-
-RPC offers feature , when a lock is active, only the executer of lock can perform and operations, so he can run NETCONF operation undisturbedly
-
-that is the name of the configuration datastore that is to be locked
-
-\<rpc message-id="101"
-
-xmlns="urn:ietf:params:xml:ns:netconf:base:1.0">
-
-\</rpc
-
-Python ncclient response: m.lock(target='running')
-
-Note
-
-Directly interacting with NETCONF over an SSH channel like in this example is not the best plan. Manually crafting the XML and RPCs is error prone and requires more effort.
-
-Rather, use code libraries and tools that does all the connection handling for you. In a bit, you can see how to use ncclient (netconfclient) with Python to make the this much easier
-
-If a request is made for a data model that doesn’t exist on the Catalyst 3850 or a request is made for a leaf that is not implemented in a data model, the Server (Catalyst 3850) responds with an empty data response. This is expected behavior.
-
-![](<../.gitbook/assets/Unknown image (969)>)
-
-### Datastores
-
-NETCONF utilizes multiple configuration datastores (candidate, running, and startup): This feature is one of the most unique attributes of NETCONF, though a device does not have to implement this feature to "support" the protocol. NETCONF utilizes a candidate configuration, which is simply a configuration with all proposed changes that are applied in an uncommitted state. It is the equivalent of entering CLI commands and having them not take effect right away. You would then commit all the changes as a single transaction. Once committed, you would see them in the running configuration.
-
-NETCONF supports device transaction, which means that when you make an API call configuring multiple objects and one fails, the entire transaction fails, and you do not end up with a partial configuration. They are also configurable and platform dependent. You can still force a change to take so that it fails on error or rolls back on error, and so on
-
-Running configuration datastore containing configuration that is applied and running upon network device
-
-**Startup** The configuration datastore holding the configuration loaded by the device when it boots
-
-**Candidate** A configuration datastore that can be manipulated without impacting the device’s current configuration and that can be committed to the running configuration datastore
-
-**URL** A configuration datastore whose configuration resides within a separate location, accessed via a URL
-
-### Communication flow
-
-Session Establishment Each side sends a , along with its
-
-Operation Request The client then sends its request (operation) to the server via the message
-
-Response is then sent back to the client within
-
-Session Close The session is then closed by the client via
-
-![](<../.gitbook/assets/Unknown image (970)>)
-
-![](<../.gitbook/assets/Unknown image (971)>)
-
-Reply from agent device
-
-![](<../.gitbook/assets/Unknown image (972)>)
-
-Reply from manager
-
-Note All messages to and from the NETCONF server or client must end with ]]>]]>. This way, the client and server know that the other side is done sending the message.
-
-![](<../.gitbook/assets/Unknown image (973)>)
-
-Close session
-
-![](<../.gitbook/assets/Unknown image (974)>)
-
-### NETCONF setup requirements
-
-A device that supports the NetConf protocol, such as a network router or switch.
-
-A client that can communicate with the device using NetConf, such as a computer running a NetConf client software.
-
-Network connectivity between the device and the client.
-
-Once you have these components, you can configure the device to enable the NetConf protocol and establish a connection between the device and the client.
-
-Here are the general steps:
-
-Configure the device to enable the NetConf protocol and specify the port number to be used for NetConf connections.
-
-Start the NetConf client software on the client and specify the IP address and port number of the device.
-
-Connect to the device using the NetConf client software and authenticate using a username and password.
-
-Once the connection is established, you can use the NetConf client software to send and receive XML-encoded data to and from the device.
-
-You can use the data to retrieve information about the device's configuration, monitor its performance, and make changes to its configuration.
-
-### IOS XE configuration
-
-To start working with NETCONF APIs, you must be a user with privilege level 15
-
-The recommended best practice when modifying the device configuration through candidate datastore is:
-
-Lock the running datastore.
-
-Lock the candidate datastore.
-
-Make modifications to the candidate configuration through edit-config RPCs with a target candidate.
-
-Commit the candidate configuration to the running configuration.
-
-Unlock candidate and running configurations.
-
-| To start working with NETCONF APIs, you must be a user with privilege level 15 username name privilege level password password aaa new-model aaa authentication login default local aaa authorization exec default local | show netconf-yang \[datastores \| sessions \| statistics] show platform software yang-management process show netconf {counters \| session\| schema} |
-| ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ---------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Enable YANG netconf-yang netconf-yang feature candidate-datastore netconf-yang ssh port                                                                                                                                  |                                                                                                                                                      |
-
-### IOS XR configuration
-
-control-plane
-
-management-plane
-
-out-of-band
-
-interface MgmtEth0/RSP0/CPU0/0
-
-allow SSH
-
-allow SNMP
-
-allow NETCONF
-
-!
-
-interface MgmtEth0/RSP1/CPU0/0
-
-allow SSH
-
-allow SNMP
-
-allow NETCONF
-
-!
-
-!
-
-!
-
-!
-
-ssh server v2
-
-ssh server netconf port 830
-
-ssh server netconf vrf default
-
-netconf agent tty
-
-!
-
-netconf-yang agent ssh
-
-commit
-
-exit
-
-!
-
-crypto key generate rsa
-
-#### To test with python script:
-
-import socket
-
-host = "10.19.55.224"
-
-port = 830
-
-sock = socket.socket(socket.AF\_INET, socket.SOCK\_STREAM)
-
-sock.settimeout(5) # 5 seconds timeout
-
-try:
-
-sock.connect((host, port))
-
-print(f"✅ Successfully connected to {host} on port {port} (NETCONF)")
-
-except socket.error as err:
-
-print(f"❌ Connection failed: {err}")
-
-finally:
-
-sock.close()
-
-Get config script
-
-from ncclient import manager
-
-with manager.connect(host="10.19.55.224", port=830, username="cisco", password="Cisco123", hostkey\_verify=False) as nc\_conn:
-
-nc\_config = nc\_conn.get\_config(source='running').data\_xml
-
-print (nc\_config)
-
-## Representational State Transfer Configuration Protocol (RESTCONF)
-
-**Representational State Transfer Configuration Protocol (RESTCONF)** is application layer, HTTPs-based NETCONF running over tcp 443.
-
-The interface is based on standard mechanisms for accessing configuration data, state data, and data-model-specific RPC operations and events, which are defined in the YANG model.
-
-Utilizes YANG data models to communicate with network devices and supports media types XML or JSON
-
-Uses HTTP methods to perform CRUD operations on a target RESTCONF server that is running on managed device (HTTPs server must be enabled on the managed device)
-
-HTTP methods are performed against URI that represents each resource that is running on a target. Only IOS XE supports RESTCONF. A privilege level 15 user is required for RESTCONF
-
-RESTCONF sends single, independent commands whereas NETCONF establishes/maintains a session. RESTCONF = stateless, NETCONF = stateful
-
-RESTCONF offers these utilities and tools:
-
-Same tools that are used for native REST interfaces are used for RESTCONF:
-
-Python requests module
-
-Postman
-
-Firefox RESTClient
-
-### HTTP verbs (CRUD mapping)
-
-![](<../.gitbook/assets/Unknown image (962)>)
-
-Note
-
-The PUT operation has the ability to replace entire sections of configuration that is based on what you send. It is analogous to declarative network configuration. For example, if you use the PATCH method on one static route, it will add the route. If you use the PUT method on the route, you will end up with just one route configured.
-
-| GET [http://csr1kv/restconf/api/config/native](http://csr1kv/restconf/api/config/native)                                                         | Retrieve full running configuration as an object            |
-| ------------------------------------------------------------------------------------------------------------------------------------------------ | ----------------------------------------------------------- |
-| GET [http://csr1kv/restconf/api/config/native/interface](http://csr1kv/restconf/api/config/native/interface)                                     | Retrieve interface-specific attributes                      |
-| GET [http://csr1kv/restconf/api/config/native/interface/GigabitEthernet/1](http://csr1kv/restconf/api/config/native/interface/GigabitEthernet/1) | Retrieve interface-specific attributes for GigabitEthernet1 |
-
-### Protocol stack
-
-![](<../.gitbook/assets/Unknown image (963)>)
-
-A RESTCONF device determines the root of the RESTCONF API through the link element: /.well-known/host-meta resource that contains the RESTCONF attribute.
-
-A RESTCONF device uses the RESTCONF API root resource as the initial part of the path in the request URI.
-
-The API resource is the top-level resource located at +restconf.
-
-### URI format and examples
-
-All RESTCONF URIs follow this format: https://
-
-//data/<\[YANG MODULE:]CONTAINER>/\[?]
-
-https://
-
-/restconf/data/ietf-interfaces:interfaces
-
-GigabitEthernet0/0/2 - [https://10.104.50.97/restconf/data/Cisco-IOS-XE-native:native/interface/GigabitEthernet=0%2F0%2F2](https://10.104.50.97/restconf/data/Cisco-IOS-XE-native:native/interface/GigabitEthernet=0%2F0%2F2)
-
-Name and IP - [https://10.85.116.59/restconf/data/Cisco-IOS-XE-native:native/interface?fields=GigabitEthernet/ip/address/primary;name](https://10.85.116.59/restconf/data/Cisco-IOS-XE-native:native/interface?fields=GigabitEthernet/ip/address/primary;name)
-
-MTU - [https://10.85.116.59/restconf/data/Cisco-IOS-XE-native:native/interface/GigabitEthernet=3/mtu](https://10.85.116.59/restconf/data/Cisco-IOS-XE-native:native/interface/GigabitEthernet=3/mtu)
-
-### Configuration (IOS XE)
-
-Ensure that your device is running a version of Cisco IOS that supports RESTCONF.
-
-Enable the HTTP server on the device with the command "ip http server"
-
-Enable the RESTCONF server on the device with the command "restconf" > it starts NGINX process
-
-**NGINX** is an internal webserver that acts as a proxy webserver. It provides (TLS)-based HTTPS
-
-RESTCONF request sent via HTTPS is first received by the NGINXproxy web server and the request is transferred to the confd web server for further syntax check
-
-Configure a username and password for RESTCONF with the command "username \[username] password \[password] privilege 15"
-
-Configure the device's management interface with the command "interface \[interface name]"
-
-Configure the management interface with an IP address and mask with the command "ip address \[IP address] \[mask]"
-
-Configure the management interface with a default gateway with the command "ip default-gateway \[default gateway IP]"
-
-Configure the management interface to use the configured username and password with the command "ip http authentication local"
-
-Configure #ip http secure-server and #ip http port <> to declare what port restconf should be using
-
-Verify the configuration with the command "show ip http server status"
-
-Verification #show platform software yang-management process
-
-Note IOS-XR doesn't support RESTCONF Restconf will be supported in a future release ref [https://www.cisco.com/c/en/us/td/docs/iosxr/ncs5xx/system-security/24xx/b-system-security-cg-24xx-ncs540/configuring-aaa-services.html](https://www.cisco.com/c/en/us/td/docs/iosxr/ncs5xx/system-security/24xx/b-system-security-cg-24xx-ncs540/configuring-aaa-services.html)
-
-**curl** is a command-line tool for getting or sending data using URL syntax. It is commonly used to test the responsiveness of the device to the RESTCONF query
-
-**curl.exe** is the version of cURL used on Windows. It comes pre-installed in Windows 10 and later.
-
-If you're using Linux or macOS, you can simply use curl instead of curl.exe (the syntax remains the same)
-
-### Test with curl
-
-| curl.exe -k -u "alef:poc" -H "Accept: application/yang-data+json" -X GET " [https://10.19.55.143/restconf/data/](https://10.19.55.143/restconf/data/)"                                                     | will return all data       |
-| ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------- |
-| curl.exe -k -u "alef:poc" -H "Accept: application/yang-data+json" -X GET " [https://10.19.55.143/restconf/data/ietf-interfaces:interfaces](https://10.19.55.143/restconf/data/ietf-interfaces:interfaces)" | will return all interfaces |
-
--k Allows insecure SSL connections (ignores certificate validation). Useful if the device uses self-signed certificates.
-
--u "username:password" Provides basic authentication with a username and password (in this case, "alef:poc")
-
--X GET Specifies the HTTP method to use (in this case, GET). Other methods include POST, PUT, and DELETE
-
-The --head (or -I) option also gives you basic information about a remote file without actually downloading it. As shown in the screenshot below, when you use curl with a remote file URL, it displays various headers to give you information about the remote file.
-
-![Delete a file after successful download using curl command](<../.gitbook/assets/Unknown image (964)>)
-
-![Use curl to view the basic information about remote files](<../.gitbook/assets/Unknown image (965)>)
-
-### REST (RESTful APIs)
-
-REST describes and follow set of rules defined by HTTP methods to gather, manipulate data and interact with APIs from multiple vendors
-
-The client uses API calls (HTTP requests) to access the resources on the server (Client-Server architecture)
-
-Must support data caching for future use, improving performance for the client and reduces the load on the server
-
-RESTful APIs are stateless each API exchange is separate event, independent of all past exchanges between client and server, meaning, each exchange has to be authenticated each time
-
-Although REST APIs use HTTP, which uses TCP (stateful) as its Layer 4 protocol, HTTP and REST APIs themselves aren't stateful (The functions of each layer are separate)
-
-Each API call in a RESTful API maps to an individual URI, meaning every configuration change or poll to retrieve data a user makes has a unique URI
-
-CRUD
-
-refers to the operations we perform using REST APIs
-
-Create operations are used to create new variables and set their initial values ie. create variable "ip\_address" and set the value to "10.1.1.1"
-
-Read operations are used to retrieve the value of a variable
-
-Update operations are used to change the value of a variable
-
-Delete operations are used to delete variables
-
-Crud also has additional operations such as Options
-
-HTML (Hypertext Markup Language)
-
-is the standard markup language for creating and structuring web pages and web applications (same as python or C# is for coding software and applications)
-
-Hypertext Transfer Protocol (HTTP)
-
-HTTP is an application layer protocol and is the foundation of communication for the World Wide Web. It is based on a client-server computing model, where the client (e.g., a web browser) and the server (e.g., a web server) use a request-response message format to transfer information. HTTP presumes a reliable underlying transport layer protocol, so TCP is commonly used. However, UDP can also be used in some cases.
-
-The web browser's primary tool is the address bar. By entering a URL into an address bar, it is possible to describe to the browser where to search for the necessary item. The URL will point to a web server and a file on that web server. Consequently, the web browser contacts the web server and requests the item that the server should send back.
-
-The data is exchanged via HTTP Requests and HTTP Responses, which are specialized data formats, used for HTTP communication. A sequence of requests and responses is called an HTTP Session and is initiated by a client by establishing a connection to the server.
-
-An example of using a request-response cycle is web browsing. When a user is browsing the web, a browser sends an HTTP request to get the HTML document representing the page. The server responds to the request and returns the HTTP response with a response code and the content of the page, which is an HTML document. The client browser parses this document, displaying its content according to layout information and resources contained within the page (usually images and videos) and sometimes processing additional requests corresponding to execute scripts. The web browser presents all of this content to a user as a complete webpage.
-
-HTTP uses verbs (methods) that maps to CRUD operations
-
-Versions
-
-HTTP/0.9 This was the first version of HTTP, and it was very simple. It only supported GET requests and didn't have headers or status codes. It was used in the early days of the web.
-
-HTTP/1.0 This version introduced more features, including support for additional request methods (POST, HEAD, etc.), headers, and status codes
-
-It also allowed for multiple requests on a single connection but required each request to establish a new connection.
-
-HTTP/1.1 is one of the most widely used versions of HTTP. It introduced important features like persistent connections (keep-alive), chunked transfer encoding, and host headers for virtual hosting. This version significantly improved the efficiency of web communication.
-
-HTTP/2 is a major revision of the HTTP protocol. It introduced features like multiplexing, header compression, and server push, all aimed at improving the speed and efficiency of web page loading. It is designed to be more efficient than HTTP/1.1 and is widely adopted for modern web applications.
-
-HTTP/3 is the latest version of HTTP, and it's based on the QUIC (Quick UDP Internet Connections) protocol
-
-It aims to further improve web performance and security
-
-HTTPS protocol has improved security by adding an encryption layer and can be used when data confidentiality is required, such as in e-commerce activities.
-
-By default, HTTP is a stateless (or connectionless) protocol, meaning it works without the receiver retaining any client information. Each request can be understood in isolation, without knowing any commands that came before it. HTTP does have some mechanisms, namely HTTP headers, to make the protocol behave as if it was stateful.
-
-#### HTTP request/response basics
-
-![](<../.gitbook/assets/Unknown image (1008)>)
-
-HTTP Verb and URI (Uniform Resource Identifier) identifies the source of the accessing web resource.
-
-The protocol to use (specifying what language a browser and a server should use for the transaction).
-
-A name of the webserver to contact.
-
-A path specifying a file on that webserver.
-
-The format is: protocol://authority/hostname/path\_to\_directory
-
-![](<../.gitbook/assets/Unknown image (1009)>)
-
-Accept header is a way for a client (browser) to specify the media type of response content it is expecting to be received
-
-Content-type is a way for a client to specify media type of request being sent to the server
-
-When a URL, such as [http://www.cisco.com](http://www.cisco.com/) c/en/us/index.html is inserted into the browser's address bar, it initiates the following sequence of actions:
-
-The client (web browser) sends an HTTP GET request to the server [www.cisco.com](http://www.cisco.com/) and asks it to get the file c/en/us/index.html.
-
-The server receives the request.
-
-The server processes the request, retrieves the c/en/us/index.html file, and sends it to the browser.
-
-The server returns an HTTP response.
-
-The client receives the response (for example, the webpage content from the file on the server) and presents it on screen in your browser window.
-
-The web server logs the browser history by recording that it visited the site (browser's history) and the PC keeps a copy of the page in its cache. The browser cache shows traces that a user leaves behind while navigating the web.
-
-![](<../.gitbook/assets/Unknown image (1010)>)
-
-[HTTP Status Codes](https://en.wikipedia.org/wiki/List_of_HTTP_status_codes)
-
-1xx informational the request was received, continuing process
-
-2xx successful the request was successfully received, understood, and accepted
-
-3xx redirection further action needs to be taken in order to complete the request
-
-4xx client error the request contains bad syntax or cannot be fulfilled
-
-HTTP 403 Forbidden response status code indicates that the server understands the request but refuses to authorize it
-
-5xx server error the server failed to fulfill request
-
-![](<../.gitbook/assets/Unknown image (1011)>)
-
-### REST API in Cisco IOS XE (container-based)
-
-REST API container is an application that provides a set of RESTful APIs to manage devices running Cisco IOS XE Software. It is located in a virtual services container, which is a virtualized environment running on the host device. It is also referred to as a virtual machine (VM), virtual service, or container. The REST API virtual service is not a native capability within Cisco IOS XE, but it is instead delivered as an open virtual application (OVA) package file
-
-The Cisco REST API OVA package was bundled with the Cisco IOS XE Software on releases prior to 16.7.1. Starting with Cisco IOS XE release 16.7.1, the OVA package is not bundled with the Cisco IOS XE image, instead it needs to be downloaded from Cisco Software Center and transferred to the Cisco device on which it is to be enabled.
-
-Regardless if bundled with Cisco IOS XE or not, the REST API service is never enabled by default on any Cisco IOS XE release. Customers interested in using the REST API capabilities have to first enable such capabilities on each device by completing the following steps:
-
-1. Log in to the device by using an administrator-level account (with privilege level 15).
-2. Install the REST-API container by using the Cisco Virtual Manager (VMAN) CLI.
-3. Enter the remote-management configuration mode and configure a local TCP port that will be bind to the management interface of the REST API service.
-4. Configure a management interface that will be used to process HTTP requests submitted to the REST API service.
-5. Enable the REST-API virtual service container
-
-![](<../.gitbook/assets/Unknown image (1012)>)
-
-![](<../.gitbook/assets/Unknown image (1013)>)
-
-The REST API authentication works as follows:
-
-The authentication uses HTTPS as the transport for full Cisco REST API access.
-
-Clients perform authentication with this service by invoking a POST on this resource with HTTP Basic Auth as the authentication mechanism. The response of this request includes a token-id. Token-ids are short-lived, opaque objects that represents client's successful authentication with the token service.
-
-Clients then access other APIs by including the token id as a custom HTTP header "X-auth-token." If this token is not present or expired, then API access will return an HTTP status code of "401 Unauthorized"
-
-Clients can also explicitly invalidate a token by performing a DELETE operation on the token resource.
-
-The username/password for the HTTPS session should be configured with privilege 15.
-
-The initial HTTP request is performed by clients to authenticate and obtain a token so that it can invoke other APIs. The HTTP POST response contains an opaque URL to be used for HTTP GET and DELETE requests.
-
-The following example shows JSON messages that are transmitted during REST API authentication process:
-
-![](<../.gitbook/assets/Unknown image (1014)>)
-
-In subsequent API accesses, the token-id must appear as a custom HTTP header for successful invocation of APIs. X-auth-token: {token-id}.
-
-To retrieve active tokens use the following resource Uniform Resource Identifier (URI) with the HTTP method GET: GET /api/v1/auth/token-services. To retrieve token details use GET /api/v1/auth/token-services/{opaque-token-id}.
-
-Typically tokens automatically expire after 15 minutes. However, clients can perform explicit invalidation of a token by doing a DELETE on the token resource: DELETE /api/v1/auth/token-services/{opaque-token-id}.
-
-#### REST API security notes
-
-Every request made to server should require validation
-
-Cached credentials should not be allowed
-
-Always use HTTPS
-
-Use hashing PBKDF2, BCrypt, and SCrypt algorithms - secure REST API from brute attacks (attempt to discover a password by systematically trying every possible combination of letters, numbers, and symbols until you discover the one correct combination that works.)
-
-Adding Timestamp in Request (API header) - This will prevent very basic replay attacks from people who are trying to brute force your system
-
-Least Privilege Users should only have enough privileges to do their job
-
-Fail-Safe Defaults Actions should be denied without explicit permission
-
-Economy of Mechanism Security design should be simple and intuitive
-
-Open Design This principle highlights the importance of building a system in an open manner, with no secret or confidential algorithms being exposed in the code or repository.
-
-Separation of Privilege Granting permissions to an entity should not be purely based on a single condition, a combination of conditions based on the type of resource is a better idea.
-
-Least Common Mechanism It concerns the risk of sharing state among different components. If one can corrupt the shared state, it can then corrupt all the other components that depend on it
-
-Psychological Acceptability Security should not make worse the user experience.
-
-Authentication
-
-Should be stateless; OAuth over basic authentication; Authentication and authorization should not be cached
-
-The most common implementations of OAuth (OAuth 2.0) use one or both of these tokens:
-
-* access token: sent like an API key, it allows the application to access a user’s data; optionally, access tokens can expire.
-* refresh token: optionally part of an OAuth , refresh tokens retrieve a new access token if they have expired. OAuth2 combines Authentication and Authorization to allow more sophisticated scope and validity control
-
-Complete Mediation
-
-A system must validate access rights to all its resources and must not rely on a cached permission matrix. If the access level to a given resource is revoked but is not reflected in the permission matrix, the security is violated
-
-JSON Web Token (JWT) secures transmission of information between parties (structure consists of header,payload and signature)
-
-Session vs Token Authentication
-
-Session are saved on server
-
-Tokens are saved on client. This type of authentication is used the most as it removes the load and stateful operations to be performed by server
-
-![](<../.gitbook/assets/Unknown image (1015)>)
-
-## Zero-Touch Provisioning (ZTP)
-
-is a process where devices can automatically receive their configurations and software from a centralized server once they are connected to the network. This eliminates the need for manual configuration and allows for quick deployment of network devices, especially in large-scale environments.
-
-The device typically identifies itself (often through its MAC address or serial number) and connects to a pre-configured provisioning server. From there, the device downloads its operating system (if necessary) and configuration files.
-
-Day-zero techniques automate bringing up network devices into a functional state with minimal to no-touch.
-
-ZTP supports autoprovisioning of a router by running customized scripts using a DHCP server.
-
-When a device that supports Zero-Touch Provisioning boots up and does not find the startup configuration (during a fresh install on day zero), the device enters the Zero-Touch Provisioning mode.
-
-The device locates a DHCP server, bootstraps itself with its interface IP address, gateway, and Domain Name System (DNS) server IP address, and enables Guest Shell
-
-The device then obtains the IP address or URL of a TFTP server and downloads the Python script to configure the device.
-
-![](<../.gitbook/assets/Unknown image (1016)>)
-
-#### ZTP security
-
-The secure aspect of ZTP ensures that only trusted devices are provisioned and that sensitive information remains protected during the provisioning process.
-
-Secure ZTP authenticates not only the onboarding network device but also validates the server authenticity and provisioning information that it is receiving from the ZTP server
-
-Secure ZTP uses a three-step validation process to onboard the remote devices securely:
-
-Router Validation: The ZTP server authenticates the router before providing bootstrapping data using the Trust Anchor Certificate (also called SUDI certificate).
-
-Server Validation: The router device in turn validates the ZTP server to make sure that the onboarding happens to the correct network. Upon completion, the ZTP server sends the bootstrapping data (for example, a YANG data model) or artifact to the router.
-
-Artifact Validation: The configuration validates the bootstrapping data or artifact received from the ZTP server.
-
-XR config [https://www.cisco.com/c/en/us/td/docs/iosxr/cisco8000/b-setup-and-upgrade-cisco8k/secure-ztp.html](https://www.cisco.com/c/en/us/td/docs/iosxr/cisco8000/b-setup-and-upgrade-cisco8k/secure-ztp.html)
-
-Automatic provisioning interprets the rest of the file as a static configuration if the file starts with:
-
-"!! IOS XR"
-
-Explanation:
-
-In Cisco IOS XR, automatic provisioning checks the first line of the configuration file.
-
-If the file starts with "!! IOS XR", the system treats it as a static configuration file, meaning the rest of the file contains CLI-based configuration commands that are applied directly.
-
-If the file starts with a shebang (#!), such as #!/bin/bash, #!/bin/sh, or #!/usr/bin/python, the system interprets it as a script and executes it accordingly.
+Device will appear under Provision -> Devices -> Plug and Play as claimed device
