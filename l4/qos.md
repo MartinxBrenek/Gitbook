@@ -19,8 +19,6 @@ layout:
 
 # QoS
 
-### Overview
-
 Before networks converged, network engineering was mainly focused on connectivity. However, the rates at which data came onto the network resulted in bursty data flows. Data, arriving in packets, tried to grab as much bandwidth as it could at any given time. Access was on a first-come, first-served basis. The data rate available to any one user varied, depending on the number of users accessing the network at any given time.
 
 The protocols that have been developed have adapted to the bursty nature of data networks, and brief outages are survivable. For example, when you retrieve email, a delay of a few seconds is generally not noticeable. A delay of minutes is annoying, but not serious.

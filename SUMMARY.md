@@ -33,12 +33,9 @@
 ## L4
 
 * [Transport Layer](l4/transport-layer.md)
-* [DNS](l4/dns.md)
-* [DHCP](l4/dhcp.md)
-* [NAT](l4/nat.md)
+* [Network Services](l4/network-services.md)
 * [QoS](l4/qos.md)
 * [Multicast](l4/multicast.md)
-* [Network Time Synchronization](l4/network-time-synchronization.md)
 
 ## Network Security
 

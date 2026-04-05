@@ -19,8 +19,6 @@ layout:
 
 # Multicast
 
-### Overview
-
 IP multicast is a network communication mechanism in which a sender transmits a single stream of packets to a multicast group identified by a special IP multicast destination address. The sending host places the multicast group address in the IP destination field, and the network is responsible for delivering the traffic only to receivers that have explicitly joined that group. Any host can send traffic to a multicast group, but only subscribed members receive and process the packets.
 
 IP multicast routers and multilayer switches forward incoming IP multicast packets out all interfaces that lead to members of the multicast group. Any host, regardless of whether it is a member of a group, can send to a group. However, only the members of a group receive the message.
