@@ -416,6 +416,40 @@ DC cannot be transmitted economically over long distances due to a drop in volta
 
 QSFP-DD modules use a flat top design, allowing for a larger "riding" heatsink instead of a smaller, integrated one. This innovative approach enables significantly better cooling performance and facilitates ongoing design improvements for optimal thermal management.
 
+### Power over Ethernet (PoE)
+
+**Power over Ethernet (PoE)** is a technology that allows to transmit data signal and provide power source over a single ethernet cable, eliminating the need for external power source for devices like access point, another switch or IoT device
+
+It is achieved by dedicating two of the four twisted pairs in an Ethernet cable (pins 1-2 and 3-6) for data transmission, while the other two pairs (pins 4-5 and 7-8) are dedicated for power transmission.
+
+PoE is primarily designed for powering and connecting low-power network devices over Ethernet cables
+
+PoE can transmit 100 meters from the switch or hub to the Network interface controller (NIC), regardless of where the power is injected. The limitation is not the power; the Ethernet cabling standards limit the total length of cabling to 100m
+
+Power sourcing equipment (PSE) (switch) provides power to powered devices (PD)
+
+PoE+ provides up to 30 watts of power per port, which is more than double the maximum power provided by PoE (which offers up to 15.4 watts).
+
+uPOE (Ultra Power over Ethernet) provides up to 60 watts of power per port.
+
+Perpetual POE provides uninterrupted power to connected powered device (PD) even when the power sourcing equipment (PSE) switch is booting.
+
+| Device(config-if)# power inline port perpetual-poe-ha | Configures perpetual PoE. When you configure perpetual PoE on a port connected to a PD device, the PD device remains powered on during reload. |
+| ----------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------- |
+
+| show power inl   | POE |
+| ---------------- | --- |
+| show power       | PSU |
+| show environment |     |
+
+![](<../.gitbook/assets/Unknown image (1343)>)
+
+![Mode A vs. Mode B PoE Pinout](<../.gitbook/assets/Unknown image (1344)>)
+
+![PoE-Class-Types](<../.gitbook/assets/Unknown image (1345)>)
+
+![IEEE Standards and Devices](<../.gitbook/assets/Unknown image (1346)>)
+
 ## Link Aggregation
 
 **EtherChannel** is a link aggregation method that bundles several physical links into a single logical **Port-channel (Po)**

@@ -19,8 +19,6 @@ layout:
 
 # VLAN
 
-### Overview
-
 VLANs split a switch into multiple Layer 2 broadcast domains.
 
 To understand VLANs, you need a solid understanding of LANs. A LAN is a group of devices that share a common broadcast domain. When a device on the LAN sends broadcast messages, the switch floods the broadcast messages (as well as unknown unicast) to all ports except the incoming port. Therefore, all other devices on the LAN receive them. You can think of a LAN and a broadcast domain as being basically the same thing. Without VLANs, a switch considers all its interfaces to be in the same broadcast domain. In other words, all connected devices are in the same LAN. With VLANs, a switch can put some interfaces into one broadcast domain and some into another. The individual broadcast domains that are created by the switch are called VLANs.

@@ -14,7 +14,6 @@
 ## L2
 
 * [Switching](l2/switching.md)
-* [STP](l2/stp.md)
 * [VLAN](l2/vlan.md)
 
 ## L3
@@ -36,7 +35,7 @@
 
 * [Transport Layer](l4/transport-layer.md)
 * [Network Services](l4/network-services.md)
-* [QoS](l4/qos.md)
+* [Quality of Service](l4/quality-of-service.md)
 * [Multicast](l4/multicast.md)
 
 ## Network Security
@@ -64,10 +63,9 @@
 ## Software Defined Networking
 
 * [Virtualization](software-defined-networking/virtualization.md)
-* [Git](software-defined-networking/git.md)
 * [Network Programmability](software-defined-networking/network-programmability.md)
 * [Management, Automation and Assurance tools](software-defined-networking/management-automation-and-assurance-tools.md)
-* [SDN](software-defined-networking/sdn.md)
+* [Software Defined Networking](software-defined-networking/software-defined-networking.md)
 
 ## Personal
 
