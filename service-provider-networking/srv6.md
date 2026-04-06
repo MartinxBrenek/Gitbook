@@ -19,7 +19,7 @@ layout:
 
 # SRv6
 
-### Overview
+{% file src="../.gitbook/assets/SP7-SRv6-v2.06.pptx" %}
 
 **Segment Routing for IPv6 (SRv6)** is the implementation of segment routing over the IPv6 data plane. SRv6 uses an extension header called a **Segment Routing Header (SRH)**. Segments in an SRH are encoded in a list of IPv6 addresses.
 
@@ -252,6 +252,22 @@ A uSID has an associated behavior, the SRv6 function associated with the given I
 
 The **End-of-Carrier ID** is 0000. All empty uSID carrier positions must be filled with the End-of-Carrier ID. Therefore, a uSID carrier can have more than one End-of-Carrier.
 
+### uSID Blocks
+
+**Global ID block (GIB):** The set of IDs available for globally scoped uSID allocation.\
+A globally scoped uSID is the type of uSID that provides reachability to a node. A globally scoped uSID typically identifies a shortest path to a node in the SR domain. An IP route (for example, /48) is advertised by the parent node to each of its globally scoped uSIDs, under the associated uSID block. The parent node executes a variant of the END behavior.\
+The “nodal” uSID (uN) is an example of a globally scoped behavior defined in uSID architecture.\
+A node can have multiple globally scoped uSIDs under the same uSID blocks (for example, one uSID per IGP flex-algorithm). Multiple nodes may share the same globally scoped uSID (Anycast).
+
+\
+**Local ID block (LIB):** The set of IDs available for locally scoped uSID allocation.\
+A locally scoped uSID is associated to a local behavior, and therefore must be preceded by a globally scoped uSID of the parent node when relying on routing to forward the packet.\
+A locally scoped uSID identifies a local micro-instruction on the parent node; for example, it may identify a cross-connect to a direct neighbor over a specific interface or a VPN context. Locally scoped uSIDs are not routeable.
+
+\
+**Wide LIB (W-LIB):** The extended set of IDs available for local uSID allocation.\
+The extended set of IDs is useful when a PE with large-scale Pseudowire termination requires more local uSIDs than provided from the LIB.
+
 #### SRH versus uSID
 
 ![](<../.gitbook/assets/Unknown image (1384)>)
@@ -268,25 +284,25 @@ It performs a lookup for the shortest path to the next DA (2001:db8:0200::/48).
 
 It forwards it by using the new DA 2001:db8:0200:0300:0400:0000:0000:0000.
 
-RP/0/RP0/CPU0:r1# configure
+`RP/0/RP0/CPU0:r1# configure`
 
-RP/0/RP0/CPU0:r1(config)# segment-routing
+`RP/0/RP0/CPU0:r1(config)# segment-routing`
 
-RP/0/RP0/CPU0:r1(config-sr)# srv6
+`RP/0/RP0/CPU0:r1(config-sr)# srv6`
 
-RP/0/RP0/CPU0:r1(config-srv6)# locators
+`RP/0/RP0/CPU0:r1(config-srv6)# locators`
 
-RP/0/RP0/CPU0:r1(config-srv6-locators)# locator MAIN
+`RP/0/RP0/CPU0:r1(config-srv6-locators)# locator MAIN`
 
-RP/0/RP0/CPU0:r1(config-srv6-locator)# micro-segment behavior unode psp-usd
+`RP/0/RP0/CPU0:r1(config-srv6-locator)# micro-segment behavior unode psp-usd`
 
-RP/0/RP0/CPU0:r1(config-srv6-locator)# prefix 2001:db8:1::/48
+`RP/0/RP0/CPU0:r1(config-srv6-locator)# prefix 2001:db8:1::/48`
 
-RP/0/RP0/CPU0:r1(config-srv6-locator)# commit
+`RP/0/RP0/CPU0:r1(config-srv6-locator)# commit`
 
-RP/0/RP0/CPU0:r1(config-srv6-locator)# end
+`RP/0/RP0/CPU0:r1(config-srv6-locator)# end`
 
-RP/0/RP0/CPU0:r1#
+`RP/0/RP0/CPU0:r1#`
 
 Use the show segment-routing srv6 locator command to verify the allocation of SRv6 local SIDs off the locator.
 
@@ -296,15 +312,15 @@ Use the show cef ipv6 command to verify that the End function is programmed in t
 
 The following example shows how to configure the IGP protocol to ensure it is aware of that locator and that the locator is advertised into IGP.
 
-RP/0/RP0/CPU0:r1(config)# router isis 1
+`RP/0/RP0/CPU0:r1(config)# router isis 1`
 
-RP/0/RP0/CPU0:r1(config-isis)# address-family ipv6 unicast
+`RP/0/RP0/CPU0:r1(config-isis)# address-family ipv6 unicast`
 
-RP/0/RP0/CPU0:r1(config-isis-af)# segment-routing srv6
+`RP/0/RP0/CPU0:r1(config-isis-af)# segment-routing srv6`
 
-RP/0/RP0/CPU0:r1(config-isis-srv6)# locator MAIN
+`RP/0/RP0/CPU0:r1(config-isis-srv6)# locator MAIN`
 
-RP/0/RP0/CPU0:r1(config-isis-srv6-loc)# commit
+`RP/0/RP0/CPU0:r1(config-isis-srv6-loc)# commit`
 
 Use the show segment-routing srv6 sid all command to display SID information across locators.
 
@@ -328,81 +344,60 @@ uDX6 for Endpoint with decapsulation and IPv6 cross-connect.
 
 The following output shows how to configure the VRF and add the interfaces toward the CE routers to the VRF.
 
+```
 RP/0/RP0/CPU0:r1(config)# vrf 1
-
 RP/0/RP0/CPU0:r1(config-vrf)# address-family ipv4 unicast
-
 RP/0/RP0/CPU0:r1(config-vrf-af)# import route-target
-
 RP/0/RP0/CPU0:r1(config-vrf-import-rt)# 1:1
-
 RP/0/RP0/CPU0:r1(config-vrf-import-rt)# export route-target
-
 RP/0/RP0/CPU0:r1(config-vrf-export-rt)# 1:1
-
 RP/0/RP0/CPU0:r1(config-vrf-export-rt)# root
-
 RP/0/RP0/CPU0:r1(config)# interface GigabitEthernet0/0/0/2
-
 RP/0/RP0/CPU0:r1(config-if)# vrf 1
-
 RP/0/RP0/CPU0:r1(config-if)# ipv4 address 10.1.6.1 255.255.255.0
-
 RP/0/RP0/CPU0:r1(config-if)# commit
-
 The following output shows how to configure the RD in the VRF and per-VRF SID allocation.
-
 RP/0/RP0/CPU0:r1(config)# router bgp 1
-
 RP/0/RP0/CPU0:r1(config-bgp)# address-family vpnv4 unicast
-
 RP/0/RP0/CPU0:r1(config-bgp-af)# vrf 1
-
 RP/0/RP0/CPU0:r1(config-bgp-vrf)# rd 1:1
-
 RP/0/RP0/CPU0:r1(config-bgp-vrf)# address-family ipv4 unicast
-
 RP/0/RP0/CPU0:r1(config-bgp-vrf-af)# segment-routing srv6
-
 RP/0/RP0/CPU0:r1(config-bgp-vrf-af-srv6)# locator MAIN
-
 RP/0/RP0/CPU0:r1(config-bgp-vrf-af-srv6)# alloc mode per-vrf
-
 RP/0/RP0/CPU0:r1(config-bgp-vrf-af-srv6)# redistribute connected
-
 RP/0/RP0/CPU0:r1(config-bgp-vrf-af)# commit
+```
 
 Once SRv6 is used for L3VPN, packets are encapsulated with destination functions, but you have to configure the source address. The following output shows you how to configure the IPv6 source address.
 
+```
 RP/0/RP0/CPU0:r1(config)# segment-routing
-
 RP/0/RP0/CPU0:r1(config-sr)# srv6
-
 RP/0/RP0/CPU0:r1(config-srv6)# encapsulation
-
 RP/0/RP0/CPU0:r1(config-srv6-encap)# source-address 2001::1
-
 RP/0/RP0/CPU0:r1(config-srv6-encap)# commit
+```
 
 The preceding example shows that BGP always allocates one uDT function per VRF. This is used for all directly connected prefixes. In principle, it is the equivalent of the aggregate label in MPLS.
 
 #### PE-PE core configuration
 
-RP/0/RP0/CPU0:r1(config)# router bgp 1
+`RP/0/RP0/CPU0:r1(config)# router bgp 1`
 
-RP/0/RP0/CPU0:r1(config-bgp)# bgp router-id 1.1.1.1
+`RP/0/RP0/CPU0:r1(config-bgp)# bgp router-id 1.1.1.1`
 
-RP/0/RP0/CPU0:r1(config-bgp)# address-family vpnv4 unicast
+`RP/0/RP0/CPU0:r1(config-bgp)# address-family vpnv4 unicast`
 
-RP/0/RP0/CPU0:r1(config-bgp-af)# neighbor 2001::3
+`RP/0/RP0/CPU0:r1(config-bgp-af)# neighbor 2001::3`
 
-RP/0/RP0/CPU0:r1(config-bgp-nbr)# remote-as 1
+`RP/0/RP0/CPU0:r1(config-bgp-nbr)# remote-as 1`
 
-RP/0/RP0/CPU0:r1(config-bgp-nbr)# update-source Loopback0
+`RP/0/RP0/CPU0:r1(config-bgp-nbr)# update-source Loopback0`
 
-RP/0/RP0/CPU0:r1(config-bgp-nbr)# address-family vpnv4 unicast
+`RP/0/RP0/CPU0:r1(config-bgp-nbr)# address-family vpnv4 unicast`
 
-RP/0/RP0/CPU0:r1(config-bgp-nbr-af)# commit
+`RP/0/RP0/CPU0:r1(config-bgp-nbr-af)# commit`
 
 On the PE1 router, verify the BGP advertisement for CE2 Loopback0 (10.2.10.1/32) prefix.
 
@@ -410,112 +405,113 @@ Answer
 
 On the PE1 router, use the show bgp vrf 1 10.2.10.1/32 command:
 
-RP/0/RP0/CPU0:PE1# show bgp vrf 1 10.2.10.1/32
+`RP/0/RP0/CPU0:PE1# show bgp vrf 1 10.2.10.1/32`
 
-BGP routing table entry for 10.2.10.1/32, Route Distinguisher: 1:1
+`BGP routing table entry for 10.2.10.1/32, Route Distinguisher: 1:1`
 
-Versions:
+`Versions:`
 
-Process bRIB/RIB SendTblVer
+`Process bRIB/RIB SendTblVer`
 
-Speaker 26 26
+`Speaker 26 26`
 
-Last Modified: Feb 6 16:04:51.459 for 00:05:05
+`Last Modified: Feb 6 16:04:51.459 for 00:05:05`
 
-Paths: (1 available, best #1)
+`Paths: (1 available, best #1)`
 
-Advertised to CE peers (in unique update groups):
+`Advertised to CE peers (in unique update groups):`
 
-192.168.101.11
+`192.168.101.11`
 
-Path #1: Received by speaker 0
+`Path #1: Received by speaker 0`
 
-Advertised to CE peers (in unique update groups):
+`Advertised to CE peers (in unique update groups):`
 
-192.168.101.11
+`192.168.101.11`
 
-65008
+`65008`
 
-2001:db8:10:2:2::2 (metric 21) from 2001:db8:10:2:2::2 (10.2.2.2)
+`2001:db8:10:2:2::2 (metric 21) from 2001:db8:10:2:2::2 (10.2.2.2)`
 
-Received Label 0xe0020
+`Received Label 0xe0020`
 
-Origin incomplete, metric 0, localpref 100, valid, internal, best, group-best, import-candidate, imported
+`Origin incomplete, metric 0, localpref 100, valid, internal, best, group-best, import-candidate, imported`
 
-Received Path ID 0, Local Path ID 1, version 26
+`Received Path ID 0, Local Path ID 1, version 26`
 
-Extended community: RT:1:1
+`Extended community: RT:1:1`
 
-PSID-Type:L3, SubTLV Count:1
+`PSID-Type:L3, SubTLV Count:1`
 
-SubTLV:
+`SubTLV:`
 
-T:1(Sid information), Sid:fcbb:bb00:4::, Behavior:63, SS-TLV Count:1
+`T:1(Sid information), Sid:fcbb:bb00:4::, Behavior:63, SS-TLV Count:1`
 
-SubSubTLV:
+`SubSubTLV:`
 
-T:1(Sid structure):
+`T:1(Sid structure):`
 
-Source AFI: VPNv4 Unicast, Source VRF: 1, Source Route Distinguisher: 1:1
+`Source AFI: VPNv4 Unicast, Source VRF: 1, Source Route Distinguisher: 1:1`
 
-The SID for VRF 1 prefix 10.2.10.1/32 is the PE2 locator (fcbb:bb00:4::) and the received label (0xe0020). The received label may be different in your lab.
+`The SID for VRF 1 prefix 10.2.10.1/32 is the PE2 locator (fcbb:bb00:4::) and the received label (0xe0020). The received label may be different in your lab.`
 
-Note
-
+{% hint style="info" %}
 The End.DT4 function encodes a uDT SID by combining a fixed IPv6 prefix (the locator) with the received BGP label, allowing identification of the routing context for decapsulated IPv4 packets. The SID fcbb:bb00:4:e002:: is formed using the prefix fcbb:bb00:4::/48 assigned to PE2 and embedding the label 0xe0020 into the SID structure. This SID is programmed on PE2 with an End.DT4 behavior that maps the label 0xe0020 to a specific VRF or routing table, enabling PE2 to decapsulate SRv6 traffic and forward IPv4 packets (for example, to CE2 loopback 10.2.10.1) based on the correct routing context.
+{% endhint %}
 
 On the PE2 router, use the show route ipv6 fcbb:bb00:4:e002:: command. Label (:e002:) in the SRv6 uDT4 address may be different in your lab.
 
-RP/0/RP0/CPU0:PE2# show route ipv6 fcbb:bb00:4:e002::
+`RP/0/RP0/CPU0:PE2# show route ipv6 fcbb:bb00:4:e002::`
 
-Routing entry for fcbb:bb00:4:e002::/64
+`Routing entry for fcbb:bb00:4:e002::/64`
 
-Known via "local-srv6 bgp-65001", distance 0, metric 0, SRv6 Endpoint uDT4, SRv6 Format f3216
+`Known via "local-srv6 bgp-65001", distance 0, metric 0, SRv6 Endpoint uDT4, SRv6 Format f3216`
 
-Installed Feb 6 16:04:37.985 for 00:09:49
+`Installed Feb 6 16:04:37.985 for 00:09:49`
 
-Routing Descriptor Blocks
+`Routing Descriptor Blocks`
 
-::ffff:0.0.0.0 directly connected
+`::ffff:0.0.0.0 directly connected`
 
-Nexthop in Vrf: "1", Table: "default", IPv4 Unicast, Table Id: 0xe0000001
+`Nexthop in Vrf: "1", Table: "default", IPv4 Unicast, Table Id: 0xe0000001`
 
-Route metric is 0
+`Route metric is 0`
 
-No advertising protos.
+`No advertising protos.`
 
-On the PE2 router, use the show cef ipv6 fcbb:bb00:4:e002:: command. Label (:e002:) in the SRv6 uDT4 address may be different in your lab.
+`On the PE2 router, use the show cef ipv6 fcbb:bb00:4:e002:: command. Label (:e002:) in the SRv6 uDT4 address may be different in your lab.`
 
-RP/0/RP0/CPU0:PE2# show cef ipv6 fcbb:bb00:4:e002::
+`RP/0/RP0/CPU0:PE2# show cef ipv6 fcbb:bb00:4:e002::`
 
-fcbb:bb00:4:e002::/64, version 97, SRv6 Endpoint uDT4, internal 0x1000001 0x0 (ptr 0x87166788) \[1], 0x400 (0x8838c0f8), 0x0 (0x8984b828)
+`fcbb:bb00:4:e002::/64, version 97, SRv6 Endpoint uDT4, internal 0x1000001 0x0 (ptr 0x87166788) [1], 0x400 (0x8838c0f8), 0x0 (0x8984b828)`
 
-Updated Feb 6 16:04:37.988
+`Updated Feb 6 16:04:37.988`
 
-Prefix Len 64, traffic index 0, precedence n/a, priority 0
+`Prefix Len 64, traffic index 0, precedence n/a, priority 0`
 
-gateway array (0x881f87a0) reference count 1, flags 0x0, source rib (7), 0 backups
+`gateway array (0x881f87a0) reference count 1, flags 0x0, source rib (7), 0 backups`
 
-\[2 type 3 flags 0x8401 (0x882a5068) ext 0x0 (0x0)]
+`[2 type 3 flags 0x8401 (0x882a5068) ext 0x0 (0x0)]`
 
-LW-LDI\[type=3, refc=1, ptr=0x8838c0f8, sh-ldi=0x882a5068]
+`LW-LDI[type=3, refc=1, ptr=0x8838c0f8, sh-ldi=0x882a5068]`
 
-gateway array update type-time 1 Feb 6 16:04:37.988
+`gateway array update type-time 1 Feb 6 16:04:37.988`
 
-LDI Update time Feb 6 16:04:37.988
+`LDI Update time Feb 6 16:04:37.988`
 
-LW-LDI-TS Feb 6 16:04:37.988
+`LW-LDI-TS Feb 6 16:04:37.988`
 
-via ::ffff:0.0.0.0/128, 0 dependencies, weight 0, class 0 \[flags 0x0]
+`via ::ffff:0.0.0.0/128, 0 dependencies, weight 0, class 0 [flags 0x0]`
 
-path-idx 0 NHID 0x0 \[0x87802198 0x0]
+`path-idx 0 NHID 0x0 [0x87802198 0x0]`
 
-next hop VRF - '1', table - 0xe0000001
+`next hop VRF - '1', table - 0xe0000001`
 
-next hop ::ffff:0.0.0.0/128
+`next hop ::ffff:0.0.0.0/128`
 
-Load distribution: 0 (refcount 2)
+`Load distribution: 0 (refcount 2)`
 
-Hash OK Interface Address
+`Hash OK Interface Address`
 
-0 Y recursive Lookup in table
+`0 Y recursive Lookup in table`
+
