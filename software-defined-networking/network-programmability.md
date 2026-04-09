@@ -1311,6 +1311,52 @@ If the file starts with "!! IOS XR", the system treats it as a static configurat
 
 If the file starts with a shebang (#!), such as #!/bin/bash, #!/bin/sh, or #!/usr/bin/python, the system interprets it as a script and executes it accordingly.
 
+## Jinja
+
+**Jinja** is a **templating engine**—it doesn’t automate systems by itself, it just **generates text (like config files) from variables using simple logic** (loops, conditions). Tools like **Ansible** and **SaltStack** use Jinja internally to build configs before applying them to machines, while **Python** is a full programming language that can actually execute automation logic. In short: **Jinja formats data into text, Python does the logic, and Ansible/Salt run and manage the automation.**
+
+Jinja is used to generate text files from variables and logic. Most often:
+
+* config files
+* YAML/JSON
+* shell scripts
+* HTML
+* device configs
+* Kubernetes manifests
+* Terraform-like text output
+* email/message templates
+
+You write a template with placeholders and simple logic, for example:
+
+```
+hostname {{ inventory_hostname }}
+
+{% for dns in dns_servers %}
+dns-server {{ dns }}
+{% endfor %}
+```
+
+***
+
+Jinja is good at:
+
+* variable substitution
+* loops
+* conditionals
+* formatting output
+* generating repetitive structured text
+
+It is **not** good at:
+
+* orchestration
+* remote execution
+* dependency handling
+* state enforcement
+* complex application logic
+* system interaction by itself
+
+So Jinja does not “do” automation alone. It helps **produce the files or commands** used by automation.
+
 ## **Git**
 
 **Git** is a version-control system that turns every change into a small, inspectable unit of work. You work on files that represent intent. You ask for a review, and then you merge the new changes with the previous ones.
