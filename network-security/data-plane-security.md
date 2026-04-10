@@ -671,6 +671,10 @@ IOS-XR config
 
 In the example, strict uRPF is enabled on the PE2 router on the GigabitEthernet0/0/0/0 interface using the ipv4 verify unicast source reachable-via rx command. A router that receives a packet will perform the routing table lookup for the source IP address. If the packet came from the attacker, the router will see that the routing table for the attacker IP addresses points to the 192.0.2.1 next-hop IP address, which in turn points to the null interface. The packet will be dropped because the packet was received through the other interface that would be used to forward the return traffic.
 
+{% hint style="info" %}
+Source-based RTBH requires uRPF because routing decisions are destination-based, so the static Null0 route only marks the attacker IP as invalid, while uRPF uses that information to actually drop packets based on their source address.
+{% endhint %}
+
 ![](<../.gitbook/assets/Unknown image (744)>)
 
 ## Demilitarized Zone (DMZ)
