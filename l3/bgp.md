@@ -1186,7 +1186,7 @@ Local preference is applied within an AS, affecting the routing decisions of int
 
 Admin has only access to his own AS 64502. A only work if we have access to ASN 64501 and modify LP between South\_A and South\_B routers not North\_A and South\_A routers
 
-### Multiprotocol BGP (MP-BGP)
+## Multiprotocol BGP (MP-BGP)
 
 MP-BGP is an BGP4 extension that allows BGP to transport any kind of control plane information in a single BGP process such as:
 
@@ -1322,6 +1322,10 @@ IPv6 Payload over IPv4 Transport
 ![](<../.gitbook/assets/Unknown image (200)>)
 
 ![](<../.gitbook/assets/Unknown image (201)>)
+
+{% hint style="info" %}
+When exchanging IPv6 routes over IPv4 BGP sessions, IOS automatically assigns an IPv4-mapped IPv6 next-hop if none is set, to satisfy AFI requirements; however, this mapped address is often not reachable in the IPv6 domain, so a proper design requires explicitly setting a valid IPv6 next-hop (e.g., via next-hop-self or route-map) that is reachable through the IGP.
+{% endhint %}
 
 ![](<../.gitbook/assets/Unknown image (202)>)
 
@@ -1765,7 +1769,7 @@ Sequenced and Resequenced Extended Community List Entry Example
 | Router> show extcommunity-list Standard extended community-list NAMED\_LIST 50 permit RT:64512:10 150 permit RT:65000:20 250 permit RT:64535:30 350 permit SoO:65535:40 | To display the routes that the named extended community list permits, use the show ip extcommunity-list EXEC command. The output shows the configuration from the first example after it has been resequenced with user-defined values. |
 | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 
-### Best practices
+## BGP Best practices
 
 Static configuration of router ID using loopback address to prevent changes to the router ID and consequent flapping of BGP sessions
 
