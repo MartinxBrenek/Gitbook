@@ -2113,6 +2113,10 @@ Make sure that no router belongs to two different clusters because this setup wo
 
 Create a numbering plan that indicates how numbers are assigned to the clusters in the network. The plan must make sure to uniquely identify each of the clusters within the AS - recommended to use router ID as the Cluster ID
 
+{% hint style="info" %}
+In special design requirements clients can also have ibgp session between them in special scenarios – We introduced direct iBGP sessions between clients at the same site as a resiliency requirement, so that if the site becomes isolated from the EVPN route reflector, the devices can still exchange EVPN routes (e.g., MAC/IP advertisements) and maintain local forwarding; this does not create routing loops because the standard iBGP split-horizon rule still applies—routes learned via iBGP are not re-advertised to other iBGP peers—and EVPN loop prevention mechanisms such as ORIGINATOR\_ID and CLUSTER\_LIST further ensure safe operation, while normal BGP best-path selection ensures that only a single preferred path is installed, so receiving the same route from a direct peer is not an issue.
+{% endhint %}
+
 #### RR redundancy considerations
 
 The more redundant RRs, the more:
