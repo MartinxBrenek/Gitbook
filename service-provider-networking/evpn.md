@@ -81,6 +81,8 @@ When EVPN is used in conjunction with an MPLS data-plane, the BGP EVPN routes al
 
 No use of PWs - EVPN uses MP2P tunnels for unicast and multidestination frame delivery via ingress replication (via MP2P tunnels) or LSM for multicast
 
+[https://www.ciscolive.com/c/dam/r/ciscolive/emea/docs/2023/pdf/BRKSPG-2473.pdf](https://www.ciscolive.com/c/dam/r/ciscolive/emea/docs/2023/pdf/BRKSPG-2473.pdf)
+
 ![](<../.gitbook/assets/Unknown image (1888)>)
 
 ### E-VPN Service Types
