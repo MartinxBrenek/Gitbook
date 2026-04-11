@@ -770,9 +770,29 @@ Load Balancing from traceroute perspective
 
 ![](<../.gitbook/assets/Unknown image (882)>)
 
+Dangerous assumptions in networking #3: Multiple links are always better
+
+It is easy to assume that two Internet links will make a transfer faster than one. More bandwidth should mean more performance.
+
+Now, imagine a router using two upstream links and sending packets from the same TCP flow across both paths. At first glance, this looks efficient. Both links are active, both carry traffic, and the transfer appears to use more of the available capacity.
+
+Now consider what happens on the receiver side.\
+Packet #1 arrives first, so everything is normal. The receiver acknowledges it and waits for packet #2. But packet #2 takes the other path and is delayed, since ISP2 has a higher latency than ISP1. In the meantime, packet #3 arrives.
+
+The receiver now has a gap in the byte stream. It has already received later data, but it is still missing the data carried by packet #2. So it cannot move its cumulative acknowledgment forward. Instead, it keeps sending the same ACK again, still indicating that packet #2 has not been received.
+
+From the sender side, these repeated ACKs look exactly like a sign of packet loss. The sender assumes the network is congested. To protect the network, it begins to reduce its TCP transmission window.\
+The result? The sender slows down the transfer rate, even though the bandwidth is available and no packets were actually lost. The transfer crawls simply because the packets arrived out of order.
+
+That is why most routers prefer per-flow load balancing instead of per-packet load balancing. It keeps all packets from the same session on the same path and preserves packet order within each flow.
+
+Multiple links are necesssary for resilience and for increasing total capacity across many simultaneous sessions. They just do not automatically make a single transfer faster.
+
 Generally, routers want to guarantee that packets belonging to a given TCP connection always travel the same path. Reordering the TCP packets would reduce TCP performance and increase CPU cycles if done in software. For this reason, routers use a hash function of some TCP connection identifiers ( source and destination IP address ) to choose among the multiple next hops. A TCP connection is identified by a 5-tuple, which refers to a set of five values that comprise a TCP/IP connection.
 
 It includes a source IP address/port range, destination IP address/port number, and the protocol in use. A router can load on any of these. In addition, recent availing technologies let L2 load balance ( ECMP ), such as THRILL and Cisco FabricPath, allow you to build massive data center topologies with Layer 2 multipathing
+
+
 
 ### Route summarization (aggregation)
 
