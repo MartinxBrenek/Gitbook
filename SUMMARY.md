@@ -1,42 +1,41 @@
 # Table of contents
 
-## L1
+## L1 - Physical Layer
 
 * [Networking Fundamentals](README.md)
-* [Physical Layer](l1/physical-layer.md)
-* [Network Architecture](l1/network-architecture.md)
-* [System Management](l1/system-management.md)
-* [Hardware Management](l1/hardware-management.md)
-* [Troubleshooting](l1/troubleshooting.md)
-* [Host OS CMD](l1/host-os-cmd.md)
-* [AI and ML](l1/ai-and-ml.md)
+* [Signal Transmission and Media](l1-physical-layer/signal-transmission-and-media.md)
+* [Network Architecture](l1-physical-layer/network-architecture.md)
+* [System Management](l1-physical-layer/system-management.md)
+* [Hardware Management](l1-physical-layer/hardware-management.md)
+* [Troubleshooting](l1-physical-layer/troubleshooting.md)
+* [Host OS CMD](l1-physical-layer/host-os-cmd.md)
 
-## L2
+## L2 - Data Link Layer
 
-* [Switching](l2/switching.md)
-* [VLAN](l2/vlan.md)
+* [Switching](l2-data-link-layer/switching.md)
+* [VLAN](l2-data-link-layer/vlan.md)
 
-## L3
+## L3 - Network Layer
 
-* [IPv4](l3/ipv4.md)
-* [Routing](l3/routing.md)
-* [Packet Forwarding](l3/packet-forwarding.md)
-* [VRF](l3/vrf.md)
-* [EIGRP](l3/eigrp.md)
-* [ISIS](l3/isis.md)
-* [OSPF](l3/ospf.md)
-* [BGP](l3/bgp.md)
-* [Traffic Engineering](l3/traffic-engineering.md)
-* [High Availability](l3/high-availability.md)
-* [IPv6](l3/ipv6.md)
-* [LISP](l3/lisp.md)
+* [IPv4](l3-network-layer/ipv4.md)
+* [Routing](l3-network-layer/routing.md)
+* [Packet Forwarding](l3-network-layer/packet-forwarding.md)
+* [VRF](l3-network-layer/vrf.md)
+* [EIGRP](l3-network-layer/eigrp.md)
+* [ISIS](l3-network-layer/isis.md)
+* [OSPF](l3-network-layer/ospf.md)
+* [BGP](l3-network-layer/bgp.md)
+* [Traffic Engineering](l3-network-layer/traffic-engineering.md)
+* [High Availability](l3-network-layer/high-availability.md)
+* [IPv6](l3-network-layer/ipv6.md)
+* [LISP](l3-network-layer/lisp.md)
 
-## L4
+## L4 - Transport Layer
 
-* [Transport Layer](l4/transport-layer.md)
-* [Network Services](l4/network-services.md)
-* [Quality of Service](l4/quality-of-service.md)
-* [Multicast](l4/multicast.md)
+* [Transport Layer](l4-transport-layer/transport-layer.md)
+* [Network Services](l4-transport-layer/network-services.md)
+* [Quality of Service](l4-transport-layer/quality-of-service.md)
+* [Multicast](l4-transport-layer/multicast.md)
 
 ## Network Security
 
@@ -63,6 +62,7 @@
 ## Software Defined Networking
 
 * [Virtualization](software-defined-networking/virtualization.md)
+* [AI and ML](software-defined-networking/ai-and-ml.md)
 * [Network Programmability](software-defined-networking/network-programmability.md)
 * [Management, Automation and Assurance tools](software-defined-networking/management-automation-and-assurance-tools.md)
 * [Software Defined Networking](software-defined-networking/software-defined-networking.md)
