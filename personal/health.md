@@ -820,6 +820,8 @@ The skin's primary function is to act as a barrier between our internal and exte
 
 According to Katarína Hrivňáková, it is not necessary to always have sunscreen on because the skin has its own natural protection and can be trained to handle sun exposure. She advocates for a more balanced approach that combines mindful sun exposure with the body's natural defenses.
 
+However try to avoid extended sun exposure between 11am-3pm - since it shines with the highest UV  for the day.
+
 The body's own sun protection: The skin has its own defense mechanisms, and people can train their bodies to gradually handle sun exposure \[36:19]. The body's ability to protect itself from the sun is tied to a person's individual phototype. A lighter phototype, common in Central Europe, might only be able to tolerate 10-15 minutes of direct sun exposure before burning \[36:19]. In contrast, a darker phototype, such as those with black skin, has more natural protection.
 
 Training the body with the "first sun": Katarína emphasizes that the body should be trained for sun exposure starting in the spring. Just like an athlete training for a competition, you can't just throw your body into an extreme situation. Starting with shorter periods in the sun, she suggests exposing the arms and legs for increasing durations, rather than immediately going all out. This gradual approach allows the skin to build its natural protective layers, including melanin, which is responsible for tanning \[36:19].
@@ -840,7 +842,7 @@ Types of Sunscreens \[03:00]: There are chemical and mineral sunscreens. Chemica
 
 Hrivňáková recommends using mineral sunscreens, particularly those with zinc oxide, as it is an essential element with known benefits for the skin. She advises caution with sunscreens containing titanium dioxide, as it is a banned food additive in some countries. For after-sun care, she suggests not rubbing the skin dry after a shower, but instead gently patting it or letting it air dry. She also recommends using hydrating products like aloe vera mixed with coconut oil or a hydrolate with panthenol to soothe and hydrate the skin
 
-Face Skin care
+#### Face Skin care
 
 Basic recommendations: Healthy diet, Get enough sleep and Manage stress
 
