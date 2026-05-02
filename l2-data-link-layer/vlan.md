@@ -360,18 +360,6 @@ Added as part of VTP or configured manually only on server
 | switchport trunk pruning vlan {add \| except \| none \| remove } vlan-list \[,vlan \[,vlan \[,,,]] |                                                                                                                                                      |
 | (config)# vtp pruning                                                                              | Enables pruning in the VTP administrative domain. By default, pruning is disabled. You need to enable pruning on only one switch in VTP server mode. |
 
-### VMPS (VLAN Membership Policy Server)
-
-**VLAN Membership Policy Server (VMPS)** is a Cisco legacy feature that allows to centrally manage and control VLAN assignments.
-
-VLAN Query Protocol (VQP) is used to support dynamic-access ports, which are not permanently assigned to a VLAN, but give VLAN assignments based on the MAC source addresses connected to the port
-
-If the host is allowed on the port, the VMPS sends the client a vlan-assignment response containing the assigned VLAN name and allowing access to the host.
-
-If the host is not allowed on the port and the VMPS is in open mode, the VMPS sends an access-denied response.
-
-If the VLAN is not allowed on the port and the VMPS is in secure mode, the VMPS sends a port-shutdown response.
-
 ## Inter-VLAN routing
 
 If we want to allow communication between different VLANs we'll have to use device capable of routing between different LAN networks
@@ -503,6 +491,18 @@ The configuration successfully demonstrates the use of a Layer 2 access link as 
 
 | interface GigabitEthernet1/0/1 switchport access vlan 6 ! interface Vlan6 ip address 10.88.0.132 255.255.255.240 ip ospf 100 area 0 |   |
 | ----------------------------------------------------------------------------------------------------------------------------------- | - |
+
+### Other common use cases for VLANs
+
+VLANs can also be used to achieve specific goals like for example establishing P2P adjacency for OSPF over an L2 transparent infrastructure or even more complex layered infrastructure like shown below in the Logical topology.
+
+PE11 goal is to achieve P2P OSPF adjacency with RSD border to become part of one routing domain. Vlan 4000 is used and configured as subinterface on both edge routers. The adjacent routers ASR1k performs special function as they bind this vlan 4000 coming from the edge routers to L2TP tunnel (L2VPN) over the underlaying infrastructure which comprises of firewalls with which they have traditional P2P IP link in order for them to bind this P2P IP link to IPsec tunnel over the internet.
+
+<figure><img src="../.gitbook/assets/image (16).png" alt=""><figcaption></figcaption></figure>
+
+The real physical topology of this setup is even more complicated as there are two additional switches between the ASR1k and Firewall. They perform traditional L2 switching based on the VLAN1300 which is imposed for the P2P IP link between firewall and the ASR1k. The purpose of these switches in this specific setup is to provide additional capability to capture packets for troubleshooting of the setup.
+
+<figure><img src="../.gitbook/assets/image (17).png" alt=""><figcaption></figcaption></figure>
 
 ## Virtual Extensible LAN (VXLAN)
 
