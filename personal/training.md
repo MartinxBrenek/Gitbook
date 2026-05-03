@@ -622,7 +622,18 @@ Flexibility is about the capacity of your body to bend, twist, and stretch witho
 
 Mobility is essential for functional movements and sports. It focuses on your joints' capacity to move freely and with strength. It can prevent injury and improve overall physical performance.
 
-Hanging the body for few minutes each day benefits
+
+
+1\. Flexibility The passive ability of soft tissue to lengthen through a range of motion.
+
+• Focus: Muscle extensibility.
+
+2\. Mobility The active ability to move a joint through its full range of motion with control.
+
+• Focus: Joint articulation and neuromuscular control.\
+3\. Stability The ability to maintain posture or joint position by resisting unwanted motion.
+
+### Hanging the body for few minutes each day benefits
 
 Spinal decompression: Hanging can help to decompress the spine and relieve pressure on the vertebrae, which may be beneficial for people with back pain or spinal conditions.
 
@@ -634,7 +645,7 @@ Improved circulation: Hanging can help to improve circulation by increasing bloo
 
 Stress relief: Hanging can promote relaxation and help to reduce feelings of stress and tension in the body.
 
-Bridge Exercises
+### Bridge Exercises
 
 Opens up tight anterior chain muscles from head to toe.
 
