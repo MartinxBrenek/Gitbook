@@ -66,13 +66,3 @@
 * [Network Programmability](software-defined-networking/network-programmability.md)
 * [Management, Automation and Assurance tools](software-defined-networking/management-automation-and-assurance-tools.md)
 * [Software Defined Networking](software-defined-networking/software-defined-networking.md)
-
-## Personal
-
-* [Finance](personal/finance.md)
-* [Personal Development](personal/personal-development.md)
-* [Buddhism](personal/buddhism.md)
-* [Biology](personal/biology.md)
-* [Health](personal/health.md)
-* [Nutrition](personal/nutrition.md)
-* [Training](personal/training.md)
