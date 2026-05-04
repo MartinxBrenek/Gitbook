@@ -810,6 +810,10 @@ The assumption is that the control plane (BGP EVPN) is distributing all the MAC/
 
 <div align="left"><figure><img src="../.gitbook/assets/image (1).png" alt="" width="233"><figcaption></figcaption></figure></div>
 
+{% hint style="info" %}
+Note: there can also be physical connection between CE and the two PE without LAG between them – and if you want to retain the logical bundle-ether interface on the PE you can simply set it to mode ON
+{% endhint %}
+
 ### EVPN startup process
 
 1. RT4 with ES-import Extended Community is always exchanged between routers to avoid loops for their ethernet segments first. It helps them recognize what other routers are connected to the same ethernet segment, so that they can elect DF
