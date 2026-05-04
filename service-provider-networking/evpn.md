@@ -808,15 +808,7 @@ The assumption is that the control plane (BGP EVPN) is distributing all the MAC/
 
 ![](<../.gitbook/assets/Unknown image (1928)>)
 
-![](<../.gitbook/assets/Unknown image (1929)>)
-
-Single LAG at the CE
-
-VLAN goes to both PE
-
-Access takes care of L2 loop
-
-Benefits: Legacy support for STP, REP, G.8032
+<div align="left"><figure><img src="../.gitbook/assets/image (1).png" alt="" width="233"><figcaption></figcaption></figure></div>
 
 ### EVPN startup process
 

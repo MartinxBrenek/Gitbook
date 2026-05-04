@@ -243,7 +243,7 @@ PfxRcd: When the session is in the established state, this value represents the 
 | neighbor ip-address shutdown | Disables communication with a BGP neighbor Used for debugging (troubleshooting) or if we want to shutdown connection to BGP neighbor over link with packet loss. This is the recommended method, since, if we would shut the link, we would not be able to perform ICMP testing to the BGP neighbor IP to test, whether the packet loss has cleared or not |
 | bgp log-neighbor-changes     |                                                                                                                                                                                                                                                                                                                                                            |
 
-<figure><img src="../.gitbook/assets/image (2).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../.gitbook/assets/image (2) (1).png" alt=""><figcaption></figcaption></figure>
 
 ### BGP timers
 

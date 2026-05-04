@@ -1835,7 +1835,7 @@ Both GitLab and GitHub host Git repositories and support reviews and automation.
 
 GitLab is a self-hosted or cloud-based platform that enables you to manage the full lifecycle of Git projects, from storage and reviews to CI/CD and releases, through an intuitive web interface.<br>
 
-<figure><img src="../.gitbook/assets/image (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../.gitbook/assets/image (1) (1).png" alt=""><figcaption></figcaption></figure>
 
 If you have a local Git repository that you want to manage with GitLab, you must first create a project on GitLab. Once the project is created, you can find the SSH or HTTP URL that you can use to configure your remote URL, or run a `git clone`.
 
