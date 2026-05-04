@@ -51,6 +51,8 @@ Na nohy zvedani cinky v sede
 
 Use neutral grip for pull ups - more joint friendly
 
+Reverse Plank
+
 ### Quick readiness tests
 
 **Úchop**
