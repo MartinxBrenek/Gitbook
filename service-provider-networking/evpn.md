@@ -866,7 +866,7 @@ Unicast traffic forwarding: After the advertisements of MAC routes, unicast traf
 
 ![](<../.gitbook/assets/Unknown image (3)>)
 
-#### EVPN native
+### EVPN native
 
 Native EVPN provides L2 connectivity (MAC learning and distribution via BGP) - it is the basic deployment of EVPN with it's core principles
 
@@ -880,7 +880,7 @@ The MAC address (AA) is updated on the PE as a remote MAC address.
 
 ![](<../.gitbook/assets/Unknown image (4)>)
 
-#### BUM forwarding (multi-destination traffic)
+### BUM forwarding (multi-destination traffic)
 
 The PEs in a particular EVPN instance can use the following to send BUM traffic to other PEs:
 
@@ -894,7 +894,7 @@ When an unknown unicast (or BUM) MAC is received on the PE, it is advertised as 
 
 ![](<../.gitbook/assets/Unknown image (5)>)
 
-**BUM ingress replication**
+#### **BUM ingress replication**
 
 A multicast flow can transmit only to PEs with receivers that are interested in the multicast flow.
 
@@ -916,7 +916,7 @@ The multicast and ESI MPLS label are downstream-assigned when using ingress repl
 
 ![](<../.gitbook/assets/Unknown image (9)>)
 
-**Point-to-multipoint inclusive tree**
+#### **Point-to-multipoint inclusive tree**
 
 You can create point-to-multipoint LSPs with Resource Reservation Protocol Traffic Engineering (RSVP-TE) or Multicast Label Distribution Protocol (MLDP) for inclusive P-multicast trees.
 
@@ -928,13 +928,13 @@ The procedure for aggregation is the same as the ones that are described in RFC 
 
 ![](<../.gitbook/assets/Unknown image (11)>)
 
-#### Segment and PE failures
+### Segment and PE failures
 
 When a PE detects a failure of one of its attached Ethernet segments, it withdraws the per-ESI auto discovery route for the failed segment. It then withdraws the Ethernet segment route. Notification is sent to all remote PEs associated to the same VPN. Remote PEs remove local PE (originating the notification) from the path list for all MAC addresses of failed Ethernet segments.
 
 If a PE router fails, the other PEs detect the BGP session timeout and invalidate routes from the failed PE. The router that connects to the same segment as the failed PE router then becomes the designated forwarder for all EVIs that are on the segment.
 
-#### MAC mobility
+### MAC mobility
 
 A PE that is advertising a MAC address with its corresponding segment identifier for the first time, advertises it with MAC mobility extended community and with a particular sequence number (higher sequence number denote freshness of the information).
 
@@ -1326,7 +1326,7 @@ No /32 host routes exported fabric-wide.
 
 Dual-homed hosts still need ARP/MAC sync between the multihomed leafs.
 
-![](<../.gitbook/assets/Unknown image (37)>)
+<img src="../.gitbook/assets/Unknown image (37)" alt="" width="375">
 
 EVPN IRB with All-Active Multi-Homing with Subnet Stretch (Host Routing)
 
