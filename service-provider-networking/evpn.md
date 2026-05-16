@@ -806,6 +806,8 @@ The assumption is that the control plane (BGP EVPN) is distributing all the MAC/
 
 **Single-active load balancing (AAPS)** Supports multi-homed devices with per-vlan load balancing. In this mode,the access device connects via “separate” Ethernet bundles to multiple PEs. PE routers in turn automatically perform service carving in order to divide VLAN forwarding responsibilities across the PEs in the Ethernet segment. The access device learns via the data-plane which Ethernet bundle to use for a given VLAN.
 
+The reason for the separate port-channel link between CE and the two PE in a Single-active setup is to ensure that the CE floods and learns the addresses via proper PE, since the second PE, that is not the DF for the VLAN will discard all flood and unicasted frames coming from the access and the core for a given vlan.
+
 ![](<../.gitbook/assets/Unknown image (1928)>)
 
 <div align="left"><figure><img src="../.gitbook/assets/image (1).png" alt="" width="233"><figcaption></figcaption></figure></div>
