@@ -19,8 +19,6 @@ layout:
 
 # SRv6
 
-{% file src="../.gitbook/assets/SP7-SRv6-v2.06.pptx" %}
-
 **Segment Routing for IPv6 (SRv6)** is the implementation of segment routing over the IPv6 data plane. SRv6 uses an extension header called a **Segment Routing Header (SRH)**. Segments in an SRH are encoded in a list of IPv6 addresses.
 
 In SRv6, the routing path is encoded directly into the IPv6 packet header using a sequence of **Segment Identifiers (SIDs)**. These SIDs represent specific network functions or instructions, such as forwarding packets to a particular node, applying services, or steering traffic along a defined path. Each SID is encoded as a 128-bit IPv6 address, ensuring compatibility with IPv6 infrastructures.

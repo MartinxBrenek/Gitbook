@@ -19,8 +19,6 @@ layout:
 
 # Segment Routing
 
-### Overview
-
 **Segment Routing (SR)** is a label switching technology that evolves existing IP and MPLS networks and enhances traffic engineering
 
 It uses a new and efficient way of routing which is more flexible and scalable compared to legacy MPLS LDP and RSVP technology
