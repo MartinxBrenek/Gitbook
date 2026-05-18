@@ -259,13 +259,9 @@ On IOS-XR, each IP prefix within a VRF is assigned a label.
 
 ![](<../.gitbook/assets/Unknown image (1780)>)
 
-Another example IOS-XE
-
-![](<../.gitbook/assets/Unknown image (1781)>)
-
-Another example IOS-XR
-
-![](<../.gitbook/assets/Unknown image (1782)>)
+{% hint style="info" %}
+There is no need to configure redistribute BGP since the route injection is happening via route-targets that are binded to the BGP.
+{% endhint %}
 
 ### PE-CE routing protocol options
 
@@ -503,7 +499,7 @@ To ensure scalability of the SP MPLS core, an router reflector is implemented, t
 
 ![](<../.gitbook/assets/Unknown image (1797)>)
 
-MPLS PE-only Setup - Collapsed Core
+#### MPLS PE-only Setup - Collapsed Core
 
 Is an MPLS network setup consisting only of PE (Provider Edge) routers without dedicated P (Provider) routers is possible and is known as a "Collapsed Core" or "PE-only Network" design. In this setup, the PE routers are directly interconnected and handle both the edge and core functions.
 
@@ -749,37 +745,37 @@ Route Distinguisher: 10:10 (INET)
 
 Now assuming a customer needs full routing table to be available, what will happen per the current label allocation mode (which is per prefix), is that every prefix will be assigned a label and from a scalability perspective this could overwhelm the table
 
-R4-PE#show ip bgp vpnv4 vrf MSSK labels
+`R4-PE#show ip bgp vpnv4 vrf MSSK labels`
 
-Network Next Hop In label/Out label
+`Network Next Hop In label/Out label`
 
-Route Distinguisher: 1:1 (MSSK)
+`Route Distinguisher: 1:1 (MSSK)`
 
-3.3.3.3/32 2.2.2.2 nolabel/22
+`3.3.3.3/32 2.2.2.2 nolabel/22`
 
-10.10.6.0/24 192.168.46.6 19/nolabel
+`10.10.6.0/24 192.168.46.6 19/nolabel`
 
-10.10.7.0/24 5.5.5.5 nolabel/20
+`10.10.7.0/24 5.5.5.5 nolabel/20`
 
-13.13.13.13/32 2.2.2.2 nolabel/23
+`13.13.13.13/32 2.2.2.2 nolabel/23`
 
-192.168.46.0 0.0.0.0 21/nolabel(MSSK)
+`192.168.46.0 0.0.0.0 21/nolabel(MSSK)`
 
-192.168.57.0 5.5.5.5 nolabel/16
+`192.168.57.0 5.5.5.5 nolabel/16`
 
-R4-PE#show ip bgp vpnv4 vrf ABC labels
+`R4-PE#show ip bgp vpnv4 vrf ABC labels`
 
-Network Next Hop In label/Out label
+`Network Next Hop In label/Out label`
 
-Route Distinguisher: 2:2 (ABC)
+`Route Distinguisher: 2:2 (ABC)`
 
-3.3.3.3/32 2.2.2.2 nolabel/22
+`3.3.3.3/32 2.2.2.2 nolabel/22`
 
-10.10.8.0/24 192.168.48.8 25/nolabel
+`10.10.8.0/24 192.168.48.8 25/nolabel`
 
-13.13.13.13/32 2.2.2.2 nolabel/23
+`13.13.13.13/32 2.2.2.2 nolabel/23`
 
-192.168.48.0 0.0.0.0 18/nolabel(ABC)
+`192.168.48.0 0.0.0.0 18/nolabel(ABC)`
 
 What can be done to properly utilize our available resources is to change the label allocation mode to per VRF instead of per prefix:
 
