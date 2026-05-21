@@ -855,7 +855,7 @@ Traceroute to the internet over IPv6-enabled ISP Vodafone
 
 ![](<../.gitbook/assets/Unknown image (1125)>)
 
-### IPv6 Mobility
+## IPv6 Mobility
 
 IP Mobility is a very important feature in today's networks. MobileIP is an IETF standard available for both IPv4 and IPv6.
 
@@ -1085,7 +1085,7 @@ Mobile IPv6-enabled cellular phone acts as a mobile router.
 
 ![](<../.gitbook/assets/Unknown image (1130)>)
 
-### Transition to IPv6
+## Transition to IPv6
 
 Supporting two protocols over time will presumably be more costly than only one protocol and to run IPv6 in our network, it must support IPv6 in the first place. Also modifications to services such as DNS, DHCP and security policies must be implemented to support IPv6
 
