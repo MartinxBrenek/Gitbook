@@ -15,6 +15,8 @@ layout:
     visible: true
   tags:
     visible: true
+  actions:
+    visible: true
 ---
 
 # Packet Forwarding
@@ -83,7 +85,7 @@ Now the sender can construct the layer 2 header and send the data directly to th
 
 If the IP is outside of the local network, the host must first resolve the MAC of it's default gateway, which will respond in the same manner.
 
-[The default gateway/router then receives such packet and determines the next-hop router to reach to the destination. Once it determines the next-hop, it overwrites the destination MAC address with the next-hop router MAC and sends it. The process is repeated until the packet reaches the final destination IP.](https://onenote/#Routing\&section-id={6EC9C333-3E04-41C1-8C01-0E8D85C128A8}\&page-id={23330675-9420-47AE-8368-54C860A78BB9}\&object-id={52581BD7-7745-0862-3434-AF316314E545}&7C\&base-path=https://d.docs.live.net/b03dd2dfb2522723/Documents/CCIE/L3.one)
+[The default gateway/router then receives such packet and determines the next-hop router to reach to the destination. Once it determines the next-hop, it overwrites the destination MAC address with the next-hop router MAC and sends it. The process is repeated until the packet reaches the final destination IP.](onenote:#Routing\&section-id={6EC9C333-3E04-41C1-8C01-0E8D85C128A8}\&page-id={23330675-9420-47AE-8368-54C860A78BB9}\&object-id={52581BD7-7745-0862-3434-AF316314E545}&7C\&base-path=https://d.docs.live.net/b03dd2dfb2522723/Documents/CCIE/L3.one)
 
 {% hint style="info" %}
 ARP request is the reason to why first ping to specific IP address fails, because the device initially needs to perform the ARP to resolve what MAC address the destination IP owns
@@ -237,11 +239,7 @@ MPLS MTU which specifies the maximum transmittable size of the packet measured f
 {% hint style="info" %}
 mpls mtu parameter does not enforce a hard forwarding limit. The actual packet forwarding limit is determined by the interface MTU.
 
-mpls mtu mainly affects control-plane signaling and internal MPLS calculations, not the physical packet transmission.
-
-What mpls mtu actually influences
-
-&#x20;
+mpls mtu mainly affects control-plane signaling and internal MPLS calculations, not the physical packet transmission.&#x20;
 
 mpls mtu is primarily used for:
 
@@ -286,6 +284,10 @@ This is because both GRE and IPsec adds additional headers to the packet to achi
 
 ![](<../.gitbook/assets/Unknown image (73)>)
 
+{% hint style="info" %}
+If you generate a 9000 byte packet from an SVI (which has an MTU of 1500 because it is bound to a physical interface or bundle), fragmentation will occur on the output interface of the first box that tries to send the packet.
+{% endhint %}
+
 #### Fragmentation in IPv6
 
 IPv6 requires that the link layer support a minimum MTU size of 1280 bytes
@@ -304,7 +306,7 @@ IPv6 and other extension headers are unfragmentable because every fragment has t
 There is no DF bit in IPv6. IPv6 devices drop oversized packets and reply with an ICMPv6 Packet Too Big message, so the source can adjust.
 {% endhint %}
 
-IPv6 Virtual Fragmentation Reassembly (VFR)
+**IPv6 Virtual Fragmentation Reassembly (VFR)**
 
 Non-initial fragments of a fragmented IPv6 packet is used to pass through IPsec and NAT64 without any examination due to the lack of the L4 header, which usually is only available on the initial fragment. The IPv6 VFR feature provides the ability to collect the fragments and provide L4 info for all fragments for IPsec and NAT64 features
 
