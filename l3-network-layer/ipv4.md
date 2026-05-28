@@ -15,6 +15,8 @@ layout:
     visible: true
   tags:
     visible: true
+  actions:
+    visible: true
 ---
 
 # IPv4
@@ -365,19 +367,22 @@ Multicast reserved addresses
 | 224.0.0.253                 | Teredo Tunneling                                                                                 |
 | 224.0.0.254                 | SSDP (Simple Service Discovery Protocol)                                                         |
 
-### Classless Inter-Domain Routing (CIDR)
+## Classless Inter-Domain Routing (CIDR)
 
-Networks allocated using CIDR can be arbitrarily large and do not have to match exactly the traditional classes in the classful network (A, B, C), allowing flexibility in address allocation
-
+CIDR removed the fixed /8, /16, and /24 requirements for address classes, allowing them to be split or "subnetted" into smaller networks.\
+An example of this notation is 175.10.10.0/20.\
+Companies can now be allocated an address range that more closely matches their needs, which prevents the wasting of IP addresses.\
 The whole unicast range (any IP address with a first octet of 0 – 223) can be allocated in any size block
 
-With CIDR, IP addresses are expressed in a format called "CIDR notation," which includes the IP address followed by a slash (/) and a number indicating the subnet mask length.
-
-If you need 300 IP addresses … You get a /23
-
-If you need 1000 IP addresses … You get a /22
-
+\
+With CIDR, IP addresses are expressed in a format called "CIDR notation," which includes the IP address followed by a slash (/) and a number indicating the subnet mask length.\
+If you need 300 IP addresses … You get a /23\
+If you need 1000 IP addresses … You get a /22\
 If you need 25,000 IP addresses … You get a /17
+
+\
+Aggregation: Another benefit of CIDR is that aggregate blocks of networks can be advertised on the Internet.\
+Two adjacent /25 networks can be advertised as single /24 network
 
 ### Subnetting
 
@@ -576,7 +581,7 @@ easiest way to assign the subnets is to assign the subnets with the largest numb
 
 ![](<../.gitbook/assets/Unknown image (1063)>)
 
-### IP address conflicts
+## IP address conflicts
 
 The presence of multiple MAC addresses associated with the same IP address confuses the network devices, that leads to intermittent connectivity issues or complete loss of connectivity for both conflicting hosts. Network packets may be sent to the wrong device, causing data loss or corruption.
 
@@ -608,7 +613,7 @@ If there is not entry in the arp table for given destination IP, the host procee
 
 If there is entry it proceeds to encapsulate the data within the frame and send it directly to the destination
 
-If the Bitwise result came to that the destination host is in the different subnet it proceeds to examine the arp cache again to determine the MAC address of its default gateway and proceeds to send it to the gateway. Router/Gateway then follows in described [Routing Process](https://onenote/#Routing\&section-id={6EC9C333-3E04-41C1-8C01-0E8D85C128A8}\&page-id={23330675-9420-47AE-8368-54C860A78BB9}\&object-id={52581BD7-7745-0862-3434-AF316314E545}&7C\&base-path=https://d.docs.live.net/b03dd2dfb2522723/Documents/CCIE/L3.one)
+If the Bitwise result came to that the destination host is in the different subnet it proceeds to examine the arp cache again to determine the MAC address of its default gateway and proceeds to send it to the gateway. Router/Gateway then follows in described [Routing Process](onenote:#Routing\&section-id={6EC9C333-3E04-41C1-8C01-0E8D85C128A8}\&page-id={23330675-9420-47AE-8368-54C860A78BB9}\&object-id={52581BD7-7745-0862-3434-AF316314E545}&7C\&base-path=https://d.docs.live.net/b03dd2dfb2522723/Documents/CCIE/L3.one)
 
 ![](<../.gitbook/assets/Unknown image (1064)>)
 
