@@ -15,6 +15,8 @@ layout:
     visible: true
   tags:
     visible: true
+  actions:
+    visible: true
 ---
 
 # MPLS L3VPN
@@ -109,11 +111,23 @@ Same PE with multiple VRFs → different RD per VRF
 
 RD identifies the route origin, not the VPN membership
 
-RD = \<IP>:\<ID>
+#### 1. Type 0 (ASN:nn)
 
-or
+* Struktura: `2 bajty pro AS číslo : 4 bajty pro uživatelské číslo`
+* Příklad: `65000:300`
+* Využití: Používá se především v rámci jedné autonomní sítě, kde jako identifikátor slouží přímo číslo vašeho AS.
 
-RD = \<ASN>:\<ID>
+#### 2. Type 1 (IPv4:nn) — _Tento máte v konfiguraci_
+
+* Struktura: `4 bajty pro IPv4 adresu : 2 bajty pro uživatelské číslo`
+* Příklad: `10.64.201.1:2`
+* Využití: Velmi časté u Service Providerů (SP). Jako IP adresa se typicky volí Loopback `PE` routeru, na kterém daná VRF vzniká. Zajišťuje to stoprocentní unikátnost RD napříč celou sítí, i když různé PE routery sdílejí stejnou VRF.
+
+#### 3. Type 2 (4-byte ASN:nn)
+
+* Struktura: `4 bajty pro globální AS číslo (32-bit ASN) : 2 bajty pro uživatelské číslo`
+* Příklad: `65537:300`
+* Využití: Vznikl jako nutnost po zavedení 4bajtových AS čísel, protože do Type 0 se velké AS číslo fyzicky nevešlo.
 
 **Route Targets (RT)** is an additional 64bit BGP Extended community attribute attached to VPNv4 BGP routes to control VPN membership e.g. import/export policy. Any number of “route targets“ can be attached to a single route
 
