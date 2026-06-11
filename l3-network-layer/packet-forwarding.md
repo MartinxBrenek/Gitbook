@@ -189,6 +189,12 @@ This is solved with fragmentation integrated within IPv4/6 headers
 
 If a host wants to send a packet larger than the MTU for a network, the packet must be fragmented by Layer 3 (since Layer 2 doesn't offer any fragmentation capabilities)
 
+#### **IP fragmentation**&#x20;
+
+is the process of splitting an IP packet into smaller fragments when the packet size exceeds the MTU of a link along the path. In IPv4, fragmentation can occur either at the source host or at intermediate routers if the packet is larger than the outgoing interface MTU and the DF (Don’t Fragment) bit is not set. Each fragment is forwarded independently through the network and carries its own IP header, including the same Identification field, a Fragment Offset indicating its position within the original packet, and the MF (More Fragments) flag to indicate whether more fragments follow. Routers do not maintain any state about fragmented packets and simply forward fragments like any other IP packet. Reassembly is always performed only at the final destination host, which collects all fragments belonging to the same original packet using the Identification field, orders them using the Fragment Offset, and determines completion using the MF flag. Intermediate routers never reassemble fragments because this would require maintaining per-flow state and significantly reduce scalability and forwarding performance.
+
+In IPv6, the behavior is different because routers are not allowed to fragment packets at all. Fragmentation can only be performed by the source host using a Fragment Extension Header, and if a packet exceeds the MTU of any link along the path, the router drops the packet and sends an ICMPv6 “Packet Too Big” message back to the sender. The sender then relies on Path MTU Discovery to adjust packet sizes dynamically. This design eliminates fragmentation overhead in the network core and improves forwarding efficiency. As a result, modern networks generally try to avoid fragmentation altogether by using PMTUD and techniques such as TCP MSS clamping, especially in environments with tunnels or encapsulation where effective MTU is reduced.
+
 #### Path MTU
 
 the smallest MTU on a device in the forwarding path determines the MTU on the entire forwarding path between the source and destination
