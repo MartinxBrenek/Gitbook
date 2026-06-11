@@ -228,13 +228,13 @@ Therefore, some vendors put forward the concept of jumbo frame, which extends th
 
 If one side of the connection (e.g., a router) has an MTU set to 1500 bytes, but the other side (e.g., a switch or host) has an MTU set to 1400 bytes, packets larger than 1400 bytes will have to be fragmented or dropped, depending on the configuration. This can lead to inefficiencies and even connection issues.
 
-Types of MTU
+#### Types of MTU
 
 ![](<../.gitbook/assets/Unknown image (71)>)
 
-Layer 2 (L2) or Ethernet MTU specifies the maximum transmittable size of the packet, measured from the ethernet header until the end of the packet. The default value of L2 MTU for a main interface is 1514 bytes. This value is configurable with the (config-if)#mtu command in the sub-config mode as well as other type of MTU's
+**Layer 2 (L2) or Ethernet MTU** specifies the maximum transmittable size of the packet, measured from the ethernet header until the end of the packet. The default value of L2 MTU for a main interface is 1514 bytes. This value is configurable with the (config-if)#mtu command in the sub-config mode as well as other type of MTU's
 
-MPLS MTU which specifies the maximum transmittable size of the packet measured from the MPLS labels until the end of the packet. This value is applicable only for labeled packets. The default value of MPLS MTU is L2 MTU subtracted by 14 bytes which is the size of the ethernet header of the main interface. You can configure the MPLS MTU with the mpls mtu command.
+**MPLS MTU** which specifies the maximum transmittable size of the packet measured from the MPLS labels until the end of the packet. This value is applicable only for labeled packets. The default value of MPLS MTU is L2 MTU subtracted by 14 bytes which is the size of the ethernet header of the main interface. You can configure the MPLS MTU with the mpls mtu command.
 
 {% hint style="info" %}
 mpls mtu parameter does not enforce a hard forwarding limit. The actual packet forwarding limit is determined by the interface MTU.
@@ -252,7 +252,7 @@ Ensuring the router does not attempt to impose a label stack that would exceed t
 It does not override the physical MTU enforcement in the data plane.
 {% endhint %}
 
-IP MTU is used to set the MTU size of an IP packet, excluding the Layer 2 header (which refer to the actual MTU of the interface).
+**IP MTU** is used to set the MTU size of an IP packet, excluding the Layer 2 header (which refer to the actual MTU of the interface).
 
 When changing interface MTU, the IP and other protocol MTU is modified automatically to match the new MTU, the IP or other MTU
 
