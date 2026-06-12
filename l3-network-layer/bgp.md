@@ -15,6 +15,8 @@ layout:
     visible: true
   tags:
     visible: true
+  actions:
+    visible: true
 ---
 
 # BGP
@@ -1265,8 +1267,6 @@ An address family is activated within BGP using the address-family command in BG
 Afterwards, an IPv6 neighbor needs to be activated within that address family using the neighbor activate command
 
 MP-BGP Configuration Structure
-
-![](<../.gitbook/assets/Unknown image (199)>)
 
 | bgp upgrade-cli | used to migrate to the address family format |
 | --------------- | -------------------------------------------- |
@@ -2608,7 +2608,7 @@ Incoming traffic to the customer is controlled by using either AS path prependin
 
 ![](<../.gitbook/assets/Unknown image (597)>)
 
-[Load Sharing](https://onenote/#Path%20Selection\&section-id={6EC9C333-3E04-41C1-8C01-0E8D85C128A8}\&page-id={9616F63C-7B78-43B3-B57B-1B79B0CBAAE8}\&object-id={44F1E4FF-160B-0597-2225-D7B107E3C02C}\&F\&base-path=https://d.docs.live.net/b03dd2dfb2522723/Documents/CCIE/L3.one)
+[Load Sharing](onenote:#Path%20Selection\&section-id={6EC9C333-3E04-41C1-8C01-0E8D85C128A8}\&page-id={9616F63C-7B78-43B3-B57B-1B79B0CBAAE8}\&object-id={44F1E4FF-160B-0597-2225-D7B107E3C02C}\&F\&base-path=https://d.docs.live.net/b03dd2dfb2522723/Documents/CCIE/L3.one)
 
 **Outgoing traffic:**
 
