@@ -1311,6 +1311,8 @@ OSPFv3 requires an IPv6 address on each OSPF interface because OSPFv3 uses IPv6 
 
 #### OSPFv3: Per-Link Architecture
 
+In OSPFv2, neighbors are discovered and adjacencies are formed based on sharing the same IPv4 subnet on a common segment. If the IP configurations do not match the subnet mask, OSPFv2 will drop the adjacency.
+
 * OSPFv3 runs **per-link** rather than **per-subnet/prefix**, fully decoupling topology calculation from IPv6 addressing.
 * Neighbor discovery and adjacencies form exclusively via **Link-Local Addresses (`fe80::/10`)**.
 * Two routers do not need to share a common global unicast prefix to pair.
