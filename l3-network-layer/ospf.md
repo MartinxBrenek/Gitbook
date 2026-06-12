@@ -15,6 +15,8 @@ layout:
     visible: true
   tags:
     visible: true
+  actions:
+    visible: true
 ---
 
 # OSPF
@@ -71,7 +73,7 @@ The Backbone Area 0 serves as central area that is used for exchanging inter-are
 
 To avoid routing loops and adhere to the hierarchical structure all nonbackbone areas must have either physical or virtual connections to the backbone - e.g Area 0 must to be contiguous e.g. there should be no physical disconnections within Area 0
 
-The reason for this star-like topology is that OSPF inter-area routing uses the distance-vector approach and a strict area hierarchy permits avoidance of the ["counting to infinity" problem.](https://onenote/#Routing\&section-id={6EC9C333-3E04-41C1-8C01-0E8D85C128A8}\&page-id={23330675-9420-47AE-8368-54C860A78BB9}\&object-id={AE859F1F-9B86-0FDB-3ADE-4A69025D1702}&10\&base-path=https://d.docs.live.net/b03dd2dfb2522723/Documents/CCIE/L3.one)
+The reason for this star-like topology is that OSPF inter-area routing uses the distance-vector approach and a strict area hierarchy permits avoidance of the ["counting to infinity" problem.](onenote:#Routing\&section-id={6EC9C333-3E04-41C1-8C01-0E8D85C128A8}\&page-id={23330675-9420-47AE-8368-54C860A78BB9}\&object-id={AE859F1F-9B86-0FDB-3ADE-4A69025D1702}&10\&base-path=https://d.docs.live.net/b03dd2dfb2522723/Documents/CCIE/L3.one)
 
 Another reason is that the propropagation of routing changes may be considerably delayed if the areas were connected in chain
 
@@ -1307,11 +1309,14 @@ OSPFv3 requires an IPv6 address on each OSPF interface because OSPFv3 uses IPv6 
 
 `ipv6 unicast-routing` must be enabled and an IPv6 address must be assigned to the interface, even if you only run the IPv4 AFI
 
-Link-local addresses are used to establish and maintain adjacencies
+#### OSPFv3: Per-Link Architecture
 
-Regardless of assigned prefixes, two devices can communicate using link-local addresses, therefore OSPFv3 is running per link instead of per IP prefix
-
-OSPFv3 is enabled per-link (no network command) identifying which networks (prefixes) are attached to that link (Multiple IPv6 prefixes can be assigned to the same link)
+* OSPFv3 runs **per-link** rather than **per-subnet/prefix**, fully decoupling topology calculation from IPv6 addressing.
+* Neighbor discovery and adjacencies form exclusively via **Link-Local Addresses (`fe80::/10`)**.
+* Two routers do not need to share a common global unicast prefix to pair.
+* All protocol packets (Hellos, LSUs) and next-hop routing tables use the LLA.
+* The global `network` command is removed. OSPFv3 is enabled directly under the interface (`ipv6 ospf <process> area <id>`).
+* The router builds adjacencies over the link first, then automatically discovers and advertises it's global IPv6 prefixes using **Type 8 (Link) and Type 9 (Intra-Area-Prefix) LSAs**.
 
 ### OSPFv3 packet header
 
