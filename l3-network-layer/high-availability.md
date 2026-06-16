@@ -830,17 +830,17 @@ Sent from virtual IPv6 address
 
 ### Gateway Load Balancing Protocol (GLBP)
 
-**Gateway Load Balancing Protocol (GLBP)** is a Cisco protocol used to overcome the limitations of HSRP and VRRP by adding load-sharing functionality to utilize all available bandwidth
+**Gateway Load Balancing Protocol (GLBP)** is a Cisco protocol used to overcome the limitations of HSRP and VRRP by adding native load-sharing functionality
 
-GLBP group allows up to four virtual MAC addresses per group
-
-GLBP supports up to 1024 virtual routers (GLBP groups) on each physical interface of a router - 4 AVFs and 1 AVG per GLBP group, where GLBP routers are in ACTIVE/ACTIVE state
-
-Same model maintained as in IPv4: one virtual IPv6 address, multiple MAC addresses
-
-Gateway Load Balancing Protocol provides load balancing over multiple routers using a single virtual IPv6 address and multiple virtual MAC addresses
-
-The forwarding load is shared among all routers in a GLBP group
+\
+Gateway Load Balancing Protocol provides load balancing over multiple routers using a single virtual IPv6 address and multiple virtual MAC addresses\
+The forwarding load is shared among all routers in a GLBP group\
+GLBP group allows up to four virtual MAC addresses per group\
+GLBP supports up to 1024 virtual routers (GLBP groups) on each physical interface of a router\
+Same model maintained as in IPv4: one virtual IPv6 address, multiple MAC addresses\
+Virtual MAC Address Range: 0007.B400.0000 to 0007.B4FF.FFFF\
+Structure: 0007.B4 + \[2-digit HEX Group ID] + \[2-digit HEX Forwarder ID]\
+Example (Group 1, Forwarder 1): 0007.b400.0101
 
 #### Active Virtual Gateway (AVG)
 
