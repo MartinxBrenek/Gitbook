@@ -496,13 +496,23 @@ Never run MPLS with your customers. Use access lists to prevent customers from s
 
 MPLS forwarding is based on label switching, where transit LSRs only process the MPLS label stack and do not inspect or make forwarding decisions based on the inner IP header. Because of this encapsulation, fragmentation behavior differs from native IP forwarding. If an ingress PE sends an MPLS-encapsulated packet (e.g., 9000+ bytes including payload and labels) and an intermediate link has a lower MTU (e.g., 1500 bytes), the transit LSR cannot perform IP-layer fragmentation since the original IP header is not visible in a way that allows normal fragmentation processing. Instead, the labeled packet must already comply with the MTU constraints of every link along the LSP, including MPLS label overhead (stack, control word if used, etc.). If the packet exceeds the outgoing interface MTU, it is typically dropped at the ingress of that link, and depending on platform behavior, an ICMP “Fragmentation Needed” / “Packet Too Big” message may be generated back towards the source. However, MPLS forwarding itself does not perform fragmentation of labeled packets in the transit path, so correct operation requires consistent end-to-end MTU alignment across all MPLS-enabled interfaces, including transport and service encapsulation overhead (LDP, SR-MPLS, VPN labels).
 
+In modern MPLS L3VPN networks, MTU handling is typically enforced at the ingress PE rather than relying on any transit devices. This design follows the fundamental MPLS forwarding model, where core routers operate purely in label-switching mode and do not perform IP-layer inspection, fragmentation, or reassembly.
+
+The ingress PE router is responsible for ensuring that any IP packet entering the MPLS domain fits within the effective transport MTU, including all encapsulations such as MPLS labels, VPN labels, and any additional tunneling overhead (e.g., GRE, VXLAN, SR-MPLS extensions depending on design). If a packet exceeds the configured MTU on the ingress PE, it is handled according to IPv4/IPv6 rules: either fragmented at ingress (IPv4 only and only if DF is not set) or dropped with an ICMP “Fragmentation Needed” / “Packet Too Big” message when DF is set or in IPv6.
+
+This approach is considered best practice because MPLS core routers are designed to be stateless with respect to IP payload processing. They simply swap labels and forward packets based on the label stack. They do not maintain IP fragmentation state and therefore cannot safely fragment or reassemble IP packets in the transit domain. As a result, any packet that is too large for the transport MTU must be resolved before entering the MPLS core.
+
+By enforcing MTU at ingress PE, the network achieves deterministic behavior: oversized packets are either properly fragmented at the edge or explicitly rejected back to the source via ICMP signaling, enabling Path MTU Discovery (PMTUD) to adjust traffic size dynamically. This prevents silent drops inside the MPLS core, which would otherwise be difficult to troubleshoot and could occur if encapsulated packets exceeded physical or logical MTU constraints.
+
+From an operational perspective, this design also aligns with scalability requirements. It avoids per-flow state in the core, eliminates the need for fragmentation handling in transit nodes, and ensures that all MTU-related complexity is pushed to network edges where full IP awareness exists.
+
 
 
 Label switching increases the demands on the maximum MTU of an interface – caused by additional MPLS header. MPLS MTU is increased to 1512 Bytes to support 1500-Bytes IP packets and MPLS stack of a depth up to the third level. (3\*4Bytes = 12Bytes) The Ethernet standard says that a frame can be as large as 1518 bytes. 18 of those will be Ethernet headers, leaving 1500 bytes as the IP MTU. So, if we have a 1500 byte packet, two labels, and Ethernet headers, the frame size is now 1526 bytes. This is just over the 1518 byte limit, so it’s called a Baby Giant. Strictly speaking, the Ethernet standard says that this should be dropped, as it’s too large. However, most modern routers and switches turn a blind eye and allow Baby Giants. It is possible that your LSR, or another device in the path, does not support baby giants. This would mean that the frame size cannot go over 1518 bytes. So what do you do now? To account for this, the MPLS MTU (that is, the maximum size for the packet plus the MPLS labels) can be lowered to 1500 bytes, preventing it from going over the limit. That means your maximum IP MTU, and MSS if you’re adjusting it, will also need to be lowered.
 
-XE(config)# mpls mtu mtu-size&#x20;
+`XE(config)# mpls mtu mtu-size`&#x20;
 
-RP/0/RP0/CPU0:PE-003-XR(config-if)#mpls mtu
+`RP/0/RP0/CPU0:PE-003-XR(config-if)#mpls mtu`
 
 ### MPLS forwarding operation
 

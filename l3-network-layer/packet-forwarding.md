@@ -230,9 +230,7 @@ After decades of development, the Ethernet speed has increased from 10 Mbit/s to
 
 Therefore, some vendors put forward the concept of jumbo frame, which extends the maximum Ethernet frame length to 9 KB
 
-#### MTU Mismatch:
-
-If one side of the connection (e.g., a router) has an MTU set to 1500 bytes, but the other side (e.g., a switch or host) has an MTU set to 1400 bytes, packets larger than 1400 bytes will have to be fragmented or dropped, depending on the configuration. This can lead to inefficiencies and even connection issues.
+**MTU Mismatch:** If one side of the connection (e.g., a router) has an MTU set to 1500 bytes, but the other side (e.g., a switch or host) has an MTU set to 1400 bytes, packets larger than 1400 bytes will have to be fragmented or dropped, depending on the configuration. This can lead to inefficiencies and even connection issues.
 
 #### Types of MTU
 
