@@ -15,6 +15,8 @@ layout:
     visible: true
   tags:
     visible: true
+  actions:
+    visible: true
 ---
 
 # Hardware Management
@@ -361,6 +363,33 @@ Pokud půjde do klasické zásuvky, tak „CAB-ACE=“, nebo „CAB-AC-EUR=“ n
 Pokud to chtějí zapojit do PDUčka nebi UPSky tak třeba „CAB-C13-CBN=“ nebo „CAB-C13-C14-2M=“
 
 ![](<../.gitbook/assets/Unknown image (234)>)
+
+### PDU (Power Distribution Unit)&#x20;
+
+znamená rozvod napájení v racku, ne konkrétní typ kabelu.
+
+Když někdo řekne **PDU napájecí kabel**, obvykle tím myslí kabel, který vede ze zařízení (router, switch, server) do rackového PDU (např. APC).
+
+Existují dvě běžné varianty:
+
+1. **IEC C13/C14** – nejběžnější.
+   * Router: IEC C14 vstup.
+   * Kabel: C13 → C14.
+   * Druhý konec se zapojuje do PDU s IEC zásuvkami.
+2. **Schuko (typ E/F)** – klasická "domácí" zástrčka.
+   * Kabel: C13 → Schuko.
+   * Může být zapojen přímo do zásuvky ve zdi nebo do PDU, které má Schuko zásuvky.
+
+Takže odpověď je: **ano, může to být obojí**. Záleží pouze na tom, jaké výstupy má PDU.
+
+Například:
+
+* APC Rack PDU s IEC C13/C19 zásuvkami → používají se kabely C13↔C14.
+* APC Rack PDU se Schuko zásuvkami → používají se klasické napájecí kabely se Schuko vidlicí.
+
+Ve většině datacenter jsou standardem **IEC kabely (C13/C14 nebo C19/C20)**, protože se lépe zajišťují proti vytažení a šetří místo. Schuko kabely se častěji používají v kancelářích nebo menších serverovnách.
+
+### Electricity overview
 
 The energy that we call Electricity is essentially leveraging of flow of electrons from negatively charged end to positively charged end
 
