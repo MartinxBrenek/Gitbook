@@ -307,38 +307,69 @@ Prefix-lists and route-maps do not originate routes. You still need `network`, `
 | (config-router)#network \<x.x.x.x>                                                                         | Allows advertising of classsful network into BGP. At least one of the subnets must be present in the routing table (if auto summary is turned on)                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         |
 | (config-router)#redistribute \<eigrp \| ospf \| bgp \| connected> \[route-map <> \| metric <> \| match <>] | ## Redistribution                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         |
 | (config-bgp)# bgp redistribute-internal                                                                    | to allow redistributing internal BGP routes into an IGP                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   |
+| show bgp regexp                                                                                            | example show bgp regexp ^6451\[1-4] - to display routes originated from 64511-4 you can also simply run show bgp regexp to simulate the \| include operator                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               |
 
 ### Announcing default route in BGP
 
-A default route (0.0.0.0/0) must exist in the RIB (Routing Information Base) before it can be advertised via BGP, unless using default-information originate (or neighbor-specific default-originate) which can advertise it unconditionally.
+A default route (`0.0.0.0/0`) can be advertised via BGP in several ways. The exact behavior depends on the platform and on whether the default is required to exist in the RIB.
 
-Purpose:
+**Purpose:**
 
-Reduces the size of BGP tables in private networks or towards customers.
+* Reduces the size of BGP tables in private networks or towards customers.
+* Provides a default path without advertising the full routing table.
 
-Standard redistribution from IGP or static routes does not advertise the default route by default. To advertise a default originated from an IGP, default-information originate must be used.
+**IOS-XE Methods to Inject 0.0.0.0/0 into BGP**
 
-IOS-XE Methods to Inject 0.0.0.0/0 into BGP
+| Method                               | Behavior                                                                                                                                                   |
+| ------------------------------------ | ---------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `network 0.0.0.0`                    | Advertises `0.0.0.0/0` into BGP **only if it exists in the RIB**.                                                                                          |
+| `redistribute static/IGP`            | Redistributes the default if it is present in the RIB and matches the redistribution policy. Redistribution alone does not create a default route.         |
+| `default-information originate`      | Enables default-route origination through redistribution. Typically used when the default is learned from an IGP/static route.                             |
+| `neighbor X.X.X.X default-originate` | Advertises `0.0.0.0/0` **to a specific neighbor**, independently of whether the default exists in the RIB. Can also be controlled with a route-map/policy. |
 
-| (config-router-af)# network 0.0.0.0                   | Advertises 0.0.0.0/0 into BGP only if it exists in the RIB. Does not originate the default if it isn’t already in the routing table.                                                                                          |
-| ----------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| redistribute static/IGP+default-information originate | Works if 0.0.0.0/0 exists in the RIB. If using redistribute default static, it injects 0.0.0.0/0 into BGP, but only when the default route exists in the routing table. Cannot originate a default from redistribution alone. |
-| (config-router-af)# neighbor default-originate        | Sends 0.0.0.0/0 to BGP neighbors regardless of its presence in RIB or BGP table. Must be configured per neighbor.                                                                                                             |
+**IOS-XR**
 
-On IOS-XR, only aggregate-address reliably injects a default route standalone:
+IOS-XR has an important difference: **`default-information originate` is configured at the BGP VRF level, above the address-family**, rather than under `address-family ipv4 unicast`.
 
-vrf A
+Example:
 
-address-family ipv4 unicast
+```
+router bgp 65000 vrf PROV-VIDEO  default-information originate  address-family ipv4 unicast   redistribute ospf INTER-AS match external 2
+```
 
-aggregate-address 0.0.0.0/0
+This is useful when the default is learned from an IGP and you want redistribution to inject it into BGP.
 
-Other commands like default-information originate, network 0.0.0.0/0, or redistribute static do not work standalone in XR.
+For example:
 
-aggregate-address essentially originates the default route without relying on RIB presence.
+```
+OSPF:O*E2 0.0.0.0/0      
+```
 
-| show bgp regexp | example show bgp regexp ^6451\[1-4] - to display routes originated from 64511-4 you can also simply run show bgp regexp to simulate the \| include operator |
-| --------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------- |
+#### `network 0.0.0.0/0`
+
+Can be used to originate the default when the corresponding route exists in the RIB:
+
+```
+vrf A address-family ipv4 unicast  network 0.0.0.0/0
+```
+
+It does **not** create the default route itself.
+
+#### `aggregate-address 0.0.0.0/0`
+
+```
+vrf A address-family ipv4 unicast  aggregate-address 0.0.0.0/0
+```
+
+This can originate a BGP default **without requiring `0/0` to already exist in the RIB**.
+
+#### Key takeaway
+
+> **On IOS-XR, remember that `default-information originate` is configured under the BGP VRF, not under the IPv4 address-family.**
+
+This was exactly the part that caused the confusion in your `PROV-VIDEO` case: the route was already in the RIB as `O*E2 0.0.0.0/0`, but OSPF redistribution alone did not inject the default into BGP.
+
+One correction I'd definitely keep in the notes: **don't write that `default-information originate`, `network`, and redistribution "do not work standalone in XR"**. That's too broad. The more useful distinction is **what each mechanism does and whether it requires the default to exist in the RIB**..
 
 ### BGP security
 
