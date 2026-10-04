@@ -125,7 +125,7 @@ After entering the desired AFI, it will navigate you to the sub config level (`c
 Neighbors must be activated per AFI/SAFI using `neighbor x.x.x.x activate`.
 {% endhint %}
 
-### VRF leaking
+### VRF leaking (MPLS)
 
 Used in complex or simple MPLS VPN use cases explained in MPLS section.
 
@@ -342,7 +342,7 @@ BGP Next-Hop Loopback in VRF Configuration
 | bgp next-hop Loopback1 | Sets the BGP next-hop for all prefixes in the specified VRF to the IP address of the Loopback1 interface. This is typically used to ensure a stable and reachable next-hop across MPLS or TE core networks, enabling recursive routing via tunnels or engineered paths |
 | ---------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 
-### Static routing between GRT and VRFs
+### Static routing between GRT and VRFs (VRF lite)
 
 | ip route 192.168.12.1 255.255.255.0 GigabitEthernet0/1 | route in a global routing table to point to the interface which is in the vrf                                                                                                 |
 | ------------------------------------------------------ | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
