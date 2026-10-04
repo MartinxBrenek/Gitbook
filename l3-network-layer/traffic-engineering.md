@@ -15,9 +15,13 @@ layout:
     visible: true
   tags:
     visible: true
+  actions:
+    visible: true
+  anchors:
+    visible: true
 ---
 
-# Traffic engineering
+# Traffic Engineering
 
 ### Why traffic engineering
 
@@ -485,7 +489,7 @@ The $AS can be defined in a seprarate RPL like shown in global parameters for ex
 
 ### Regular expressions (regex)
 
-**Regular expressions (regex)** are patterns used to describe and match specific sets of strings. They are commonly used in programming and text processing to search, manipulate, and validate text based on certain criteria. With Regex, you can define rules and patterns that enable you to effectively filter and extract information from large amounts of data, such as the filtering of ASNs in [AS-Path ACL](https://onenote/#BGP%20Cont\&section-id={6EC9C333-3E04-41C1-8C01-0E8D85C128A8}\&page-id={45262C8F-C420-416A-B9D3-D13ED59C5C01}\&object-id={8C92153C-87F7-0D97-240F-F29E59D082D5}&1F\&base-path=https://d.docs.live.net/b03dd2dfb2522723/Documents/CCIE/L3.one)
+**Regular expressions (regex)** are patterns used to describe and match specific sets of strings. They are commonly used in programming and text processing to search, manipulate, and validate text based on certain criteria. With Regex, you can define rules and patterns that enable you to effectively filter and extract information from large amounts of data, such as the filtering of ASNs in [AS-Path ACL](onenote:#BGP%20Cont\&section-id={6EC9C333-3E04-41C1-8C01-0E8D85C128A8}\&page-id={45262C8F-C420-416A-B9D3-D13ED59C5C01}\&object-id={8C92153C-87F7-0D97-240F-F29E59D082D5}&1F\&base-path=https://d.docs.live.net/b03dd2dfb2522723/Documents/CCIE/L3.one)
 
 | Character | Description                                        |
 | --------- | -------------------------------------------------- |

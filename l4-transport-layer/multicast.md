@@ -15,6 +15,10 @@ layout:
     visible: true
   tags:
     visible: true
+  actions:
+    visible: true
+  anchors:
+    visible: true
 ---
 
 # Multicast
@@ -1822,7 +1826,7 @@ As service providers migrate addressing and routing protocols to IPv6, all other
 
 An IPv6 multicast address is an identifier for a set of interfaces that typically belong to different nodes. A node may belong to any number of multicast groups. A packet that is sent to a multicast address is delivered to all interfaces that are identified by the multicast group address.
 
-[IPv6 Multicast structure is described in IPv6 section](https://onenote/#IPv6\&section-id={6EC9C333-3E04-41C1-8C01-0E8D85C128A8}\&page-id={9FEA2E6E-BBB1-477C-A51C-AC09C4FF8958}\&object-id={D3C31647-2AEF-0444-13FD-4C2E49344310}&83\&base-path=https://d.docs.live.net/b03dd2dfb2522723/Documents/CCIE/L3.one)
+[IPv6 Multicast structure is described in IPv6 section](onenote:#IPv6\&section-id={6EC9C333-3E04-41C1-8C01-0E8D85C128A8}\&page-id={9FEA2E6E-BBB1-477C-A51C-AC09C4FF8958}\&object-id={D3C31647-2AEF-0444-13FD-4C2E49344310}&83\&base-path=https://d.docs.live.net/b03dd2dfb2522723/Documents/CCIE/L3.one)
 
 MP-BGP version 4 support allows population of separate routing paths for IPv6 unicast and multicast traffic.
 

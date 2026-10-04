@@ -15,6 +15,10 @@ layout:
     visible: true
   tags:
     visible: true
+  actions:
+    visible: true
+  anchors:
+    visible: true
 ---
 
 # System Management
@@ -1034,7 +1038,7 @@ Yellowdog Updater Modified (YUM) is a free and open-source command-line package-
 
 ### VM-based Cisco IOS XR vs Container-based Cisco IOS XR
 
-Guest Shell Linux Containers (LXCs) are considered lightweight since they do not need their own kernel as they borrow services from the host operating system and generally require less resources. The platforms that support the LXC architecture do not support SMU and [ISSU](https://onenote/#IOS-XE\&section-id={58B48AF9-0B19-4885-B24D-492AA8D605CF}\&page-id={BA710271-F92A-442A-81A3-38C509B76485}\&object-id={DC5F6F8F-B1EE-0E44-2D0C-21E4D6AC45EC}&3C\&base-path=https://d.docs.live.net/b03dd2dfb2522723/Documents/CCIE/L1.one)
+Guest Shell Linux Containers (LXCs) are considered lightweight since they do not need their own kernel as they borrow services from the host operating system and generally require less resources. The platforms that support the LXC architecture do not support SMU and [ISSU](onenote:#IOS-XE\&section-id={58B48AF9-0B19-4885-B24D-492AA8D605CF}\&page-id={BA710271-F92A-442A-81A3-38C509B76485}\&object-id={DC5F6F8F-B1EE-0E44-2D0C-21E4D6AC45EC}&3C\&base-path=https://d.docs.live.net/b03dd2dfb2522723/Documents/CCIE/L1.one)
 
 VMs emulate hardware and the host operating systems must have their own kernel, but the VM architecture does provide ISSU support
 

@@ -15,6 +15,10 @@ layout:
     visible: true
   tags:
     visible: true
+  actions:
+    visible: true
+  anchors:
+    visible: true
 ---
 
 # Data Plane Security
@@ -699,7 +703,7 @@ system-level zone, and any interface that is not a member of another security zo
 
 When an interface that is not associated in a security zone sends traffic to an interface that is in a security zone, the traffic is dropped
 
-![](<../.gitbook/assets/Unknown image (745)>)
+<img src="../.gitbook/assets/Unknown image (745)" alt="" width="375">
 
 #### Example: Internet-facing router interface
 

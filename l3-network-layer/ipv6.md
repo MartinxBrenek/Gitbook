@@ -15,6 +15,10 @@ layout:
     visible: true
   tags:
     visible: true
+  actions:
+    visible: true
+  anchors:
+    visible: true
 ---
 
 # IPv6
@@ -170,7 +174,7 @@ RFC2460 recommended extension header chain sequence
 
 ### IPv6 addressing scheme
 
-The addressing architecture of IPv6 is defined in RFC 4291 and allows three different types of transmission: unicast, [Anycast](https://onenote/#L3%20-%20IPv4\&section-id={6EC9C333-3E04-41C1-8C01-0E8D85C128A8}\&page-id={0BE7C4A5-25A0-4FB3-9FBB-F8118301B662}\&object-id={8D629352-0E5D-0836-0518-5BFAA16EE1B2}&7D\&base-path=https://d.docs.live.net/b03dd2dfb2522723/Documents/CCIE/L3.one) and multicast
+The addressing architecture of IPv6 is defined in RFC 4291 and allows three different types of transmission: unicast, [Anycast](onenote:#L3%20-%20IPv4\&section-id={6EC9C333-3E04-41C1-8C01-0E8D85C128A8}\&page-id={0BE7C4A5-25A0-4FB3-9FBB-F8118301B662}\&object-id={8D629352-0E5D-0836-0518-5BFAA16EE1B2}&7D\&base-path=https://d.docs.live.net/b03dd2dfb2522723/Documents/CCIE/L3.one) and multicast
 
 Unicast addresses are divided into scopes:
 

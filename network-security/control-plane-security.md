@@ -15,6 +15,10 @@ layout:
     visible: true
   tags:
     visible: true
+  actions:
+    visible: true
+  anchors:
+    visible: true
 ---
 
 # Control Plane Security
@@ -139,7 +143,7 @@ For IPv6 - Do not accept prefixes longer than /48, as /48 is the minimum IPv6 pr
 
 To be implemented as prefix list and applied as route-map in IOS-XE and as prefix set and applied as RPL for IOS-XR. The following document includes prefixes that should be blocked in IOS-XE and
 
-{% file src="../.gitbook/assets/IPv6 Bogons - XE+XR.txt" %}
+{% file src="/broken/files/PaHBffU4rYrkgvuzNqos" %}
 
 ### BGP FlowSpec
 

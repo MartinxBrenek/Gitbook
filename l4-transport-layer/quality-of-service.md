@@ -15,9 +15,13 @@ layout:
     visible: true
   tags:
     visible: true
+  actions:
+    visible: true
+  anchors:
+    visible: true
 ---
 
-# QoS
+# Quality of Service
 
 Before networks converged, network engineering was mainly focused on connectivity. However, the rates at which data came onto the network resulted in bursty data flows. Data, arriving in packets, tried to grab as much bandwidth as it could at any given time. Access was on a first-come, first-served basis. The data rate available to any one user varied, depending on the number of users accessing the network at any given time.
 
@@ -829,7 +833,7 @@ is the default congestion avoidance behavior. Does not distinguish between servi
 
 Tail drop drawbacks:
 
-When congestion occurs, dropping affects most of the TCP sessions, which simultaneously back off and then restart again. This causes inefficient link utilization at the congestion point ([TCP global synchronization](https://onenote/#Transport%20Layer\&section-id={E7D8C7C5-105B-4198-A054-E267184A51AE}\&page-id={664269A1-2936-417B-91FA-B3708098457E}\&object-id={B5A6C804-7921-070E-3C60-AA96A7139ACB}&4A\&base-path=https://d.docs.live.net/b03dd2dfb2522723/Documents/CCIE/L4%20%5eM%20IP%20Services.one)).
+When congestion occurs, dropping affects most of the TCP sessions, which simultaneously back off and then restart again. This causes inefficient link utilization at the congestion point ([TCP global synchronization](onenote:#Transport%20Layer\&section-id={E7D8C7C5-105B-4198-A054-E267184A51AE}\&page-id={664269A1-2936-417B-91FA-B3708098457E}\&object-id={B5A6C804-7921-070E-3C60-AA96A7139ACB}&4A\&base-path=https://d.docs.live.net/b03dd2dfb2522723/Documents/CCIE/L4%20%5eM%20IP%20Services.one)).
 
 TCP starvation, in which all buffers are temporarily seized by aggressive flows, and normal TCP flows experience buffer starvation.
 

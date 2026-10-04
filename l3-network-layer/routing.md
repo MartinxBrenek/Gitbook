@@ -16,6 +16,10 @@ layout:
     visible: true
   tags:
     visible: true
+  actions:
+    visible: true
+  anchors:
+    visible: true
 ---
 
 # Routing
@@ -640,15 +644,15 @@ If a device does not receive an update from another device for 180 seconds or mo
 
 If there is still no update after 240 seconds, the device removes all routing table entries for the nonupdating device
 
-| (config)#router rip                              | Enable RIP routing process                                                                                                                                                                                                                                                                          |
-| ------------------------------------------------ | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| (config-router)#version 2                        | Specify RIP version 2                                                                                                                                                                                                                                                                               |
-| (config-router)#network 192.168.1.0              | Advertise subnet on Fa0/0                                                                                                                                                                                                                                                                           |
-| (config-router)#network 10.0.0.0                 | Advertise subnet 10.0.0.0                                                                                                                                                                                                                                                                           |
-| (config-router)#neighbor 10.10.10.1              | Specify neighbors for RIP updates exchange (limits updates to specific routers)                                                                                                                                                                                                                     |
-| (config-router)#no auto-summary                  | eliminates default auto summary behavior                                                                                                                                                                                                                                                            |
-| show ip rip \[neighbors \| database]             |                                                                                                                                                                                                                                                                                                     |
-| (config-if)# ip rip authentication key-chain kal | requires preconfigured [key chain](https://onenote/#OSPv2%20Cont\&section-id={6EC9C333-3E04-41C1-8C01-0E8D85C128A8}\&page-id={475A8F40-BA6A-43D9-9C98-CC5A77AE93A2}\&object-id={708B7DF5-831E-05CD-1EC7-C4093996CAFC}&57\&base-path=https://d.docs.live.net/b03dd2dfb2522723/Documents/CCIE/L3.one) |
+| (config)#router rip                              | Enable RIP routing process                                                                                                                                                                                                                                                                  |
+| ------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| (config-router)#version 2                        | Specify RIP version 2                                                                                                                                                                                                                                                                       |
+| (config-router)#network 192.168.1.0              | Advertise subnet on Fa0/0                                                                                                                                                                                                                                                                   |
+| (config-router)#network 10.0.0.0                 | Advertise subnet 10.0.0.0                                                                                                                                                                                                                                                                   |
+| (config-router)#neighbor 10.10.10.1              | Specify neighbors for RIP updates exchange (limits updates to specific routers)                                                                                                                                                                                                             |
+| (config-router)#no auto-summary                  | eliminates default auto summary behavior                                                                                                                                                                                                                                                    |
+| show ip rip \[neighbors \| database]             |                                                                                                                                                                                                                                                                                             |
+| (config-if)# ip rip authentication key-chain kal | requires preconfigured [key chain](onenote:#OSPv2%20Cont\&section-id={6EC9C333-3E04-41C1-8C01-0E8D85C128A8}\&page-id={475A8F40-BA6A-43D9-9C98-CC5A77AE93A2}\&object-id={708B7DF5-831E-05CD-1EC7-C4093996CAFC}&57\&base-path=https://d.docs.live.net/b03dd2dfb2522723/Documents/CCIE/L3.one) |
 
 #### RIPng (IPv6)
 

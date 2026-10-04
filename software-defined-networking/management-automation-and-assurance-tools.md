@@ -15,6 +15,10 @@ layout:
     visible: true
   tags:
     visible: true
+  actions:
+    visible: true
+  anchors:
+    visible: true
 ---
 
 # Management, Automation and Assurance tools
@@ -906,7 +910,7 @@ The central controller component is solved using the Cisco Optical Network Contr
 
 ### Hierarchy of all systems
 
-![](<../.gitbook/assets/Unknown image (787)>)
+<img src="../.gitbook/assets/Unknown image (787)" alt="" width="563">
 
 ### Cisco Transport Controller
 
@@ -1231,7 +1235,7 @@ With SNMP, all requested data must be edited and sent at once - with Push based,
 5. Limited Event-Driven Monitoring: Due to its reliance on polling, SNMP is less adept at capturing and responding to event-driven conditions, resulting in potential delays in detecting and reporting critical network events or anomalies unless they coincide with polling intervals.
 6. Lack of Flexibility: Extending or modifying the hierarchical data model of SNMP, defined by MIBs, involves complex and time-consuming updates to both the management system and network devices. This process limits flexibility in adding new metrics or adapting to evolving network requirements.
 
-[Other SNMP limitation are listed here](https://onenote/#Cisco%20NSO\&section-id={2DC2FCEA-3B33-4FFE-8240-49F35B5E0C99}\&page-id={D049B260-48C9-45D2-BA21-1A53E2067E5B}\&object-id={0E733387-CBE7-0EC0-3D07-818F817E1D13}\&D\&base-path=https://d.docs.live.net/b03dd2dfb2522723/Notes/SDN.one)
+[Other SNMP limitation are listed here](onenote:#Cisco%20NSO\&section-id={2DC2FCEA-3B33-4FFE-8240-49F35B5E0C99}\&page-id={D049B260-48C9-45D2-BA21-1A53E2067E5B}\&object-id={0E733387-CBE7-0EC0-3D07-818F817E1D13}\&D\&base-path=https://d.docs.live.net/b03dd2dfb2522723/Notes/SDN.one)
 
 ![](<../.gitbook/assets/Unknown image (1621)>)
 
